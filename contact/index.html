@@ -94,14 +94,10 @@
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div class="container">
-        <h1>Let's Get in Touch</h1>
-        <p>We'd love to hear your feedback, feature requests, or partnership inquiries.</p>
+        <h1>Contact Support</h1>
+        <p>If you need assistance, please reach out directly at:</p>
 
-        <div class="email-btn" onclick="openEmail()">Email Support</div>
-        <p style="margin-top: 15px; font-size: 0.95rem; color: rgba(255, 255, 255, 0.5);">
-            or contact us directly at:<br>
-            <strong id="em-box" style="color: rgba(255, 255, 255, 0.8);"></strong>
-        </p>
+        <a id="em-box" class="email-btn" style="text-decoration: none;" href="#">Loading Email...</a>
 
         <br><br><br><br>
         <a href="/blackboard" class="back-link">Return to Application</a>
@@ -113,13 +109,12 @@
         var u2 = "board.web";
         var d1 = "gmail";
         var d2 = "com";
+        var combined = u1 + u2 + "@" + d1 + "." + d2;
 
         // Assemble visually for humans after the DOM loads
-        document.getElementById('em-box').innerText = u1 + u2 + "@" + d1 + "." + d2;
-
-        function openEmail() {
-            window.location.href = "mailto:" + u1 + u2 + "@" + d1 + "." + d2;
-        }
+        var obf = document.getElementById('em-box');
+        obf.innerText = combined;
+        obf.href = "mailto:" + combined;
     </script>
 </body>
 
