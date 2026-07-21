@@ -1,0 +1,17 @@
+{
+  "name": "LearningBoard (Blackboard)",
+  "short_name": "Blackboard",
+  "start_url": "/blackboard",
+  "display": "standalone",
+  "background_color": "#121d15",
+  "theme_color": "#121d15",
+  "description": "The Ultimate Virtual Blackboard for Creators & Educators",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "192x192 512x512 any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
