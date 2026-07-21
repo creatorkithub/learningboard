@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M8WDT49P');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - LearningBoard | learningboard.online</title>
@@ -79,22 +89,36 @@
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8WDT49P" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div class="container">
         <h1>Let's Get in Touch</h1>
         <p>We'd love to hear your feedback, feature requests, or partnership inquiries.</p>
 
         <div class="email-btn" onclick="openEmail()">Email Support</div>
+        <p style="margin-top: 15px; font-size: 0.95rem; color: rgba(255, 255, 255, 0.5);">
+            or contact us directly at:<br>
+            <strong id="em-box" style="color: rgba(255, 255, 255, 0.8);"></strong>
+        </p>
 
         <br><br><br><br>
         <a href="/blackboard" class="back-link">Return to Application</a>
     </div>
 
     <script>
-        // Simple obfuscation to slow down basic scraping bots
+        // Advanced string obfuscation to block scraper bots from harvesting the email
+        var u1 = "learning";
+        var u2 = "board.web";
+        var d1 = "gmail";
+        var d2 = "com";
+
+        // Assemble visually for humans after the DOM loads
+        document.getElementById('em-box').innerText = u1 + u2 + "@" + d1 + "." + d2;
+
         function openEmail() {
-            var user = "support";
-            var domain = "learningboard.online";
-            window.location.href = "mailto:" + user + "@" + domain;
+            window.location.href = "mailto:" + u1 + u2 + "@" + d1 + "." + d2;
         }
     </script>
 </body>

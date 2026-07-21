@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M8WDT49P');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
@@ -485,6 +495,10 @@
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8WDT49P" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <div id="app-container">
         <div id="alu-frame-top" class="alu-frame horizontal"></div>
@@ -1166,6 +1180,43 @@
             }
         });
 
+    </script>
+    <!-- Privacy Consent Banner -->
+    <div id="privacy-banner"
+        style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 500px; background: rgba(240, 240, 245, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 20px; color: #1f2937; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Outfit', sans-serif;">
+        <h4 style="margin: 0 0 10px 0; color: #2563eb; font-size: 1.1rem;">Privacy Consent</h4>
+        <p style="margin: 0 0 15px 0; font-size: 0.9rem; line-height: 1.4;">We do not collect or store any of your
+            personal data on our servers. Local Storage is used strictly to autosave your drawings. By continuing to use
+            LearningBoard, you accept our <a href="/privacy" style="color: #2563eb; text-decoration: underline;">Privacy
+                Policy</a> & <a href="/terms" style="color: #2563eb; text-decoration: underline;">Terms</a>.</p>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button id="btn-decline"
+                style="background: transparent; color: #4b5563; border: 1px solid rgba(0,0,0,0.2); padding: 8px 16px; border-radius: 6px; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; font-weight: 600; transition: background 0.3s;">Decline</button>
+            <button id="btn-accept"
+                style="background: #2563eb; color: #ffffff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; transition: transform 0.2s;">Accept</button>
+        </div>
+    </div>
+
+    <script>
+        // Privacy Consent Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const consent = localStorage.getItem('lb-privacy-consent');
+            const banner = document.getElementById('privacy-banner');
+            if (consent !== 'accepted') {
+                banner.style.display = 'block';
+            }
+
+            document.getElementById('btn-accept').onclick = () => {
+                localStorage.setItem('lb-privacy-consent', 'accepted');
+                banner.style.transition = 'opacity 0.3s ease';
+                banner.style.opacity = '0';
+                setTimeout(() => banner.style.display = 'none', 300);
+            };
+
+            document.getElementById('btn-decline').onclick = () => {
+                banner.style.display = 'none';
+            };
+        });
     </script>
 </body>
 
