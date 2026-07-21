@@ -1,0 +1,17 @@
+{
+    "name": "LearningBoard (Whiteboard)",
+    "short_name": "Whiteboard",
+    "start_url": "/whiteboard",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "description": "The Ultimate Virtual Whiteboard for Creators & Educators",
+    "icons": [
+        {
+            "src": "icon.svg",
+            "sizes": "192x192 512x512 any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}

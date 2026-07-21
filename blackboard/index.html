@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearningBoard - Free Virtual Interactive Chalkboard | learningboard.online</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121d15">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed:', err));
+            });
+        }
+    </script>
+    <meta name="description"
+        content="Turn your browser into a realistic, interactive digital blackboard. Perfect for teaching, drawing, and brainstorming online for free.">
+    <meta name="keywords"
+        content="digital blackboard, virtual chalkboard, online teaching tool, drawing board, free white board">
+    <meta property="og:title" content="LearningBoard - Free Virtual Interactive Chalkboard | learningboard.online">
+    <meta property="og:description"
+        content="Turn your browser into a realistic, interactive digital blackboard. Perfect for teaching, drawing, and brainstorming online for free.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://learningboard.online/blackboard">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg-solid, #1a2f26);
+            font-family: 'Outfit', sans-serif;
+            color: white;
+            user-select: none;
+        }
+
+        #app-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--bg-solid, #1a2f26);
+            background:
+                radial-gradient(circle farthest-corner at 50% 50%, var(--bg-center, #203a2f) 0%, var(--bg-edge, #0d1b15) 100%),
+                linear-gradient(45deg, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05)),
+                linear-gradient(45deg, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05));
+            background-size: 100% 100%, 4px 4px, 4px 4px;
+            background-position: 0 0, 0 0, 2px 2px;
+        }
+
+        /* --- Website Content Styles --- */
+        main {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            color: #e2e8f0;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        main h1,
+        main h2 {
+            color: #ffffff;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        main h1 {
+            font-size: 3.4rem;
+            text-align: center;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(52, 211, 153, 0.2);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 35px 30px;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px -15px rgba(52, 211, 153, 0.15);
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            color: #6ee7b7;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 50px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            background: #080d18;
+            backdrop-filter: blur(10px);
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: #34d399;
+            text-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+
+        #bg-canvas {
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.6;
+            mix-blend-mode: multiply;
+        }
+
+        #board-canvas {
+            z-index: 2;
+        }
+
+        #dust-canvas {
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        #toolbar {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 12px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: rgba(15, 25, 20, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            align-items: center;
+            transition: all 0.3s ease;
+            max-width: calc(100vw - 12vmin);
+            flex-wrap: wrap;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .tool-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tool-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tool-btn.active {
+            color: #1a2f26;
+            background: white;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .sep {
+            width: 1px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 4px;
+        }
+
+        .color-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .color-btn.active {
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        body.theme-black {
+            --bg-solid: #0d0d0d;
+            --bg-center: #1a1a1a;
+            --bg-edge: #050505;
+        }
+
+        .board-theme-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .board-theme-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .board-theme-btn.active {
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        .board-theme-btn.green {
+            background: #203a2f;
+        }
+
+        .board-theme-btn.black {
+            background: #1a1a1a;
+        }
+
+        @media (max-width: 800px) {
+            #toolbar {
+                width: 90%;
+                flex-wrap: wrap;
+                justify-content: center;
+                border-radius: 20px;
+                gap: 8px;
+                padding: 10px;
+                bottom: 15px;
+            }
+
+            .color-btn {
+                width: 22px;
+                height: 22px;
+            }
+
+            .board-theme-btn {
+                width: 22px;
+                height: 22px;
+            }
+
+            .tool-btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .sep {
+                height: 20px;
+            }
+        }
+
+        #toolbar.drawing-hidden {
+            transform: translate(-50%, 150%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #toolbar.idle-hidden {
+                transform: translate(-50%, calc(100% - 15px));
+                opacity: 0.4;
+            }
+
+            #toolbar.idle-hidden:hover {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+
+        #fullscreen-container {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            z-index: 10;
+            display: flex;
+            padding: 2px 4px;
+            /* Slightly tighter padding for a single button */
+            border-radius: 50px;
+            background: rgba(15, 25, 20, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        #fullscreen-container.drawing-hidden {
+            transform: translateY(-150%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #fullscreen-container.idle-hidden {
+                transform: translateY(calc(-100% - 15px));
+                opacity: 0.4;
+            }
+
+            #fullscreen-container.idle-hidden:hover {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        #dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 17, 32, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .dialog {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 400px;
+            width: 90%;
+            backdrop-filter: blur(20px);
+        }
+
+        #dialog-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        #dialog-overlay.active .dialog {
+            transform: translateY(0) scale(1);
+        }
+
+        .dialog h3 {
+            margin: 0 0 12px 0;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: #f8fafc;
+        }
+
+        .dialog p {
+            margin: 0 0 25px 0;
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .dialog-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-confirm {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: inherit;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.05);
+            color: #f8fafc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Wood Frame Styles */
+        .wood-frame {
+            position: absolute;
+            pointer-events: none;
+            z-index: 20;
+            background-color: #3b2313;
+            background-image:
+                repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 2px, transparent 2px, transparent 4px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.4));
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .horizontal {
+            left: 0;
+            right: 0;
+            height: 1.5vmin;
+        }
+
+        #wood-frame-top {
+            top: 0;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.7);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+        }
+
+        #wood-frame-bottom {
+            bottom: 0;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.8);
+            background-image:
+                repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 2px, transparent 2px, transparent 4px),
+                linear-gradient(to top, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.4));
+        }
+
+        .vertical {
+            top: 0;
+            bottom: 0;
+            width: 1.5vmin;
+        }
+
+        #wood-frame-left {
+            left: 0;
+            border-right: 2px solid rgba(0, 0, 0, 0.7);
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.8);
+            background-image:
+                repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 2px, transparent 2px, transparent 4px),
+                linear-gradient(to right, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.4));
+        }
+
+        #wood-frame-right {
+            right: 0;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.8);
+            background-image:
+                repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 2px, transparent 2px, transparent 4px),
+                linear-gradient(to left, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.4));
+        }
+
+        input[type="range"] {
+            accent-color: #a7f3d0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app-container">
+        <div id="wood-frame-top" class="wood-frame horizontal"></div>
+        <div id="wood-frame-bottom" class="wood-frame horizontal"></div>
+        <div id="wood-frame-left" class="wood-frame vertical"></div>
+        <div id="wood-frame-right" class="wood-frame vertical"></div>
+
+        <canvas id="bg-canvas"></canvas>
+        <canvas id="board-canvas"></canvas>
+        <canvas id="dust-canvas"></canvas>
+
+        <div id="toolbar">
+            <button class="tool-btn active" id="btn-chalk" title="Chalk (C)">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path
+                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                </svg>
+                Chalk
+            </button>
+            <button class="tool-btn" id="btn-eraser" title="Eraser (E)">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path
+                        d="M16.24 11.51l1.57-1.57-4.12-4.12-1.57 1.57 4.12 4.12zM21.53 7.82l-2.82-2.82c-.78-.78-2.05-.78-2.83 0L3.15 17.82c-.78.78-.78 2.05 0 2.83L6.03 23.51c.78.78 2.05.78 2.83 0L21.53 10.65c.78-.78.78-2.05 0-2.83zM6.69 21.03l-2.12-2.12L13.15 10.3l2.12 2.12L6.69 21.03z" />
+                </svg>
+                Eraser
+            </button>
+
+            <div class="slider-container" id="chalk-slider-container"
+                style="display: flex; align-items: center; gap: 6px; margin-left: 2px;">
+                <svg class="icon" viewBox="0 0 24 24" style="width: 14px; opacity: 0.6;">
+                    <circle id="chalk-icon-circle" cx="12" cy="12" r="3.3" />
+                </svg>
+                <input type="range" id="chalk-size" min="1" max="15" step="0.5" value="2.5" style="width: 60px;"
+                    title="Size Keyboard Shortcuts: [ and ]">
+            </div>
+
+            <div class="slider-container" id="eraser-slider-container"
+                style="display: none; align-items: center; gap: 6px; margin-left: 2px;">
+                <svg class="icon" viewBox="0 0 24 24" style="width: 14px; opacity: 0.6;">
+                    <circle id="eraser-icon-circle" cx="12" cy="12" r="6.1" />
+                </svg>
+                <input type="range" id="eraser-size" min="20" max="150" value="60" style="width: 60px;"
+                    title="Size Keyboard Shortcuts: [ and ]">
+            </div>
+
+            <div class="sep"></div>
+
+            <div class="color-btn active" data-color="rgba(245, 245, 245, " style="background: #f5f5f5;"
+                title="Dusty White"></div>
+            <div class="color-btn" data-color="rgba(244, 143, 177, " style="background: #f48fb1;" title="Pink"></div>
+            <div class="color-btn" data-color="rgba(239, 83, 80, " style="background: #ef5350;" title="Red"></div>
+            <div class="color-btn" data-color="rgba(255, 183, 77, " style="background: #ffb74d;" title="Orange"></div>
+            <div class="color-btn" data-color="rgba(255, 224, 102, " style="background: #ffe066;" title="Yellow"></div>
+            <div class="color-btn" data-color="rgba(197, 225, 165, " style="background: #c5e1a5;" title="Light Green">
+            </div>
+            <div class="color-btn" data-color="rgba(129, 199, 132, " style="background: #81c784;" title="Green"></div>
+            <div class="color-btn" data-color="rgba(129, 212, 250, " style="background: #81d4fa;" title="Light Blue">
+            </div>
+            <div class="color-btn" data-color="rgba(144, 202, 249, " style="background: #90caf9;" title="Blue"></div>
+            <div class="color-btn" data-color="rgba(206, 147, 216, " style="background: #ce93d8;" title="Purple"></div>
+
+            <div class="sep"></div>
+
+
+
+            <div style="display: flex; align-items: center; gap: 4px;">
+                <button class="tool-btn active" id="btn-dust" title="Toggle Chalk Dust">
+                    <svg class="icon" id="dust-icon-on" viewBox="0 0 24 24">
+                        <path
+                            d="M18 10l-1.26-2.74L14 6l2.74-1.26L18 2l1.26 2.74L22 6l-2.74 1.26zM10.5 4.5L8 2 5.5 4.5 3 7l2.5 2.5L8 12l2.5-2.5L13 7l-2.5-2.5zM15 18l-1.26-2.74L11 14l2.74-1.26L15 10l1.26 2.74L19 14l-2.74 1.26z" />
+                    </svg>
+                    <svg class="icon" id="dust-icon-off" viewBox="0 0 24 24" style="display:none; opacity:0.6;">
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                    </svg>
+                    <span style="margin-left: 2px;">FX</span>
+                </button>
+                <button class="tool-btn active" id="btn-sound" title="Toggle Sound (S)">
+                    <svg class="icon" id="sound-icon-on" viewBox="0 0 24 24">
+                        <path
+                            d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                    </svg>
+                    <svg class="icon" id="sound-icon-off" viewBox="0 0 24 24" style="display:none;">
+                        <path
+                            d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                    </svg>
+                </button>
+                <input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.3" style="width: 50px;"
+                    title="Volume">
+            </div>
+
+            <div class="sep"></div>
+
+            <button class="tool-btn" id="btn-undo" title="Undo (Ctrl+Z)">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path
+                        d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
+                </svg>
+            </button>
+            <button class="tool-btn" id="btn-redo" title="Redo (Ctrl+Y)">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path
+                        d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22l2.37.78c1.05-3.19 4.06-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" />
+                </svg>
+            </button>
+
+            <div class="sep"></div>
+
+            <button class="tool-btn" id="btn-clear" title="Clear Board (X)">Clear</button>
+            <button class="tool-btn" id="btn-export">Export</button>
+        </div>
+
+        <div id="fullscreen-container">
+            <div style="display: flex; gap: 8px; margin-right: 12px; align-items: center;">
+                <div class="board-theme-btn green active" data-theme="green" title="Green Board"></div>
+                <div class="board-theme-btn black" data-theme="black" title="Black Board"></div>
+            </div>
+            <div class="sep" style="height: 18px; margin: 0 4px;"></div>
+            <a href="/whiteboard" class="tool-btn"
+                style="text-decoration: none; padding: 6px 12px; font-weight: 600; color: #a7f3d0;">
+                Switch to Whiteboard →
+            </a>
+            <div class="sep" style="height: 18px; margin: 0 4px;"></div>
+            <button class="tool-btn" id="btn-fullscreen" title="Fullscreen (F)">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+                </svg>
+            </button>
+        </div>
+    </div> <!-- End app-container -->
+
+    <div id="dialog-overlay">
+        <div class="dialog">
+            <h3>Clear Blackboard?</h3>
+            <p>This action cannot be undone. All chalk will be lost.</p>
+            <div class="dialog-btns">
+                <button class="btn-cancel" id="dl-cancel">Cancel</button>
+                <button class="btn-confirm" id="dl-confirm">Clear All</button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <h1>The Ultimate Virtual Blackboard for Creators &amp; Educators</h1>
+        <p style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">Learning Board
+            provides a hyper-realistic, lag-free chalkboard experience right in your browser. Whether you're teaching a
+            math class, recording a coding tutorial, or just brainstorming ideas, our digital blackboard feels just like
+            the real thing.</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>✍️ Pressure Sensitive</h3>
+                <p>Hardware stylus support maps your natural hand pressure dynamically to chalk thickness and opacity.
+                </p>
+            </div>
+            <div class="feature-card">
+                <h3>🎨 Authentic Textures</h3>
+                <p>Experience procedurally generated slate textures and dynamic chalk dust particles that react to your
+                    strokes.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔊 Immersive Audio</h3>
+                <p>A built-in synthesizer provides realistic chalk scratching sounds that dynamically adjust to your
+                    drawing speed.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔒 100% Client-Side</h3>
+                <p>No accounts, no tracking, and no servers. Everything runs safely and entirely within your browser.
+                </p>
+            </div>
+            <div class="feature-card">
+                <h3>💾 Auto-Saving</h3>
+                <p>Accidentally closed the tab? No problem. Learning Board automatically saves your progress locally.
+                </p>
+            </div>
+        </div>
+        <div class="faq-section" style="margin-top: 80px;">
+            <style>
+                details.faq-item {
+                    cursor: pointer;
+                }
+
+                details.faq-item>summary {
+                    list-style: none;
+                    /* Hide default arrow in firefox */
+                    outline: none;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                details.faq-item>summary::-webkit-details-marker {
+                    display: none;
+                    /* Hide default arrow in webkit */
+                }
+
+                details.faq-item[open]>summary .faq-icon {
+                    transform: rotate(45deg);
+                }
+
+                .faq-icon {
+                    transition: transform 0.3s ease;
+                    font-size: 1.8rem;
+                    line-height: 1;
+                    font-weight: 300;
+                }
+            </style>
+            <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+
+            <details class="faq-item"
+                style="margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: background 0.3s ease;">
+                <summary>
+                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">What are the keyboard shortcuts?</h3>
+                    <span class="faq-icon" style="color: #34d399;">+</span>
+                </summary>
+                <p style="margin: 15px 0 0 0; line-height: 1.6;">You can work faster using these
+                    keys:<br>
+                    <b>C</b>: Chalk/Marker<br>
+                    <b>E</b>: Eraser<br>
+                    <b>[</b> / <b>]</b>: Decrease or Increase brush size<br>
+                    <b>Ctrl+Z</b> / <b>Ctrl+Y</b>: Undo / Redo<br>
+                    <b>X</b>: Clear Board<br>
+                    <b>F</b>: Toggle Fullscreen<br>
+                    <b>S</b>: Toggle Sound Plugin
+                </p>
+            </details>
+
+            <details class="faq-item"
+                style="margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: background 0.3s ease;">
+                <summary>
+                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Is LearningBoard really 100% free?</h3>
+                    <span class="faq-icon" style="color: #34d399;">+</span>
+                </summary>
+                <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes! LearningBoard is completely free to use. There are
+                    no hidden fees, no premium subscription tiers, and no irritating account registrations required.
+                    Just open the page and start teaching or drawing instantly.</p>
+            </details>
+
+            <details class="faq-item"
+                style="margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: background 0.3s ease;">
+                <summary>
+                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Does LearningBoard work on iPads and
+                        drawing tablets?</h3>
+                    <span class="faq-icon" style="color: #34d399;">+</span>
+                </summary>
+                <p style="margin: 15px 0 0 0; line-height: 1.6;">Absolutely. LearningBoard is deeply optimized for touch
+                    devices and hardware styluses like the Apple Pencil or Wacom tablets. It dynamically reads your
+                    native stylus pressure to map realistic chalk or marker thickness on the fly.</p>
+            </details>
+
+            <details class="faq-item"
+                style="margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: background 0.3s ease;">
+                <summary>
+                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">How do I save my drawings?</h3>
+                    <span class="faq-icon" style="color: #34d399;">+</span>
+                </summary>
+                <p style="margin: 15px 0 0 0; line-height: 1.6;">Your work is automatically saved locally to your device
+                    as you draw, meaning you won't lose your work if you accidentally refresh the page. To export your
+                    board as a high-quality image for sharing, simply use the "Export" button in the digital toolbar.
+                </p>
+            </details>
+
+            <details class="faq-item"
+                style="margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: background 0.3s ease;">
+                <summary>
+                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Can I use this for online tutoring via
+                        Zoom or Google Meet?</h3>
+                    <span class="faq-icon" style="color: #34d399;">+</span>
+                </summary>
+                <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes, our digital blackboard is highly recommended for
+                    virtual tutoring! Simply share your browser window in your video conferencing application. Because
+                    LearningBoard runs smoothly at up to 120 frames per second on the client-side, your students will
+                    see perfectly fluid writing.</p>
+            </details>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/contact">Contact Us</a>
+        </div>
+        <div style="margin-top: 20px;">
+            &copy; 2026 Learning Board. All rights reserved. Built for educators.
+        </div>
+    </footer>
+
+    <script>
+        // --- Core Application Logic ---
+
+        const boardCanvas = document.getElementById('board-canvas');
+        const boardCtx = boardCanvas.getContext('2d', { willReadFrequently: true });
+
+        const dustCanvas = document.getElementById('dust-canvas');
+        const dustCtx = dustCanvas.getContext('2d');
+
+        const bgCanvas = document.getElementById('bg-canvas');
+        const bgCtx = bgCanvas.getContext('2d');
+
+        let width, height;
+
+        let isDrawing = false;
+        let lastX = 0, lastY = 0;
+        let lastTime = 0;
+        let currentTool = 'chalk'; // 'chalk' or 'eraser'
+        let currentColorStr = 'rgba(245, 245, 245, ';
+
+        // History for Undo/Redo
+        let historyStack = [];
+        let redoStack = [];
+        const MAX_HISTORY = 20;
+
+        let dustParticles = [];
+
+        // Setup resize
+        function resizeCanvas() {
+            const app = document.getElementById('app-container');
+            width = app ? app.clientWidth : window.innerWidth;
+            height = app ? app.clientHeight : window.innerHeight;
+
+            const oldW = boardCanvas.width || width;
+            const oldH = boardCanvas.height || height;
+            const newBoardW = Math.max(oldW, width);
+            const newBoardH = Math.max(oldH, height);
+
+            let imageData = null;
+            if (boardCanvas.width > 0 && boardCanvas.height > 0) {
+                imageData = boardCtx.getImageData(0, 0, boardCanvas.width, boardCanvas.height);
+            }
+
+            boardCanvas.width = newBoardW;
+            boardCanvas.height = newBoardH;
+            boardCanvas.style.width = newBoardW + 'px';
+            boardCanvas.style.height = newBoardH + 'px';
+
+            dustCanvas.width = width; dustCanvas.height = height;
+            bgCanvas.width = width; bgCanvas.height = height;
+
+            if (imageData) {
+                boardCtx.putImageData(imageData, 0, 0);
+            }
+
+            generateProceduralBackground();
+        }
+
+        function generateProceduralBackground() {
+            // Generate microscopic pores and scuff marks for a hyper-realistic slate
+            bgCtx.clearRect(0, 0, width, height);
+            const imageData = bgCtx.createImageData(width, height);
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                // Random scuff/noise
+                const val = Math.random() * 255;
+                if (Math.random() > 0.99) { // pores
+                    data[i] = data[i + 1] = data[i + 2] = val * 0.5;
+                    data[i + 3] = 40;
+                } else {
+                    data[i] = data[i + 1] = data[i + 2] = val;
+                    data[i + 3] = 10;
+                }
+            }
+            bgCtx.putImageData(imageData, 0, 0);
+
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // --- Audio Engine ---
+        let audioCtx, pinkNoiseNode, filterNode, gainNode;
+        let audioInitialized = false;
+        let soundEnabled = localStorage.getItem('lb-sound') !== 'false';
+        let dustEnabled = localStorage.getItem('lb-dust') !== 'false';
+
+        // Apply immediately on load
+        if (!soundEnabled) {
+            document.getElementById('btn-sound').classList.remove('active');
+            document.getElementById('sound-icon-on').style.display = 'none';
+            document.getElementById('sound-icon-off').style.display = 'block';
+        }
+        if (!dustEnabled) {
+            document.getElementById('btn-dust').classList.remove('active');
+            document.getElementById('dust-icon-on').style.display = 'none';
+            document.getElementById('dust-icon-off').style.display = 'block';
+        }
+
+        document.getElementById('btn-sound').onclick = () => {
+            soundEnabled = !soundEnabled;
+            localStorage.setItem('lb-sound', soundEnabled);
+            if (soundEnabled) {
+                document.getElementById('btn-sound').classList.add('active');
+                document.getElementById('sound-icon-on').style.display = 'block';
+                document.getElementById('sound-icon-off').style.display = 'none';
+            } else {
+                document.getElementById('btn-sound').classList.remove('active');
+                document.getElementById('sound-icon-on').style.display = 'none';
+                document.getElementById('sound-icon-off').style.display = 'block';
+                stopAudio();
+            }
+        };
+
+        document.getElementById('btn-dust').onclick = () => {
+            dustEnabled = !dustEnabled;
+            localStorage.setItem('lb-dust', dustEnabled);
+            if (dustEnabled) {
+                document.getElementById('btn-dust').classList.add('active');
+                document.getElementById('dust-icon-on').style.display = 'block';
+                document.getElementById('dust-icon-off').style.display = 'none';
+            } else {
+                document.getElementById('btn-dust').classList.remove('active');
+                document.getElementById('dust-icon-on').style.display = 'none';
+                document.getElementById('dust-icon-off').style.display = 'block';
+            }
+        };
+
+        function initAudio() {
+            if (audioInitialized) return;
+            audioInitialized = true;
+
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContext();
+
+            // Pink Noise Generation
+            const bufferSize = audioCtx.sampleRate * 2;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const output = buffer.getChannelData(0);
+            let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+            for (let i = 0; i < bufferSize; i++) {
+                let white = Math.random() * 2 - 1;
+                b0 = 0.99886 * b0 + white * 0.0555179;
+                b1 = 0.99332 * b1 + white * 0.0750759;
+                b2 = 0.96900 * b2 + white * 0.1538520;
+                b3 = 0.86650 * b3 + white * 0.3104856;
+                b4 = 0.55000 * b4 + white * 0.5329522;
+                b5 = -0.7616 * b5 - white * 0.0168980;
+                output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
+                b6 = white * 0.115926;
+            }
+
+            pinkNoiseNode = audioCtx.createBufferSource();
+            pinkNoiseNode.buffer = buffer;
+            pinkNoiseNode.loop = true;
+
+            filterNode = audioCtx.createBiquadFilter();
+            filterNode.type = 'bandpass';
+
+            gainNode = audioCtx.createGain();
+            gainNode.gain.value = 0;
+
+            pinkNoiseNode.connect(filterNode);
+            filterNode.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            pinkNoiseNode.start();
+        }
+
+        let globalAudioVolume = 0.3;
+        document.getElementById('vol-slider').oninput = (e) => {
+            globalAudioVolume = parseFloat(e.target.value);
+        };
+
+        function updateAudioDynamic(speed) {
+            if (!soundEnabled || !audioCtx || audioCtx.state !== 'running') return;
+            const now = audioCtx.currentTime;
+
+            if (currentTool === 'chalk') {
+                filterNode.type = 'bandpass';
+                const freq = Math.min(6000, 2000 + speed * 250);
+                filterNode.frequency.setTargetAtTime(freq, now, 0.02);
+
+                const vol = Math.max(0, Math.min(0.7, (speed - 1) * 0.06)) * globalAudioVolume;
+                gainNode.gain.setTargetAtTime(vol, now, 0.02);
+                filterNode.Q.value = 0.5;
+            } else {
+                // Eraser: heavy dragging sound
+                filterNode.type = 'lowpass';
+                filterNode.frequency.setTargetAtTime(250 + Math.min(200, speed * 8), now, 0.1);
+                const vol = Math.max(0, Math.min(0.8, speed * 0.04)) * globalAudioVolume;
+                gainNode.gain.setTargetAtTime(vol, now, 0.1);
+                filterNode.Q.value = 3.0; // More resonance for felt texture
+            }
+        }
+
+        function stopAudio() {
+            if (!audioCtx) return;
+            gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+        }
+
+        // --- Brush Processing & Rendering ---
+
+        // Procedural chalk brush (cached for performance)
+        const brushCanvas = document.createElement('canvas');
+        brushCanvas.width = 40; brushCanvas.height = 40;
+        const brushCtx = brushCanvas.getContext('2d');
+
+        function updateChalkPattern() {
+            brushCtx.clearRect(0, 0, 40, 40);
+            const center = 20;
+            const radius = 18;
+            for (let y = 0; y < 40; y++) {
+                for (let x = 0; x < 40; x++) {
+                    const dist = Math.hypot(x - center, y - center);
+                    if (dist < radius) {
+                        const probability = 1 - Math.pow(dist / radius, 1.5);
+                        if (Math.random() < probability) {
+                            brushCtx.fillStyle = currentColorStr + (Math.random() * 0.8 + 0.2) + ')';
+                            brushCtx.fillRect(x, y, 1, 1);
+                        }
+                    }
+                }
+            }
+        }
+        updateChalkPattern();
+
+        let lastThickness = 5;
+
+        function drawStroke(x0, y0, x1, y1, speed, pressure) {
+            const dist = Math.hypot(x1 - x0, y1 - y0);
+            if (dist < 0.1) return;
+
+            const p = (pressure && pressure > 0) ? pressure : 0.5;
+            const pressureMod = p * 2.0; // standard mouse (0.5) gives 1.0 multiplier
+
+            if (currentTool === 'chalk') {
+                // Slower = thicker, more opaque. Faster = thinner, transparent grainy
+                const maxThick = chalkBaseSize * 3.0 * pressureMod;
+                const minThick = chalkBaseSize * 0.2 * pressureMod;
+                const targetThickness = Math.max(minThick, maxThick - Math.min(maxThick * 0.7, speed * 0.25));
+
+                const pressureOpacity = p * 1.5; // significantly fade with light pressure
+                const opacityMod = Math.max(0.1, 1.0 - Math.min(0.85, speed * 0.03)) * Math.min(1.0, pressureOpacity);
+
+                boardCtx.globalCompositeOperation = 'source-over';
+                boardCtx.globalAlpha = opacityMod;
+
+                // Stamp the cached brush along the line with thickness interpolation
+                const spacing = Math.max(0.5, Math.min(lastThickness, targetThickness) * 0.2); // tight spacing for smooth line
+                const steps = Math.max(1, Math.floor(dist / spacing));
+
+                for (let i = 0; i <= steps; i++) {
+                    const t = i / steps;
+                    const cx = x0 + (x1 - x0) * t;
+                    const cy = y0 + (y1 - y0) * t;
+
+                    const currentThick = lastThickness + (targetThickness - lastThickness) * t;
+                    const drawSize = currentThick * 2.5;
+
+                    // Add slight jitter
+                    const jitterX = (Math.random() - 0.5) * currentThick * 0.1;
+                    const jitterY = (Math.random() - 0.5) * currentThick * 0.1;
+
+                    boardCtx.drawImage(brushCanvas, cx + jitterX - drawSize / 2, cy + jitterY - drawSize / 2, drawSize, drawSize);
+                }
+
+                lastThickness = targetThickness;
+
+                boardCtx.globalAlpha = 1.0;
+
+                // Spawn dust particles
+                if (Math.random() < 0.3 + (speed * 0.01)) {
+                    spawnDust(x1, y1, currentColorStr, 1 + speed * 0.1);
+                }
+
+            } else {
+                // Eraser Tool
+                // Solid path continuous erasing without ghosting/caterpillar artifacts
+                const thickness = (eraserBaseSize + Math.min(20, speed * 0.5)) * pressureMod;
+
+                boardCtx.lineCap = 'round';
+                boardCtx.lineJoin = 'round';
+
+                boardCtx.globalCompositeOperation = 'destination-out';
+
+                boardCtx.beginPath();
+                boardCtx.moveTo(x0, y0);
+                boardCtx.lineTo(x1, y1);
+
+                boardCtx.lineWidth = thickness;
+                boardCtx.strokeStyle = 'rgba(0,0,0,1)';
+                boardCtx.stroke();
+
+                if (Math.random() < 0.6) spawnDust(x1, y1, 'rgba(255,255,255,', 4);
+            }
+        }
+
+        // --- Dust Particle System ---
+        function spawnDust(x, y, colorStr, amount) {
+            if (!dustEnabled) return;
+            for (let i = 0; i < amount; i++) {
+                dustParticles.push({
+                    x: x + (Math.random() - 0.5) * 20,
+                    y: y + (Math.random() - 0.5) * 20,
+                    vx: (Math.random() - 0.5) * 1,
+                    vy: Math.random() * 2 + 0.5,
+                    life: 1.0,
+                    decay: Math.random() * 0.02 + 0.01,
+                    colorStr: colorStr
+                });
+            }
+        }
+
+        function updateDust(timestamp) {
+            dustCtx.clearRect(0, 0, width, height);
+            for (let i = dustParticles.length - 1; i >= 0; i--) {
+                let p = dustParticles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.life -= p.decay;
+
+                if (p.life <= 0) {
+                    dustParticles.splice(i, 1);
+                } else {
+                    dustCtx.fillStyle = p.colorStr + (p.life * 0.5) + ')';
+                    dustCtx.fillRect(p.x, p.y, 1.5, 1.5);
+                }
+            }
+            requestAnimationFrame(updateDust);
+        }
+        requestAnimationFrame(updateDust);
+
+
+        // --- Interaction Handling ---
+
+        function getPos(e) {
+            const rect = boardCanvas.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+
+            // Constrain drawing within the physical wooden border (1.5vmin thick)
+            const frameSize = Math.min(width, height) * 0.015;
+            x = Math.max(frameSize, Math.min(width - frameSize, x));
+            y = Math.max(frameSize, Math.min(height - frameSize, y));
+
+            return { x, y };
+        }
+
+        let hideToolbarTimeout;
+        let idleToolbarTimeout;
+
+        function resetIdleTimeout() {
+            const tb = document.getElementById('toolbar');
+            const fc = document.getElementById('fullscreen-container');
+            if (tb) {
+                tb.classList.remove('idle-hidden');
+                if (fc) fc.classList.remove('idle-hidden');
+                clearTimeout(idleToolbarTimeout);
+                idleToolbarTimeout = setTimeout(() => {
+                    if (!isDrawing) {
+                        tb.classList.add('idle-hidden');
+                        if (fc) fc.classList.add('idle-hidden');
+                    }
+                }, 3000);
+            }
+        }
+
+        window.addEventListener('mousemove', resetIdleTimeout);
+        resetIdleTimeout();
+
+        function handlePointerDown(e) {
+            if (e.target.closest && e.target.closest('#toolbar')) return;
+            if (e.target !== boardCanvas && e.target !== dustCanvas) return;
+
+            document.getElementById('toolbar').classList.add('drawing-hidden');
+            const fc = document.getElementById('fullscreen-container');
+            if (fc) fc.classList.add('drawing-hidden');
+            clearTimeout(hideToolbarTimeout);
+
+            if (soundEnabled) {
+                initAudio();
+                if (audioCtx) audioCtx.resume(); // Ensure running
+            }
+
+            isDrawing = true;
+            const pos = getPos(e);
+            lastX = pos.x; lastY = pos.y;
+            lastTime = performance.now();
+
+            const p = (e.pressure && e.pressure > 0) ? e.pressure : 0.5;
+            lastThickness = chalkBaseSize * 2 * (p * 2.0);
+
+            drawStroke(lastX, lastY, lastX + 0.1, lastY, 0, e.pressure);
+            updateAudioDynamic(5);
+        }
+
+        function handlePointerMove(e) {
+            if (!isDrawing) return;
+            e.preventDefault(); // Prevent scrolling on touch
+
+            const events = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+
+            for (let ev of events) {
+                const pos = getPos(ev);
+                const now = ev.timeStamp || performance.now();
+                const dt = Math.max(1, now - lastTime);
+
+                const dist = Math.hypot(pos.x - lastX, pos.y - lastY);
+                if (dist < 0.1) continue;
+
+                const speed = dist / dt * 10; // velocity proxy
+
+                drawStroke(lastX, lastY, pos.x, pos.y, speed, ev.pressure);
+                updateAudioDynamic(speed);
+
+                lastX = pos.x;
+                lastY = pos.y;
+                lastTime = now;
+            }
+        }
+
+        function handlePointerUp() {
+            if (!isDrawing) return;
+            isDrawing = false;
+
+            clearTimeout(hideToolbarTimeout);
+            hideToolbarTimeout = setTimeout(() => {
+                if (!isDrawing) {
+                    document.getElementById('toolbar').classList.remove('drawing-hidden');
+                    const fc = document.getElementById('fullscreen-container');
+                    if (fc) fc.classList.remove('drawing-hidden');
+                    resetIdleTimeout();
+                }
+            }, 800);
+
+            stopAudio();
+            saveHistoryData();
+        }
+
+        window.addEventListener('pointerdown', handlePointerDown);
+        window.addEventListener('pointermove', handlePointerMove, { passive: false });
+        window.addEventListener('pointerup', handlePointerUp);
+        window.addEventListener('pointercancel', handlePointerUp);
+
+
+        // --- State Management ---
+        let autoSaveTimeout;
+
+        function saveHistoryData() {
+            // Save to history array immediately
+            const dataUrl = boardCanvas.toDataURL();
+            if (historyStack.length === 0 || historyStack[historyStack.length - 1] !== dataUrl) {
+                historyStack.push(dataUrl);
+            }
+            if (historyStack.length > MAX_HISTORY) {
+                historyStack.shift();
+            }
+            redoStack = []; // clear redo on new action
+
+            // Debounce localStorage auto-save
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                try {
+                    localStorage.setItem('learningboard_save', dataUrl);
+                } catch (e) {
+                    console.warn("Local storage full or disabled.");
+                }
+            }, 1000);
+        }
+
+        function restoreFromHistory(dataUrl) {
+            const img = new Image();
+            img.onload = () => {
+                boardCtx.clearRect(0, 0, boardCanvas.width, boardCanvas.height);
+                boardCtx.drawImage(img, 0, 0);
+            };
+            img.src = dataUrl;
+        }
+
+        function undo() {
+            if (historyStack.length > 1) {
+                redoStack.push(historyStack.pop());
+                restoreFromHistory(historyStack[historyStack.length - 1]);
+                localStorage.setItem('learningboard_save', historyStack[historyStack.length - 1]);
+            } else if (historyStack.length === 1) {
+                redoStack.push(historyStack.pop());
+                boardCtx.clearRect(0, 0, boardCanvas.width, boardCanvas.height);
+                localStorage.removeItem('learningboard_save');
+            }
+        }
+
+        function redo() {
+            if (redoStack.length > 0) {
+                const dataUrl = redoStack.pop();
+                historyStack.push(dataUrl);
+                restoreFromHistory(dataUrl);
+                localStorage.setItem('learningboard_save', dataUrl);
+            }
+        }
+
+        function loadInitialSave() {
+            const saved = localStorage.getItem('learningboard_save');
+            if (saved) {
+                historyStack.push(saved);
+                restoreFromHistory(saved);
+            } else {
+                saveHistoryData(); // initialized empty state
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadInitialSave);
+
+
+        // --- UI Interactions ---
+
+        let chalkBaseSize = 2.5;
+        document.getElementById('chalk-size').addEventListener('input', (e) => {
+            chalkBaseSize = parseFloat(e.target.value);
+            const r = 2 + (chalkBaseSize / 15) * 8;
+            document.getElementById('chalk-icon-circle').setAttribute('r', r);
+        });
+
+        let eraserBaseSize = 60;
+        document.getElementById('eraser-size').addEventListener('input', (e) => {
+            eraserBaseSize = parseInt(e.target.value);
+            const r = 4 + ((eraserBaseSize - 20) / 130) * 7;
+            document.getElementById('eraser-icon-circle').setAttribute('r', r);
+        });
+
+        document.getElementById('btn-chalk').onclick = () => {
+            currentTool = 'chalk';
+            document.getElementById('btn-chalk').classList.add('active');
+            document.getElementById('btn-eraser').classList.remove('active');
+            document.getElementById('eraser-slider-container').style.display = 'none';
+            document.getElementById('chalk-slider-container').style.display = 'flex';
+        };
+
+        document.getElementById('btn-eraser').onclick = () => {
+            currentTool = 'eraser';
+            document.getElementById('btn-eraser').classList.add('active');
+            document.getElementById('btn-chalk').classList.remove('active');
+            document.getElementById('eraser-slider-container').style.display = 'flex';
+            document.getElementById('chalk-slider-container').style.display = 'none';
+        };
+
+        const colorBtns = document.querySelectorAll('.color-btn');
+        colorBtns.forEach(btn => {
+            btn.onclick = () => {
+                colorBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentColorStr = btn.dataset.color;
+                updateChalkPattern();
+                // Assure tool is set to chalk when picking color
+                document.getElementById('btn-chalk').click();
+            };
+        });
+
+        let currentTheme = localStorage.getItem('learningboard_theme') || 'green';
+        if (currentTheme === 'black') {
+            document.body.classList.add('theme-black');
+            document.querySelector('.board-theme-btn.black').classList.add('active');
+            document.querySelector('.board-theme-btn.green').classList.remove('active');
+        }
+
+        const themeBtns = document.querySelectorAll('.board-theme-btn');
+        themeBtns.forEach(btn => {
+            btn.onclick = () => {
+                themeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentTheme = btn.dataset.theme;
+                localStorage.setItem('learningboard_theme', currentTheme);
+                if (currentTheme === 'black') {
+                    document.body.classList.add('theme-black');
+                } else {
+                    document.body.classList.remove('theme-black');
+                }
+            };
+        });
+
+        document.getElementById('btn-undo').onclick = undo;
+        document.getElementById('btn-redo').onclick = redo;
+
+        const overlay = document.getElementById('dialog-overlay');
+        document.getElementById('btn-clear').onclick = () => {
+            overlay.classList.add('active');
+        };
+
+        document.getElementById('dl-cancel').onclick = () => {
+            overlay.classList.remove('active');
+        };
+
+        document.getElementById('dl-confirm').onclick = () => {
+            boardCtx.clearRect(0, 0, boardCanvas.width, boardCanvas.height);
+            saveHistoryData();
+            overlay.classList.remove('active');
+        };
+
+        document.getElementById('btn-export').onclick = () => {
+            // Combine bg and board to export a correct representation
+            const tempCnv = document.createElement('canvas');
+            tempCnv.width = width; tempCnv.height = height;
+            const tctx = tempCnv.getContext('2d');
+
+            // Draw dark slate bg with radial gradient matching CSS
+            const centerColor = currentTheme === 'black' ? '#1a1a1a' : '#203a2f';
+            const edgeColor = currentTheme === 'black' ? '#050505' : '#0d1b15';
+            const radGrad = tctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, Math.max(width, height));
+            radGrad.addColorStop(0, centerColor);
+            radGrad.addColorStop(1, edgeColor);
+            tctx.fillStyle = radGrad;
+            tctx.fillRect(0, 0, width, height);
+
+            tctx.fillStyle = 'rgba(0,0,0,0.05)';
+            tctx.fillRect(0, 0, width, height);
+
+            // Draw procedural noise
+            tctx.drawImage(bgCanvas, 0, 0);
+            // Draw chalk
+            tctx.drawImage(boardCanvas, 0, 0);
+
+            const link = document.createElement('a');
+            link.download = 'blackboard_export.png';
+            link.href = tempCnv.toDataURL('image/png');
+            link.click();
+        };
+
+        document.getElementById('btn-fullscreen').onclick = () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.warn(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        };
+
+        // Keyboard shortcuts
+        window.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            const overlay = document.getElementById('dialog-overlay');
+            if (overlay && overlay.classList.contains('active')) {
+                if (e.key === 'Enter') {
+                    document.getElementById('dl-confirm').click();
+                    e.preventDefault();
+                } else if (e.key === 'Escape') {
+                    document.getElementById('dl-cancel').click();
+                    e.preventDefault();
+                }
+                return;
+            }
+
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key.toLowerCase() === 'z') {
+                    if (e.shiftKey) redo(); else undo();
+                    e.preventDefault();
+                }
+                if (e.key.toLowerCase() === 'y') {
+                    redo();
+                    e.preventDefault();
+                }
+            } else {
+                switch (e.key.toLowerCase()) {
+                    case 'c': document.getElementById('btn-chalk').click(); break;
+                    case 'e': document.getElementById('btn-eraser').click(); break;
+                    case 's': document.getElementById('btn-sound').click(); break;
+                    case 'x': document.getElementById('btn-clear').click(); break;
+                    case 'f': document.getElementById('btn-fullscreen').click(); break;
+                    case '[':
+                        if (currentTool === 'chalk') {
+                            const inp = document.getElementById('chalk-size');
+                            inp.value = Math.max(parseFloat(inp.min), parseFloat(inp.value) - parseFloat(inp.step || 1));
+                            inp.dispatchEvent(new Event('input'));
+                        } else {
+                            const inp = document.getElementById('eraser-size');
+                            inp.value = Math.max(parseInt(inp.min), parseInt(inp.value) - 10);
+                            inp.dispatchEvent(new Event('input'));
+                        }
+                        break;
+                    case ']':
+                        if (currentTool === 'chalk') {
+                            const inp = document.getElementById('chalk-size');
+                            inp.value = Math.min(parseFloat(inp.max), parseFloat(inp.value) + parseFloat(inp.step || 1));
+                            inp.dispatchEvent(new Event('input'));
+                        } else {
+                            const inp = document.getElementById('eraser-size');
+                            inp.value = Math.min(parseInt(inp.max), parseInt(inp.value) + 10);
+                            inp.dispatchEvent(new Event('input'));
+                        }
+                        break;
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>
