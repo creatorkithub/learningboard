@@ -13,6 +13,7 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-M8WDT49P');</script>
     <!-- End Google Tag Manager -->
+    <meta name="yandex-verification" content="90df3282b64ffaa7" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Virtual Blackboard &amp; Interactive Greenboard | LearningBoard</title>
@@ -181,27 +182,105 @@
             pointer-events: none;
         }
 
-        #toolbar {
+        /* --- RIGHT-SIDE FLOATING PALETTE CONTAINER --- */
+        #palette-container {
             position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            z-index: 100;
             display: flex;
-            gap: 12px;
-            padding: 10px 20px;
-            border-radius: 50px;
-            background: rgba(15, 25, 20, 0.6);
+            align-items: center;
+        }
+
+        #palette-trigger {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 80px;
+            background: rgba(15, 25, 20, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: none;
+            border-radius: 12px 0 0 12px;
+            display: flex;
             align-items: center;
-            transition: all 0.3s ease;
-            max-width: calc(100vw - 12vmin);
-            flex-wrap: wrap;
             justify-content: center;
+            cursor: pointer;
+            z-index: 101;
+            box-shadow: -4px 0 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #palette-trigger:hover {
+            background: rgba(25, 40, 32, 0.9);
+            width: 36px;
+        }
+
+        #toolbar {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%) translateX(120%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 18px 14px;
+            border-radius: 22px 0 0 22px;
+            background: rgba(15, 25, 20, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: none;
+            box-shadow: none;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, visibility 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            width: 216px;
+            max-height: 90vh;
+            overflow-y: auto;
             box-sizing: border-box;
+            z-index: 102;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #palette-container:hover #toolbar {
+                transform: translateY(-50%) translateX(0);
+                opacity: 1;
+                visibility: visible;
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+                pointer-events: auto;
+            }
+
+            #palette-container:hover #palette-trigger {
+                transform: translateY(-50%) translateX(-216px);
+            }
+        }
+
+        #palette-container.tap-open #toolbar,
+        #palette-container.locked #toolbar {
+            transform: translateY(-50%) translateX(0);
+            opacity: 1;
+            visibility: visible;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+            pointer-events: auto;
+        }
+
+        #palette-container.tap-open #palette-trigger,
+        #palette-container.locked #palette-trigger {
+            transform: translateY(-50%) translateX(-216px);
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            width: 100%;
+            margin: 6px 0;
         }
 
         .tool-btn {
@@ -214,7 +293,7 @@
             padding: 8px 16px;
             border-radius: 30px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -223,6 +302,19 @@
         .tool-btn:hover {
             color: white;
             background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .tool-btn:active {
+            transform: scale(0.95);
+        }
+
+        #btn-clear:hover {
+            background: rgba(239, 68, 68, 0.4) !important;
+            color: #ffffff !important;
+            border-color: rgba(239, 68, 68, 0.6) !important;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            transform: scale(1.05);
         }
 
         .tool-btn.active {
@@ -296,15 +388,24 @@
             background: #1a1a1a;
         }
 
-        @media (max-width: 800px) {
+        /* Tablet Responsiveness (481px to 900px) */
+        @media (max-width: 900px) {
             #toolbar {
-                width: 90%;
-                flex-wrap: wrap;
-                justify-content: center;
-                border-radius: 20px;
-                gap: 8px;
-                padding: 10px;
-                bottom: 15px;
+                width: 195px;
+                padding: 14px 10px;
+                gap: 10px;
+                max-height: 88vh;
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                #palette-container:hover #palette-trigger {
+                    transform: translateY(-50%) translateX(-195px);
+                }
+            }
+
+            #palette-container.tap-open #palette-trigger,
+            #palette-container.locked #palette-trigger {
+                transform: translateY(-50%) translateX(-195px);
             }
 
             .color-btn {
@@ -318,7 +419,7 @@
             }
 
             .tool-btn {
-                padding: 6px 12px;
+                padding: 6px 10px;
                 font-size: 13px;
             }
 
@@ -327,21 +428,224 @@
             }
         }
 
-        #toolbar.drawing-hidden {
-            transform: translate(-50%, 150%);
-            opacity: 0;
-            pointer-events: none;
+        /* Small Mobile Screen Responsiveness (<= 480px) */
+        @media (max-width: 480px) {
+            #toolbar {
+                width: 175px;
+                padding: 12px 8px;
+                gap: 8px;
+                border-radius: 18px 0 0 18px;
+                max-height: 85vh;
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                #palette-container:hover #palette-trigger {
+                    transform: translateY(-50%) translateX(-175px);
+                }
+            }
+
+            #palette-container.tap-open #palette-trigger,
+            #palette-container.locked #palette-trigger {
+                transform: translateY(-50%) translateX(-175px);
+            }
+
+            .tool-btn {
+                padding: 5px 8px;
+                font-size: 12px;
+                gap: 4px;
+            }
+
+            .color-grid {
+                gap: 5px;
+                margin: 4px 0;
+            }
+
+            .color-btn {
+                width: 18px;
+                height: 18px;
+            }
+
+            #palette-trigger {
+                width: 28px;
+                height: 70px;
+                border-radius: 10px 0 0 10px;
+            }
+
+            #palette-trigger svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        /* Mobile Landscape Orientation Responsiveness (<= 500px Height) */
+        @media (max-height: 500px) {
+            #toolbar {
+                width: 165px;
+                padding: 6px 6px;
+                gap: 4px;
+                border-radius: 14px 0 0 14px;
+                max-height: 96vh;
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                #palette-container:hover #palette-trigger {
+                    transform: translateY(-50%) translateX(-165px);
+                }
+            }
+
+            #palette-container.tap-open #palette-trigger,
+            #palette-container.locked #palette-trigger {
+                transform: translateY(-50%) translateX(-165px);
+            }
+
+            .tool-btn {
+                padding: 3px 6px;
+                font-size: 11px;
+                gap: 3px;
+            }
+
+            .color-grid {
+                gap: 4px;
+                margin: 2px 0;
+            }
+
+            .color-btn {
+                width: 16px;
+                height: 16px;
+            }
+
+            #palette-trigger {
+                width: 24px;
+                height: 55px;
+                border-radius: 8px 0 0 8px;
+            }
+
+            #palette-trigger svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            #fullscreen-container {
+                top: 8px;
+                right: 8px;
+                padding: 1px 4px;
+            }
+
+            #fullscreen-container .tool-btn {
+                padding: 3px 5px;
+                font-size: 11px;
+            }
+        }
+
+        #palette-container.drawing-hidden,
+        #toolbar.drawing-hidden,
+        #scroll-info-hint.drawing-hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* --- BOTTOM SCROLL INFO HINT BUTTON --- */
+        #scroll-info-hint {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(15, 25, 20, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: opacity 0.3s ease, background 0.2s ease, border-color 0.2s ease;
+            animation: scrollBounce 2.2s infinite ease-in-out;
+            pointer-events: auto;
+        }
+
+        #scroll-info-hint:hover {
+            background: rgba(25, 40, 32, 0.9);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        #scroll-info-hint svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        @keyframes scrollBounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(4px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(2px);
+            }
         }
 
         @media (hover: hover) and (pointer: fine) {
             #toolbar.idle-hidden {
-                transform: translate(-50%, calc(100% - 15px));
                 opacity: 0.4;
             }
 
             #toolbar.idle-hidden:hover {
-                transform: translate(-50%, 0);
                 opacity: 1;
+            }
+        }
+
+        .switch-text-full {
+            display: inline;
+        }
+
+        .switch-text-short {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .switch-text-full {
+                display: none;
+            }
+
+            .switch-text-short {
+                display: inline;
+            }
+
+            #fullscreen-container {
+                top: 12px;
+                right: 12px;
+                padding: 2px 6px;
+                max-width: calc(100vw - 24px);
+                box-sizing: border-box;
+            }
+
+            #fullscreen-container .board-theme-btn {
+                width: 18px;
+                height: 18px;
+            }
+
+            #fullscreen-container .tool-btn {
+                padding: 4px 6px;
+                font-size: 12px;
             }
         }
 
@@ -401,15 +705,17 @@
         .dialog {
             background: rgba(15, 23, 42, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
+            padding: 32px 28px;
             border-radius: 24px;
             text-align: center;
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transform: translateY(30px) scale(0.95);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             max-width: 400px;
-            width: 90%;
+            width: 90vw;
+            box-sizing: border-box;
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         #dialog-overlay.active {
@@ -560,124 +866,176 @@
         <canvas id="board-canvas"></canvas>
         <canvas id="dust-canvas"></canvas>
 
-        <div id="toolbar">
-            <button class="tool-btn active" id="btn-chalk" title="Chalk (C)">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path
-                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+        <!-- --- PHASE 5: RIGHT-SIDE FLOATING PALETTE ---- -->
+        <div id="palette-container">
+            <div id="palette-trigger" title="Toggle Tool Palette">
+                <svg class="icon icon-open" viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
                 </svg>
-                Chalk
-            </button>
-            <button class="tool-btn" id="btn-eraser" title="Eraser (E)">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path
-                        d="M16.24 11.51l1.57-1.57-4.12-4.12-1.57 1.57 4.12 4.12zM21.53 7.82l-2.82-2.82c-.78-.78-2.05-.78-2.83 0L3.15 17.82c-.78.78-.78 2.05 0 2.83L6.03 23.51c.78.78 2.05.78 2.83 0L21.53 10.65c.78-.78.78-2.05 0-2.83zM6.69 21.03l-2.12-2.12L13.15 10.3l2.12 2.12L6.69 21.03z" />
+                <svg class="icon icon-close" viewBox="0 0 24 24" style="display:none;">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
                 </svg>
-                Eraser
-            </button>
-
-            <div class="slider-container" id="chalk-slider-container"
-                style="display: flex; align-items: center; gap: 6px; margin-left: 2px;">
-                <svg class="icon" viewBox="0 0 24 24" style="width: 14px; opacity: 0.6;">
-                    <circle id="chalk-icon-circle" cx="12" cy="12" r="3.3" />
-                </svg>
-                <input type="range" id="chalk-size" min="1" max="15" step="0.5" value="2.5" style="width: 60px;"
-                    title="Size Keyboard Shortcuts: [ and ]">
             </div>
 
-            <div class="slider-container" id="eraser-slider-container"
-                style="display: none; align-items: center; gap: 6px; margin-left: 2px;">
-                <svg class="icon" viewBox="0 0 24 24" style="width: 14px; opacity: 0.6;">
-                    <circle id="eraser-icon-circle" cx="12" cy="12" r="6.1" />
-                </svg>
-                <input type="range" id="eraser-size" min="20" max="150" value="60" style="width: 60px;"
-                    title="Size Keyboard Shortcuts: [ and ]">
-            </div>
+            <div id="toolbar">
+                <div class="tool-group"
+                    style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 6px; width: 100%;">
+                    <button class="tool-btn active" id="btn-chalk" title="Chalk (C)"
+                        style="flex: 1; justify-content: center; padding: 8px 4px;">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                        </svg>
+                        Chalk
+                    </button>
+                    <button class="tool-btn" id="btn-eraser" title="Eraser (E)"
+                        style="flex: 1; justify-content: center; padding: 8px 4px;">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M16.24 11.51l1.57-1.57-4.12-4.12-1.57 1.57 4.12 4.12zM21.53 7.82l-2.82-2.82c-.78-.78-2.05-.78-2.83 0L3.15 17.82c-.78.78-.78 2.05 0 2.83L6.03 23.51c.78.78 2.05.78 2.83 0L21.53 10.65c.78-.78.78-2.05 0-2.83zM6.69 21.03l-2.12-2.12L13.15 10.3l2.12 2.12L6.69 21.03z" />
+                        </svg>
+                        Eraser
+                    </button>
+                </div>
 
-            <div class="sep"></div>
-
-            <div class="color-btn active" data-color="rgba(245, 245, 245, " style="background: #f5f5f5;"
-                title="Dusty White"></div>
-            <div class="color-btn" data-color="rgba(244, 143, 177, " style="background: #f48fb1;" title="Pink"></div>
-            <div class="color-btn" data-color="rgba(239, 83, 80, " style="background: #ef5350;" title="Red"></div>
-            <div class="color-btn" data-color="rgba(255, 183, 77, " style="background: #ffb74d;" title="Orange"></div>
-            <div class="color-btn" data-color="rgba(255, 224, 102, " style="background: #ffe066;" title="Yellow"></div>
-            <div class="color-btn" data-color="rgba(197, 225, 165, " style="background: #c5e1a5;" title="Light Green">
-            </div>
-            <div class="color-btn" data-color="rgba(129, 199, 132, " style="background: #81c784;" title="Green"></div>
-            <div class="color-btn" data-color="rgba(129, 212, 250, " style="background: #81d4fa;" title="Light Blue">
-            </div>
-            <div class="color-btn" data-color="rgba(144, 202, 249, " style="background: #90caf9;" title="Blue"></div>
-            <div class="color-btn" data-color="rgba(206, 147, 216, " style="background: #ce93d8;" title="Purple"></div>
-
-            <div class="sep"></div>
-
-
-
-            <div style="display: flex; align-items: center; gap: 4px;">
-                <button class="tool-btn active" id="btn-dust" title="Toggle Chalk Dust">
-                    <svg class="icon" id="dust-icon-on" viewBox="0 0 24 24">
-                        <path
-                            d="M18 10l-1.26-2.74L14 6l2.74-1.26L18 2l1.26 2.74L22 6l-2.74 1.26zM10.5 4.5L8 2 5.5 4.5 3 7l2.5 2.5L8 12l2.5-2.5L13 7l-2.5-2.5zM15 18l-1.26-2.74L11 14l2.74-1.26L15 10l1.26 2.74L19 14l-2.74 1.26z" />
+                <div class="slider-container" id="chalk-slider-container"
+                    style="display: flex; align-items: center; gap: 6px; width: 100%;">
+                    <svg class="icon" viewBox="0 0 24 24" style="width: 14px; opacity: 0.6;">
+                        <circle id="chalk-icon-circle" cx="12" cy="12" r="3.3" />
                     </svg>
-                    <svg class="icon" id="dust-icon-off" viewBox="0 0 24 24" style="display:none; opacity:0.6;">
-                        <path
-                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                    <input type="range" id="chalk-size" min="1" max="15" step="0.5" value="2.5" style="width: 100%;"
+                        title="Size Keyboard Shortcuts: [ and ]">
+                </div>
+
+                <div class="slider-container" id="eraser-slider-container"
+                    style="display: none; align-items: center; gap: 6px; width: 100%;">
+                    <svg class="icon" viewBox="0 0 24 24" style="width: 14px; opacity: 0.6;">
+                        <circle id="eraser-icon-circle" cx="12" cy="12" r="6.1" />
                     </svg>
-                    <span style="margin-left: 2px;">FX</span>
-                </button>
-                <button class="tool-btn active" id="btn-sound" title="Toggle Sound (S)">
-                    <svg class="icon" id="sound-icon-on" viewBox="0 0 24 24">
-                        <path
-                            d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-                    </svg>
-                    <svg class="icon" id="sound-icon-off" viewBox="0 0 24 24" style="display:none;">
-                        <path
-                            d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
-                    </svg>
-                </button>
-                <input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.3" style="width: 50px;"
-                    title="Volume">
+                    <input type="range" id="eraser-size" min="20" max="150" value="60" style="width: 100%;"
+                        title="Size Keyboard Shortcuts: [ and ]">
+                </div>
+
+                <div class="color-grid">
+                    <div class="color-btn active" data-color="rgba(245, 245, 245, " style="background: #f5f5f5;"
+                        title="Dusty White"></div>
+                    <div class="color-btn" data-color="rgba(244, 143, 177, " style="background: #f48fb1;" title="Pink">
+                    </div>
+                    <div class="color-btn" data-color="rgba(239, 83, 80, " style="background: #ef5350;" title="Red">
+                    </div>
+                    <div class="color-btn" data-color="rgba(255, 183, 77, " style="background: #ffb74d;" title="Orange">
+                    </div>
+                    <div class="color-btn" data-color="rgba(255, 224, 102, " style="background: #ffe066;"
+                        title="Yellow"></div>
+                    <div class="color-btn" data-color="rgba(197, 225, 165, " style="background: #c5e1a5;"
+                        title="Light Green"></div>
+                    <div class="color-btn" data-color="rgba(129, 199, 132, " style="background: #81c784;" title="Green">
+                    </div>
+                    <div class="color-btn" data-color="rgba(129, 212, 250, " style="background: #81d4fa;"
+                        title="Light Blue"></div>
+                    <div class="color-btn" data-color="rgba(144, 202, 249, " style="background: #90caf9;" title="Blue">
+                    </div>
+                    <div class="color-btn" data-color="rgba(206, 147, 216, " style="background: #ce93d8;"
+                        title="Purple"></div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin: 4px 0;">
+                    <div style="height: 1px; flex-grow: 1; background: rgba(255,255,255,0.1);"></div>
+                    <button class="tool-btn" id="btn-pin" title="Lock Palette Open"
+                        style="padding: 2px !important; width: 24px; height: 24px; min-width: unset !important; background: transparent !important; box-shadow: none !important; border: none !important; opacity: 0.5; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s;">
+                        <svg class="icon" id="pin-icon-unlocked" viewBox="0 0 24 24"
+                            style="width: 16px; height: 16px; fill: rgba(255,255,255,0.7);">
+                            <path
+                                d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z" />
+                        </svg>
+                        <svg class="icon" id="pin-icon-locked" viewBox="0 0 24 24"
+                            style="width: 16px; height: 16px; fill: #34d399; display: none;">
+                            <path
+                                d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                        </svg>
+                    </button>
+                    <div style="height: 1px; flex-grow: 1; background: rgba(255,255,255,0.1);"></div>
+                </div>
+
+                <div style="display: flex; gap: 6px; width: 100%; align-items: center;">
+                    <button class="tool-btn active" id="btn-dust" title="Toggle Chalk Dust"
+                        style="flex: 1; justify-content: center; padding: 8px 6px;">
+                        <svg class="icon" id="dust-icon-on" viewBox="0 0 24 24">
+                            <path
+                                d="M18 10l-1.26-2.74L14 6l2.74-1.26L18 2l1.26 2.74L22 6l-2.74 1.26zM10.5 4.5L8 2 5.5 4.5 3 7l2.5 2.5L8 12l2.5-2.5L13 7l-2.5-2.5zM15 18l-1.26-2.74L11 14l2.74-1.26L15 10l1.26 2.74L19 14l-2.74 1.26z" />
+                        </svg>
+                        FX
+                    </button>
+                    <div id="sound-pill"
+                        style="flex: 1.2; display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.12); padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.2s ease;">
+                        <button class="tool-btn active" id="btn-sound" title="Click to Mute / Unmute"
+                            style="padding: 2px !important; width: 22px; height: 22px; min-width: unset !important; background: transparent !important; box-shadow: none !important; border: none !important; display: flex; align-items: center; justify-content: center;">
+                            <svg class="icon" id="sound-icon-on" viewBox="0 0 24 24"
+                                style="width: 16px; height: 16px; fill: #ffffff;">
+                                <path
+                                    d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                            </svg>
+                            <svg class="icon" id="sound-icon-off" viewBox="0 0 24 24"
+                                style="width: 16px; height: 16px; fill: rgba(255, 255, 255, 0.4); display: none;">
+                                <path
+                                    d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                            </svg>
+                        </button>
+                        <input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.15"
+                            style="width: 100%; cursor: pointer;" title="Adjust Sound Volume">
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 6px; width: 100%;">
+                    <button class="tool-btn" id="btn-undo" title="Undo (Ctrl+Z)"
+                        style="flex: 1; justify-content: center;">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
+                        </svg>
+                    </button>
+                    <button class="tool-btn" id="btn-redo" title="Redo (Ctrl+Y)"
+                        style="flex: 1; justify-content: center;">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22l2.37.78c1.05-3.19 4.06-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div style="display: flex; gap: 6px; width: 100%;">
+                    <button class="tool-btn" id="btn-clear" title="Clear Board (X)"
+                        style="flex: 1; justify-content: center; background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;">Clear</button>
+                    <button class="tool-btn" id="btn-export" style="flex: 1; justify-content: center;">Export</button>
+                </div>
             </div>
-
-            <div class="sep"></div>
-
-            <button class="tool-btn" id="btn-undo" title="Undo (Ctrl+Z)">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path
-                        d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
-                </svg>
-            </button>
-            <button class="tool-btn" id="btn-redo" title="Redo (Ctrl+Y)">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path
-                        d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22l2.37.78c1.05-3.19 4.06-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" />
-                </svg>
-            </button>
-
-            <div class="sep"></div>
-
-            <button class="tool-btn" id="btn-clear" title="Clear Board (X)">Clear</button>
-            <button class="tool-btn" id="btn-export">Export</button>
         </div>
 
         <div id="fullscreen-container">
-            <div style="display: flex; gap: 8px; margin-right: 12px; align-items: center;">
+            <div style="display: flex; gap: 6px; margin-right: 6px; align-items: center;">
                 <div class="board-theme-btn green active" data-theme="green" title="Green Board"></div>
                 <div class="board-theme-btn black" data-theme="black" title="Black Board"></div>
             </div>
-            <div class="sep" style="height: 18px; margin: 0 4px;"></div>
-            <a href="/whiteboard" class="tool-btn"
-                style="text-decoration: none; padding: 6px 12px; font-weight: 600; color: #a7f3d0;">
-                Switch to Whiteboard →
+            <div class="sep" style="height: 18px; margin: 0 2px;"></div>
+            <a href="/whiteboard/" class="tool-btn"
+                style="text-decoration: none; padding: 6px 10px; font-weight: 600; color: #a7f3d0; white-space: nowrap;">
+                <span class="switch-text-full">Switch to Whiteboard →</span>
+                <span class="switch-text-short">Whiteboard →</span>
             </a>
-            <div class="sep" style="height: 18px; margin: 0 4px;"></div>
+            <div class="sep" style="height: 18px; margin: 0 2px;"></div>
             <button class="tool-btn" id="btn-fullscreen" title="Fullscreen (F)">
                 <svg class="icon" viewBox="0 0 24 24">
                     <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
                 </svg>
             </button>
         </div>
+
+        <button id="scroll-info-hint" title="Scroll down for website info" aria-label="Scroll down for information">
+            <span>Scroll for Info</span>
+            <svg viewBox="0 0 24 24">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
+            </svg>
+        </button>
     </div> <!-- End app-container -->
 
     <div id="dialog-overlay">
@@ -936,45 +1294,68 @@
         let dustEnabled = localStorage.getItem('lb-dust') !== 'false';
 
         // Apply immediately on load
-        if (!soundEnabled) {
-            document.getElementById('btn-sound').classList.remove('active');
-            document.getElementById('sound-icon-on').style.display = 'none';
-            document.getElementById('sound-icon-off').style.display = 'block';
-        }
-        if (!dustEnabled) {
-            document.getElementById('btn-dust').classList.remove('active');
-            document.getElementById('dust-icon-on').style.display = 'none';
-            document.getElementById('dust-icon-off').style.display = 'block';
-        }
+        const btnSound = document.getElementById('btn-sound');
+        const btnDust = document.getElementById('btn-dust');
+        const soundPill = document.getElementById('sound-pill');
+        const soundIconOn = document.getElementById('sound-icon-on');
+        const soundIconOff = document.getElementById('sound-icon-off');
+        const dustIconOn = document.getElementById('dust-icon-on');
 
-        document.getElementById('btn-sound').onclick = () => {
-            soundEnabled = !soundEnabled;
-            localStorage.setItem('lb-sound', soundEnabled);
+        function applySoundState() {
+            if (!btnSound) return;
             if (soundEnabled) {
-                document.getElementById('btn-sound').classList.add('active');
-                document.getElementById('sound-icon-on').style.display = 'block';
-                document.getElementById('sound-icon-off').style.display = 'none';
+                btnSound.classList.add('active');
+                if (soundIconOn) soundIconOn.style.display = 'block';
+                if (soundIconOff) soundIconOff.style.display = 'none';
+                if (soundPill) {
+                    soundPill.style.borderColor = 'rgba(52, 211, 153, 0.5)';
+                    soundPill.style.background = 'rgba(52, 211, 153, 0.12)';
+                    soundPill.style.opacity = '1';
+                }
             } else {
-                document.getElementById('btn-sound').classList.remove('active');
-                document.getElementById('sound-icon-on').style.display = 'none';
-                document.getElementById('sound-icon-off').style.display = 'block';
+                btnSound.classList.remove('active');
+                if (soundIconOn) soundIconOn.style.display = 'none';
+                if (soundIconOff) soundIconOff.style.display = 'block';
+                if (soundPill) {
+                    soundPill.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    soundPill.style.background = 'rgba(255, 255, 255, 0.05)';
+                    soundPill.style.opacity = '0.6';
+                }
                 stopAudio();
             }
-        };
+        }
 
-        document.getElementById('btn-dust').onclick = () => {
-            dustEnabled = !dustEnabled;
-            localStorage.setItem('lb-dust', dustEnabled);
+        function applyDustState() {
+            if (!btnDust) return;
             if (dustEnabled) {
-                document.getElementById('btn-dust').classList.add('active');
-                document.getElementById('dust-icon-on').style.display = 'block';
-                document.getElementById('dust-icon-off').style.display = 'none';
+                btnDust.classList.add('active');
+                if (dustIconOn) dustIconOn.style.opacity = '1';
             } else {
-                document.getElementById('btn-dust').classList.remove('active');
-                document.getElementById('dust-icon-on').style.display = 'none';
-                document.getElementById('dust-icon-off').style.display = 'block';
+                btnDust.classList.remove('active');
+                if (dustIconOn) dustIconOn.style.opacity = '0.3';
             }
-        };
+        }
+
+        applySoundState();
+        applyDustState();
+
+        if (btnSound) {
+            btnSound.onclick = (e) => {
+                e.stopPropagation();
+                soundEnabled = !soundEnabled;
+                localStorage.setItem('lb-sound', soundEnabled);
+                applySoundState();
+            };
+        }
+
+        if (btnDust) {
+            btnDust.onclick = (e) => {
+                e.stopPropagation();
+                dustEnabled = !dustEnabled;
+                localStorage.setItem('lb-dust', dustEnabled);
+                applyDustState();
+            };
+        }
 
         function initAudio() {
             if (audioInitialized) return;
@@ -1017,10 +1398,24 @@
             pinkNoiseNode.start();
         }
 
-        let globalAudioVolume = 0.3;
-        document.getElementById('vol-slider').oninput = (e) => {
-            globalAudioVolume = parseFloat(e.target.value);
-        };
+        let globalAudioVolume = 0.15;
+        const volSlider = document.getElementById('vol-slider');
+        if (volSlider) {
+            volSlider.oninput = (e) => {
+                const val = parseFloat(e.target.value);
+                globalAudioVolume = val;
+                if (val > 0 && !soundEnabled) {
+                    soundEnabled = true;
+                    localStorage.setItem('lb-sound', 'true');
+                    applySoundState();
+                } else if (val === 0 && soundEnabled) {
+                    soundEnabled = false;
+                    localStorage.setItem('lb-sound', 'false');
+                    applySoundState();
+                }
+            };
+            volSlider.onclick = (e) => e.stopPropagation();
+        }
 
         function updateAudioDynamic(speed) {
             if (!soundEnabled || !audioCtx || audioCtx.state !== 'running') return;
@@ -1220,12 +1615,17 @@
         resetIdleTimeout();
 
         function handlePointerDown(e) {
-            if (e.target.closest && e.target.closest('#toolbar')) return;
+            if (e.target.closest && (e.target.closest('#toolbar') || e.target.closest('#palette-trigger'))) return;
             if (e.target !== boardCanvas && e.target !== dustCanvas) return;
 
-            document.getElementById('toolbar').classList.add('drawing-hidden');
+            const pc = document.getElementById('palette-container');
+            if (pc) pc.classList.add('drawing-hidden');
+            const tb = document.getElementById('toolbar');
+            if (tb) tb.classList.add('drawing-hidden');
             const fc = document.getElementById('fullscreen-container');
             if (fc) fc.classList.add('drawing-hidden');
+            const sh = document.getElementById('scroll-info-hint');
+            if (sh) sh.classList.add('drawing-hidden');
             clearTimeout(hideToolbarTimeout);
 
             if (soundEnabled) {
@@ -1277,9 +1677,14 @@
             clearTimeout(hideToolbarTimeout);
             hideToolbarTimeout = setTimeout(() => {
                 if (!isDrawing) {
-                    document.getElementById('toolbar').classList.remove('drawing-hidden');
+                    const pc = document.getElementById('palette-container');
+                    if (pc) pc.classList.remove('drawing-hidden');
+                    const tb = document.getElementById('toolbar');
+                    if (tb) tb.classList.remove('drawing-hidden');
                     const fc = document.getElementById('fullscreen-container');
                     if (fc) fc.classList.remove('drawing-hidden');
+                    const sh = document.getElementById('scroll-info-hint');
+                    if (sh) sh.classList.remove('drawing-hidden');
                     resetIdleTimeout();
                 }
             }, 800);
@@ -1364,12 +1769,96 @@
 
         // --- UI Interactions ---
 
-        let chalkBaseSize = 2.5;
-        document.getElementById('chalk-size').addEventListener('input', (e) => {
-            chalkBaseSize = parseFloat(e.target.value);
-            const r = 2 + (chalkBaseSize / 15) * 8;
-            document.getElementById('chalk-icon-circle').setAttribute('r', r);
+        // --- Palette Trigger & Pin Lock Logic ---
+        const paletteContainer = document.getElementById('palette-container');
+        const paletteTrigger = document.getElementById('palette-trigger');
+        const btnPin = document.getElementById('btn-pin');
+        let isPalettePinned = localStorage.getItem('learningboard_palette_pinned') === 'true';
+
+        if (isPalettePinned && paletteContainer && btnPin) {
+            paletteContainer.classList.add('locked');
+            const unp = document.getElementById('pin-icon-unlocked');
+            const pnd = document.getElementById('pin-icon-locked');
+            if (unp) unp.style.display = 'none';
+            if (pnd) pnd.style.display = 'inline';
+            btnPin.style.opacity = '1';
+        }
+
+        if (paletteTrigger) {
+            paletteTrigger.onclick = (e) => {
+                e.stopPropagation();
+                if (paletteContainer.classList.contains('locked')) {
+                    // If locked, tapping trigger toggles locked off
+                    paletteContainer.classList.remove('locked');
+                    paletteContainer.classList.remove('tap-open');
+                    isPalettePinned = false;
+                    localStorage.setItem('learningboard_palette_pinned', 'false');
+                    const unp = document.getElementById('pin-icon-unlocked');
+                    const pnd = document.getElementById('pin-icon-locked');
+                    if (unp) unp.style.display = 'inline';
+                    if (pnd) pnd.style.display = 'none';
+                    if (btnPin) btnPin.style.opacity = '0.5';
+                } else {
+                    paletteContainer.classList.toggle('tap-open');
+                }
+            };
+        }
+
+        if (btnPin) {
+            btnPin.onclick = (e) => {
+                e.stopPropagation();
+                isPalettePinned = !isPalettePinned;
+                localStorage.setItem('learningboard_palette_pinned', isPalettePinned);
+                const unp = document.getElementById('pin-icon-unlocked');
+                const pnd = document.getElementById('pin-icon-locked');
+                if (isPalettePinned) {
+                    paletteContainer.classList.add('locked');
+                    paletteContainer.classList.add('tap-open');
+                    if (unp) unp.style.display = 'none';
+                    if (pnd) pnd.style.display = 'inline';
+                    btnPin.style.opacity = '1';
+                } else {
+                    paletteContainer.classList.remove('locked');
+                    paletteContainer.classList.remove('tap-open');
+                    if (unp) unp.style.display = 'inline';
+                    if (pnd) pnd.style.display = 'none';
+                    btnPin.style.opacity = '0.5';
+                }
+            };
+        }
+
+        // Close tap-open state when clicking/tapping anywhere outside the palette
+        document.addEventListener('pointerdown', (e) => {
+            if (paletteContainer && !paletteContainer.contains(e.target) && !isPalettePinned) {
+                paletteContainer.classList.remove('tap-open');
+            }
         });
+
+        const scrollHint = document.getElementById('scroll-info-hint');
+        if (scrollHint) {
+            scrollHint.onclick = () => {
+                const mainEl = document.querySelector('main');
+                if (mainEl) {
+                    mainEl.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    window.scrollTo({ top: window.innerHeight - 40, behavior: 'smooth' });
+                }
+            };
+        }
+
+        let chalkBaseSize = window.innerWidth <= 900 ? 1.5 : 2.5;
+        const chalkSizeSlider = document.getElementById('chalk-size');
+        if (chalkSizeSlider) {
+            chalkSizeSlider.value = chalkBaseSize;
+            const r = 2 + (chalkBaseSize / 15) * 8;
+            const circle = document.getElementById('chalk-icon-circle');
+            if (circle) circle.setAttribute('r', r);
+            chalkSizeSlider.addEventListener('input', (e) => {
+                chalkBaseSize = parseFloat(e.target.value);
+                const newR = 2 + (chalkBaseSize / 15) * 8;
+                if (circle) circle.setAttribute('r', newR);
+            });
+        }
 
         let eraserBaseSize = 60;
         document.getElementById('eraser-size').addEventListener('input', (e) => {
