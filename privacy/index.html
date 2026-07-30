@@ -23,7 +23,7 @@
     <style>
         body {
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
             font-family: 'Outfit', sans-serif;
             background: #0b1120;
             color: #e2e8f0;
@@ -33,6 +33,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
+            padding: 40px 20px;
         }
 
         h1,
@@ -52,10 +53,74 @@
             text-decoration: underline;
         }
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 30px;
+        /* Global Nav */
+        .global-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(11, 17, 32, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .global-nav .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .global-nav .logo span {
+            color: #34d399;
+        }
+
+        .global-nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .global-nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1rem;
             font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .global-nav-links a:hover {
+            color: #34d399;
+        }
+
+        .global-nav-btn {
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .global-nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4);
+        }
+
+        @media (max-width: 600px) {
+            .global-nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
         }
     </style>
 </head>
@@ -65,8 +130,16 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8WDT49P" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <nav class="global-nav">
+        <a href="/" class="logo">Learning<span>Board</span></a>
+        <div class="global-nav-links">
+            <a href="/privacy/">Privacy</a>
+            <a href="/terms/">Terms</a>
+            <a href="/contact/">Contact</a>
+            <a href="/blackboard/" class="global-nav-btn">Launch App</a>
+        </div>
+    </nav>
     <div class="container">
-        <a href="/blackboard/" class="back-link">← Back to LearningBoard</a>
         <h1>Privacy Policy for Learning Board</h1>
         <p><strong>Last Updated: July 21, 2026</strong></p>
         <p>Learning Board ("we," "our," or "us") operates the website located at learningboard.online. We are committed

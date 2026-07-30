@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <link rel="canonical" href="https://learningboard.online/blackboard/" />
+    <link rel="canonical" href="https://learningboard.online/" />
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
@@ -17,15 +17,303 @@
     <meta name="naver-site-verification" content="" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearningBoard | learningboard.online</title>
+    <title>LearningBoard | Free Virtual Blackboard & Interactive Greenboard</title>
+    <meta name="description"
+        content="Turn your browser into a realistic, interactive digital blackboard. Perfect for online teaching, drawing, and remote tutoring with natural chalk sounds and simple controls.">
+    <meta name="keywords" content="online blackboard, greenboard, blackboard, virtual chalkboard, online teaching tool">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <!-- Instant Redirect to Blackboard (New Home) -->
-    <script>window.location.replace("/blackboard/");</script>
-    <meta http-equiv="refresh" content="0; url=/blackboard/" />
     <style>
-        body {
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Outfit', sans-serif;
             background-color: #0b1120;
-            display: none !important;
+            color: #e2e8f0;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        /* Global Nav */
+        .global-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(11, 17, 32, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .global-nav .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .global-nav .logo span {
+            color: #34d399;
+        }
+
+        .global-nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .global-nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .global-nav-links a:hover {
+            color: #34d399;
+        }
+
+        .global-nav-btn {
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .global-nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4);
+        }
+
+        @media (max-width: 600px) {
+            .global-nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+
+            main {
+                padding-top: 10px;
+                /* Reduced further */
+            }
+
+            .hero-banner {
+                margin-bottom: 30px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+                margin-bottom: 15px;
+            }
+        }
+
+        main {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1,
+        h2 {
+            color: #ffffff;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: 3.4rem;
+            text-align: center;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(52, 211, 153, 0.2);
+        }
+
+        .hero-banner {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .cta-btn-large {
+            display: inline-block;
+            margin-top: 30px;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(52, 211, 153, 0.3);
+        }
+
+        .cta-btn-large:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(52, 211, 153, 0.4);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 35px 30px;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px -15px rgba(52, 211, 153, 0.15);
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            color: #6ee7b7;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .faq-section {
+            margin-top: 80px;
+        }
+
+        details.faq-item {
+            cursor: pointer;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.3s ease;
+        }
+
+        details.faq-item>summary {
+            list-style: none;
+            outline: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        details.faq-item>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.faq-item[open]>summary .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.8rem;
+            line-height: 1;
+            font-weight: 300;
+            color: #34d399;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 50px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            background: #080d18;
+            backdrop-filter: blur(10px);
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: #34d399;
+            text-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
+        }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4);
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(52, 211, 153, 0.6);
+        }
+
+        #back-to-top svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        @media (max-width: 600px) {
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+            }
+
+            #back-to-top svg {
+                width: 24px;
+                height: 24px;
+            }
         }
     </style>
 </head>
@@ -35,6 +323,126 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8WDT49P" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="global-nav">
+        <a href="/" class="logo">Learning<span>Board</span></a>
+        <div class="global-nav-links">
+            <a href="/privacy/">Privacy</a>
+            <a href="/terms/">Terms</a>
+            <a href="/contact/">Contact</a>
+            <a href="/blackboard/" class="global-nav-btn">Launch App</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero-banner">
+            <h1>Free Virtual Blackboard &amp; Interactive Greenboard</h1>
+            <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto; color: #cbd5e1;">LearningBoard
+                provides a hyper-realistic, lag-free online blackboard experience right in your browser. Whether you're
+                teaching a math class, recording a video tutorial, or conducting remote tutoring, our virtual chalkboard
+                feels just like the real thing.</p>
+            <a href="/blackboard/" class="cta-btn-large">Open Blackboard Now</a>
+        </div>
+
+        <section style="margin-top: 50px;">
+            <h2 style="text-align: center;">Built for Teachers &amp; Tutors</h2>
+            <p
+                style="text-align: center; max-width: 750px; margin: 0 auto 40px auto; color: #cbd5e1; font-size: 1.05rem;">
+                Designed specifically for educators and presenters who need a clean, interactive teaching surface.
+                Switch seamlessly between an authentic greenboard and a deep blackboard aesthetic with a single click.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>✍️ Pressure Sensitive Chalk</h3>
+                    <p>Hardware stylus support maps natural hand pressure dynamically to chalk thickness and opacity on
+                        the virtual chalkboard.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎨 Greenboard &amp; Blackboard</h3>
+                    <p>Switch seamlessly between an authentic greenboard and a deep blackboard aesthetic to match your
+                        visual teaching preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔊 Realistic Chalk Sound</h3>
+                    <p>A built-in Web Audio engine produces realistic chalk scratching sounds that dynamically adjust to
+                        your drawing speed.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔒 100% Client-Side Apps</h3>
+                    <p>Works completely offline with no server required, no accounts, and no tracking. Everything runs
+                        safely inside your browser.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="faq-section">
+            <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+            <details class="faq-item">
+                <summary>
+                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Is LearningBoard really 100% free?</h3>
+                    <span class="faq-icon">+</span>
+                </summary>
+                <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes! LearningBoard is completely free to use. There are
+                    no hidden fees, no premium subscription tiers, and no irritating account registrations required.</p>
+            </details>
+            <details class="faq-item">
+                <summary>
+                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Does it work on iPads and drawing
+                        tablets?</h3>
+                    <span class="faq-icon">+</span>
+                </summary>
+                <p style="margin: 15px 0 0 0; line-height: 1.6;">Absolutely. LearningBoard is deeply optimized for touch
+                    devices and hardware styluses like the Apple Pencil or Wacom tablets, dynamically reading your
+                    stylus pressure.</p>
+            </details>
+            <details class="faq-item">
+                <summary>
+                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Can I use this for online tutoring via
+                        Zoom or Google Meet?</h3>
+                    <span class="faq-icon">+</span>
+                </summary>
+                <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes, our digital blackboard is highly recommended for
+                    virtual tutoring! Simply share your browser window in your video conferencing application.</p>
+            </details>
+        </div>
+    </main>
+
+    <footer>
+        <div style="margin-bottom: 20px;">
+            <a href="/"
+                style="font-size: 1.5rem; font-weight: 800; color: #f8fafc; text-decoration: none; letter-spacing: -0.02em; display: inline-flex; align-items: center;">Learning<span
+                    style="color: #34d399;">Board</span></a>
+        </div>
+        <div>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/contact/">Contact Us</a>
+        </div>
+        <div style="margin-top: 20px;">
+            &copy; 2026 Learning Board. All rights reserved. Built for educators.
+        </div>
+    </footer>
+    <button id="back-to-top" title="Back to top">
+        <svg viewBox="0 0 24 24">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+        </svg>
+    </button>
+    <script>
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    </script>
 </body>
 
 </html>
