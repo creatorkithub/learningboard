@@ -1,7 +1,7 @@
 LearningBoard
 
 LearningBoard offers a hyper-realistic, lag-free online blackboard, designed to feel like a real chalkboard directly in your browser. Perfect for teaching, tutoring, or creating tutorials, it provides an authentic experience.
-You can try the live application at learningboard.online.
+You can try the live application at https://learningboard.online/
 
 Key Features
 - Authentic Aesthetics: Switch instantly between black and green board styles.
