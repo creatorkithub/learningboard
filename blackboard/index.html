@@ -957,7 +957,7 @@
                     <svg class="icon" viewBox="0 0 24 24" style="width: 14px; opacity: 0.6;">
                         <circle id="chalk-icon-circle" cx="12" cy="12" r="3.3" />
                     </svg>
-                    <input type="range" id="chalk-size" min="1" max="15" step="0.5" value="2.5" style="width: 100%;"
+                    <input type="range" id="chalk-size" min="0.5" max="15" step="0.5" value="2.5" style="width: 100%;"
                         title="Size Keyboard Shortcuts: [ and ]">
                 </div>
 
@@ -1653,6 +1653,7 @@
 
         let hideToolbarTimeout;
         let idleToolbarTimeout;
+        let activePointerId = null;
 
         function resetIdleTimeout() {
             const tb = document.getElementById('toolbar');
@@ -1676,6 +1677,14 @@
         function handlePointerDown(e) {
             if (e.target.closest && (e.target.closest('#toolbar') || e.target.closest('#palette-trigger'))) return;
             if (e.target !== boardCanvas && e.target !== dustCanvas) return;
+
+            // If a second pointer comes down, ignore it and continue drawing with the first finger
+            if (activePointerId !== null) {
+                return;
+            }
+            if (e.pointerType === 'touch' && !e.isPrimary) return;
+
+            activePointerId = e.pointerId;
 
             const pc = document.getElementById('palette-container');
             if (pc) pc.classList.add('drawing-hidden');
@@ -1705,8 +1714,10 @@
         }
 
         function handlePointerMove(e) {
-            if (!isDrawing) return;
-            e.preventDefault(); // Prevent scrolling on touch
+            if (e.target === boardCanvas || e.target === dustCanvas) {
+                e.preventDefault(); // Inhibit native scroll/zoom for all canvas touches
+            }
+            if (!isDrawing || e.pointerId !== activePointerId) return;
 
             const events = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
 
@@ -1729,9 +1740,10 @@
             }
         }
 
-        function handlePointerUp() {
-            if (!isDrawing) return;
+        function handlePointerUp(e) {
+            if (!isDrawing || (e && e.pointerId !== activePointerId)) return;
             isDrawing = false;
+            activePointerId = null;
 
             clearTimeout(hideToolbarTimeout);
             hideToolbarTimeout = setTimeout(() => {
@@ -1905,7 +1917,7 @@
             };
         }
 
-        let chalkBaseSize = window.innerWidth <= 900 ? 1.5 : 2.5;
+        let chalkBaseSize = window.innerWidth <= 900 ? 0.5 : 2.5;
         const chalkSizeSlider = document.getElementById('chalk-size');
         if (chalkSizeSlider) {
             chalkSizeSlider.value = chalkBaseSize;
