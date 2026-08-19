@@ -2,6 +2,27 @@
 <html lang="en">
 
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self' https://*.googletagmanager.com; object-src 'none';">
+    <style id="antiClickjack">
+        body {
+            display: none !important;
+        }
+    </style>
+    <script type="text/javascript">
+        if (self === top) {
+            var antiClickjack = document.getElementById("antiClickjack");
+            if (antiClickjack) antiClickjack.parentNode.removeChild(antiClickjack);
+        } else {
+            top.location = self.location;
+        }
+    </script>
     <link rel="canonical" href="https://learningboard.online/blackboard/" />
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -41,6 +62,12 @@
         content="Turn your browser into a realistic, interactive digital blackboard. Perfect for online teaching, drawing, and remote tutoring with natural chalk sounds and simple controls.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://learningboard.online/blackboard/">
+    <meta property="og:image" content="https://learningboard.online/icon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Virtual Blackboard &amp; Interactive Greenboard | LearningBoard">
+    <meta name="twitter:description"
+        content="Turn your browser into a realistic, interactive digital blackboard. Perfect for online teaching, drawing, and remote tutoring.">
+    <meta name="twitter:image" content="https://learningboard.online/icon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
@@ -250,19 +277,6 @@
             z-index: 102;
         }
 
-        @media (hover: hover) and (pointer: fine) {
-            #palette-container:hover #toolbar {
-                transform: translateY(-50%) translateX(0);
-                opacity: 1;
-                visibility: visible;
-                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
-                pointer-events: auto;
-            }
-
-            #palette-container:hover #palette-trigger {
-                transform: translateY(-50%) translateX(-216px);
-            }
-        }
 
         #palette-container.tap-open #toolbar,
         #palette-container.locked #toolbar {
@@ -400,11 +414,6 @@
                 max-height: 88vh;
             }
 
-            @media (hover: hover) and (pointer: fine) {
-                #palette-container:hover #palette-trigger {
-                    transform: translateY(-50%) translateX(-195px);
-                }
-            }
 
             #palette-container.tap-open #palette-trigger,
             #palette-container.locked #palette-trigger {
@@ -441,11 +450,6 @@
                 max-height: 85vh;
             }
 
-            @media (hover: hover) and (pointer: fine) {
-                #palette-container:hover #palette-trigger {
-                    transform: translateY(-50%) translateX(-175px);
-                }
-            }
 
             #palette-container.tap-open #palette-trigger,
             #palette-container.locked #palette-trigger {
@@ -490,11 +494,6 @@
                 max-height: 96vh;
             }
 
-            @media (hover: hover) and (pointer: fine) {
-                #palette-container:hover #palette-trigger {
-                    transform: translateY(-50%) translateX(-165px);
-                }
-            }
 
             #palette-container.tap-open #palette-trigger,
             #palette-container.locked #palette-trigger {
@@ -904,6 +903,24 @@
             }
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "LearningBoard",
+          "url": "https://learningboard.online/"
+        },
+        {
+          "@type": "Organization",
+          "name": "LearningBoard",
+          "url": "https://learningboard.online/",
+          "logo": "https://learningboard.online/icon.png"
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body>
@@ -1107,7 +1124,7 @@
 
     <main>
         <h1>Free Virtual Blackboard &amp; Interactive Greenboard</h1>
-        <p style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">LearningBoard
+        <p style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto 60px auto;">LearningBoard
             provides a hyper-realistic, lag-free online blackboard experience right in your browser. Whether you're
             teaching a
             math class, recording a video tutorial, or conducting remote tutoring, our virtual chalkboard feels just
@@ -2164,7 +2181,7 @@
             });
         }
     </script>
-    <script src="/cookie-consent.js"></script>
+    <script src="/cookie-consent.js" defer></script>
 </body>
 
 </html>

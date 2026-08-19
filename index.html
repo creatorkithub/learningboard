@@ -2,6 +2,27 @@
 <html lang="en">
 
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self' https://*.googletagmanager.com; object-src 'none';">
+    <style id="antiClickjack">
+        body {
+            display: none !important;
+        }
+    </style>
+    <script type="text/javascript">
+        if (self === top) {
+            var antiClickjack = document.getElementById("antiClickjack");
+            if (antiClickjack) antiClickjack.parentNode.removeChild(antiClickjack);
+        } else {
+            top.location = self.location;
+        }
+    </script>
     <link rel="canonical" href="https://learningboard.online/" />
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -21,6 +42,16 @@
     <meta name="description"
         content="Turn your browser into a realistic, interactive digital blackboard. Perfect for online teaching, drawing, and remote tutoring with natural chalk sounds and simple controls.">
     <meta name="keywords" content="online blackboard, greenboard, blackboard, virtual chalkboard, online teaching tool">
+    <meta property="og:title" content="LearningBoard | Free Virtual Blackboard & Interactive Greenboard">
+    <meta property="og:description"
+        content="Turn your browser into a realistic, interactive digital blackboard. Perfect for online teaching, drawing, and remote tutoring with natural chalk sounds and simple controls.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://learningboard.online/">
+    <meta property="og:image" content="https://learningboard.online/icon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LearningBoard | Free Virtual Blackboard & Interactive Greenboard">
+    <meta name="twitter:description" content="Turn your browser into a realistic, interactive digital blackboard.">
+    <meta name="twitter:image" content="https://learningboard.online/icon.png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -318,6 +349,56 @@
             }
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "LearningBoard",
+          "url": "https://learningboard.online/"
+        },
+        {
+          "@type": "Organization",
+          "name": "LearningBoard",
+          "url": "https://learningboard.online/",
+          "logo": "https://learningboard.online/icon.png"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "Is LearningBoard really 100% free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! LearningBoard is completely free to use. There are no hidden fees, no premium subscription tiers, and no irritating account registrations required."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Does it work on iPads and drawing tablets?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely. LearningBoard is deeply optimized for touch devices and hardware styluses like the Apple Pencil or Wacom tablets, dynamically reading your stylus pressure."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Can I use this for online tutoring via Zoom or Google Meet?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, our digital blackboard is highly recommended for virtual tutoring! Simply share your browser window in your video conferencing application."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Can I use LearningBoard offline?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, absolutely! LearningBoard is built as a Progressive Web App (PWA). Once you visit the site, it caches the necessary files in your browser. You can seamlessly disconnect from the internet and continue using the blackboard or whiteboard without any interruptions. You can even install it on your device for quick access!"
+            }
+          }]
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body>
@@ -407,6 +488,16 @@
                 <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes, our digital blackboard is highly recommended for
                     virtual tutoring! Simply share your browser window in your video conferencing application.</p>
             </details>
+            <details class="faq-item">
+                <summary>
+                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Can I use LearningBoard offline?</h3>
+                    <span class="faq-icon">+</span>
+                </summary>
+                <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes, absolutely! LearningBoard is built as a
+                    Progressive Web App (PWA). Once you visit the site, it caches the necessary files in your browser.
+                    You can seamlessly disconnect from the internet and continue using the blackboard or whiteboard
+                    without any interruptions. You can even install it on your device for quick access!</p>
+            </details>
         </div>
     </main>
 
@@ -445,7 +536,7 @@
             });
         }
     </script>
-    <script src="/cookie-consent.js"></script>
+    <script src="/cookie-consent.js" defer></script>
 </body>
 
 </html>
