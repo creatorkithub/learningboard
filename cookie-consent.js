@@ -114,7 +114,7 @@
     const banner = document.createElement('div');
     banner.id = 'cookie-consent-banner';
     banner.innerHTML = `
-        <p>We use cookies to analyze web traffic and improve your experience. By clicking "Accept", you agree to our <a href="/privacy/">Privacy Policy</a> and <a href="/terms/">Terms of Service</a>.</p>
+        <p>We use cookies to analyze web traffic, improve your experience, and serve targeted advertisements. By clicking "Accept", you agree to our <a href="/privacy/">Privacy Policy</a> and <a href="/terms/">Terms of Service</a>.</p>
         <div class="cookie-btn-group">
             <button class="cookie-btn cookie-btn-decline" id="cookie-btn-decline">Decline</button>
             <button class="cookie-btn cookie-btn-accept" id="cookie-btn-accept">Accept</button>
