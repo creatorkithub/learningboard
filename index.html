@@ -38,6 +38,8 @@
     <meta name="naver-site-verification" content="" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0b1120">
     <title>LearningBoard | Free Virtual Blackboard & Interactive Greenboard</title>
     <meta name="description"
         content="Turn your browser into a realistic, interactive digital blackboard. Perfect for online teaching, drawing, and remote tutoring with natural chalk sounds and simple controls.">
@@ -564,6 +566,15 @@
         }
     </script>
     <script src="/cookie-consent.js" defer></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(err => {
+                    console.error('Service worker registration failed:', err);
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>
