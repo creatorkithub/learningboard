@@ -24,7 +24,7 @@
             border-radius: 16px;
             padding: 24px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            z-index: 10000;
+            z-index: 2147483647 !important;
             display: flex;
             flex-direction: column;
             gap: 16px;

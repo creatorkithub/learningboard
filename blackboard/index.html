@@ -302,7 +302,7 @@
 
         .tool-btn {
             background: transparent;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             color: rgba(255, 255, 255, 0.7);
             font-family: inherit;
             font-size: 14px;
@@ -337,6 +337,7 @@
         .tool-btn.active {
             color: #1a2f26;
             background: white;
+            border-color: transparent;
             box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
         }
 
@@ -687,7 +688,7 @@
             }
         }
 
-        #dialog-overlay {
+        #dialog-overlay, #export-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -710,7 +711,7 @@
             padding: 32px 28px;
             border-radius: 24px;
             text-align: center;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transform: translateY(30px) scale(0.95);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             max-width: 400px;
@@ -720,12 +721,12 @@
             -webkit-backdrop-filter: blur(20px);
         }
 
-        #dialog-overlay.active {
+        #dialog-overlay.active, #export-overlay.active {
             display: flex;
             opacity: 1;
         }
 
-        #dialog-overlay.active .dialog {
+        #dialog-overlay.active .dialog, #export-overlay.active .dialog {
             transform: translateY(0) scale(1);
         }
 
@@ -867,7 +868,7 @@
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(20px);
+            transform: translate(-50%, 20px);
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4);
         }
@@ -921,6 +922,251 @@
       ]
     }
     </script>
+    <script src="../lib/jszip.min.js"></script>
+    <script src="../lib/jspdf.umd.min.js"></script> <!-- Slide Navigator CSS -->
+    <style>
+        /* --- SLIDE NAVIGATOR --- */
+        #slide-navigator {
+            position: absolute;
+            bottom: 65px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 90;
+            background: rgba(15, 25, 20, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 10px 15px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            max-width: 90vw;
+            overflow-x: auto;
+
+            z-index: 999999 !important;
+            pointer-events: auto !important;
+        }
+
+        #slide-navigator::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        #slide-navigator::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+
+        #slide-navigator::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        #slide-navigator::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+                #slide-navigator.drawing-hidden {
+            opacity: 0;
+            pointer-events: none !important;
+            transform: translate(-50%, 20px);
+        }
+
+        #slide-navigator {
+            transition: opacity 0.3s ease-in-out, transform 0.2s ease, border-color 0.2s ease;
+
+            z-index: 999999 !important;
+            pointer-events: auto !important;
+        }
+
+        .slide-thumb {
+            width: 70px;
+            height: 40px;
+            background: #1a2f26;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        body.theme-black .slide-thumb {
+            background: #0d0d0d;
+        }
+
+        .slide-thumb:hover {
+            transform: scale(1.05);
+        }
+
+        .slide-thumb.active {
+            border-color: #34d399;
+            transform: scale(1.1);
+        }
+
+        .slide-menu-container {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            z-index: 5;
+        }
+
+        .slide-menu-btn {
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border-radius: 4px;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background 0.2s;
+        }
+
+        .slide-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .slide-menu-btn.menu-open {
+            background: #34d399;
+            color: #080808;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.8);
+        }
+
+        .slide-menu-dropdown {
+            display: none;
+            position: fixed;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            z-index: 9000000;
+            min-width: 140px;
+        }
+
+        body:not(.theme-black) .slide-menu-dropdown {
+            background: #f8fafc;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .slide-menu-dropdown.show {
+            display: block;
+        }
+
+        .slide-menu-action,
+        .slide-menu-delete {
+            width: 100%;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            font-size: 13px;
+            font-family: inherit;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slide-menu-action {
+            color: #f1f5f9;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        body:not(.theme-black) .slide-menu-action {
+            color: #334155;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .slide-menu-action:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        body:not(.theme-black) .slide-menu-action:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .slide-menu-delete {
+            color: #ef4444;
+        }
+
+        .slide-menu-delete:hover {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        .slide-add-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            width: 70px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.2s;
+            flex-shrink: 0;
+
+            z-index: 999999 !important;
+            pointer-events: auto !important;
+        }
+
+        .slide-add-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            #slide-navigator {
+                bottom: 50px;
+                padding: 6px 10px;
+                gap: 8px;
+
+                z-index: 999999 !important;
+                pointer-events: auto !important;
+            }
+
+            .slide-thumb,
+            .slide-add-btn {
+                width: 50px;
+                height: 30px;
+
+                z-index: 999999 !important;
+                pointer-events: auto !important;
+            }
+        }
+
+                        #slide-navigator.idle-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 20px);
+        }
+    </style>
+
+    <style>
+        :fullscreen {
+            overflow: hidden !important;
+        }
+
+        :-webkit-full-screen {
+            overflow: hidden !important;
+        }
+
+        :-moz-full-screen {
+            overflow: hidden !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -976,7 +1222,7 @@
                     <svg class="icon" viewBox="0 0 24 24" style="width: 14px; opacity: 0.6;">
                         <circle id="chalk-icon-circle" cx="12" cy="12" r="3.3" />
                     </svg>
-                    <input type="range" id="chalk-size" min="0.5" max="15" step="0.5" value="2.5" style="width: 100%;"
+                    <input type="range" id="chalk-size" min="0.1" max="15" step="0.05" value="2.5" style="width: 100%;"
                         title="Size Keyboard Shortcuts: [ and ]">
                 </div>
 
@@ -1121,6 +1367,18 @@
             </div>
         </div>
     </div>
+
+    <div id="export-overlay">
+        <div class="dialog">
+            <h3 style="margin-bottom:12px;">Export Boards</h3>
+            <div class="dialog-btns" style="flex-direction:column; gap:10px;">
+                <button id="btn-export-pdf" class="btn-confirm" style="width:100%;">Download as Multiple-Page PDF</button>
+                <button id="btn-export-zip" class="btn-confirm" style="width:100%; background:linear-gradient(135deg, #10b981 0%, #059669 100%);">Download as Image ZIP</button>
+                <button id="export-cancel" class="btn-cancel" style="width:100%; margin-top:8px;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
 
     <main>
         <h1>Free Virtual Blackboard &amp; Interactive Greenboard</h1>
@@ -1369,7 +1627,8 @@
         let audioCtx, pinkNoiseNode, filterNode, gainNode;
         let audioInitialized = false;
         let soundEnabled = localStorage.getItem('lb-sound') !== 'false';
-        let dustEnabled = localStorage.getItem('lb-dust') !== 'false';
+        let _sd = localStorage.getItem('lb-dust');
+        let dustEnabled = _sd ? (_sd === 'true') : (window.innerWidth > 900);
 
         // Apply immediately on load
         const btnSound = document.getElementById('btn-sound');
@@ -1559,9 +1818,12 @@
 
             if (currentTool === 'chalk') {
                 // Slower = thicker, more opaque. Faster = thinner, transparent grainy
-                const maxThick = chalkBaseSize * 3.0 * pressureMod;
-                const minThick = chalkBaseSize * 0.2 * pressureMod;
-                const targetThickness = Math.max(minThick, maxThick - Math.min(maxThick * 0.7, speed * 0.25));
+                // Scale modifiers dynamically so thin lines stay precise and don't blob, while thick lines express freely
+                const maxMultiplier = 1.0 + Math.min(2.0, chalkBaseSize);
+                const minMultiplier = Math.max(0.2, 1.0 - (chalkBaseSize / 2.5) * 0.8);
+                const maxThick = chalkBaseSize * maxMultiplier * Math.max(0.5, pressureMod);
+                const minThick = chalkBaseSize * minMultiplier * Math.max(0.5, pressureMod);
+                const targetThickness = Math.max(minThick, maxThick - Math.min(maxThick * 0.8, speed * 0.25));
 
                 const pressureOpacity = p * 1.5; // significantly fade with light pressure
                 const opacityMod = Math.max(0.1, 1.0 - Math.min(0.85, speed * 0.03)) * Math.min(1.0, pressureOpacity);
@@ -1579,7 +1841,7 @@
                     const cy = y0 + (y1 - y0) * t;
 
                     const currentThick = lastThickness + (targetThickness - lastThickness) * t;
-                    const drawSize = currentThick * 2.5;
+                    const drawSize = Math.max(0.8, currentThick * 2.5); // minimum hard limit for physical browser canvas limits
 
                     // Add slight jitter
                     const jitterX = (Math.random() - 0.5) * currentThick * 0.1;
@@ -1620,8 +1882,9 @@
         }
 
         // --- Dust Particle System ---
+        let isDustAnimating = true;
         function spawnDust(x, y, colorStr, amount) {
-            if (!dustEnabled) return;
+            if (!dustEnabled) return; // User allowed to enable on mobile if desired
             for (let i = 0; i < amount; i++) {
                 dustParticles.push({
                     x: x + (Math.random() - 0.5) * 20,
@@ -1636,6 +1899,11 @@
         }
 
         function updateDust(timestamp) {
+            if (dustParticles.length === 0) {
+                isDustAnimating = false;
+                dustCtx.clearRect(0, 0, width, height);
+                return;
+            }
             dustCtx.clearRect(0, 0, width, height);
             for (let i = dustParticles.length - 1; i >= 0; i--) {
                 let p = dustParticles[i];
@@ -1652,6 +1920,16 @@
             }
             requestAnimationFrame(updateDust);
         }
+
+        // Let original spawn dust know if it needs to restart a halted loop
+        const _origSpawn = spawnDust;
+        spawnDust = function (x, y, colorStr, amount) {
+            _origSpawn(x, y, colorStr, amount);
+            if (!isDustAnimating && dustParticles.length > 0) {
+                isDustAnimating = true;
+                requestAnimationFrame(updateDust);
+            }
+        };
         requestAnimationFrame(updateDust);
 
 
@@ -1680,11 +1958,13 @@
             if (tb) {
                 tb.classList.remove('idle-hidden');
                 if (fc) fc.classList.remove('idle-hidden');
+                if (document.getElementById('slide-navigator')) document.getElementById('slide-navigator').classList.remove('idle-hidden');
                 clearTimeout(idleToolbarTimeout);
                 idleToolbarTimeout = setTimeout(() => {
                     if (!isDrawing) {
                         tb.classList.add('idle-hidden');
                         if (fc) fc.classList.add('idle-hidden');
+                        if (document.getElementById('slide-navigator')) document.getElementById('slide-navigator').classList.add('idle-hidden');
                     }
                 }, 3000);
             }
@@ -1713,6 +1993,7 @@
             if (fc) fc.classList.add('drawing-hidden');
             const sh = document.getElementById('scroll-info-hint');
             if (sh) sh.classList.add('drawing-hidden');
+            if (document.getElementById('slide-navigator')) document.getElementById('slide-navigator').classList.add('drawing-hidden');
             clearTimeout(hideToolbarTimeout);
 
             if (soundEnabled) {
@@ -1775,6 +2056,7 @@
                     if (fc) fc.classList.remove('drawing-hidden');
                     const sh = document.getElementById('scroll-info-hint');
                     if (sh) sh.classList.remove('drawing-hidden');
+                    if (document.getElementById('slide-navigator')) document.getElementById('slide-navigator').classList.remove('drawing-hidden');
                     resetIdleTimeout();
                 }
             }, 800);
@@ -1789,29 +2071,212 @@
         window.addEventListener('pointercancel', handlePointerUp);
 
 
-        // --- State Management ---
+        // --- State Management : Multi-Board ---
+        let boards = []; // array of { id, dataUrl, history: [], redo: [] }
+        let currentBoardIndex = 0;
         let autoSaveTimeout;
 
-        function saveHistoryData() {
-            // Save to history array immediately
-            const dataUrl = boardCanvas.toDataURL();
-            if (historyStack.length === 0 || historyStack[historyStack.length - 1] !== dataUrl) {
-                historyStack.push(dataUrl);
-            }
-            if (historyStack.length > MAX_HISTORY) {
-                historyStack.shift();
-            }
-            redoStack = []; // clear redo on new action
+        function getActiveBoard() { return boards[currentBoardIndex]; }
 
-            // Debounce localStorage auto-save
+        function saveBoardsState() {
             clearTimeout(autoSaveTimeout);
             autoSaveTimeout = setTimeout(() => {
-                try {
-                    localStorage.setItem('learningboard_save', dataUrl);
+                                try {
+                    const toSave = boards.map(b => ({ id: b.id, dataUrl: b.dataUrl }));
+                    localStorage.setItem('learningboard_boards_state' + window.location.pathname, JSON.stringify(toSave));
+                    localStorage.setItem('learningboard_current_board_index' + window.location.pathname, currentBoardIndex);
                 } catch (e) {
                     console.warn("Local storage full or disabled.");
                 }
             }, 1000);
+        }
+
+        function renderThumbnails() {
+            const container = document.getElementById('slides-container');
+            if (!container) return;
+            container.innerHTML = '';
+            boards.forEach((board, index) => {
+                const dom = document.createElement('div');
+                dom.className = 'slide-thumb' + (index === currentBoardIndex ? ' active' : '');
+                                if (board.dataUrl) {
+                    dom.style.backgroundImage = `url(${board.thumbDataUrl || board.dataUrl})`;
+                    const img = new Image();
+                    img.onload = () => {
+                        const tCnv = document.createElement('canvas');
+                        tCnv.width = 140;
+                        tCnv.height = 80;
+                        const tCtx = tCnv.getContext('2d');
+                        tCtx.fillStyle = document.body.classList.contains('theme-black') ? '#080808' : (window.location.pathname.includes('whiteboard') ? '#f0f0f0' : '#1a2f26');
+                        tCtx.fillRect(0, 0, 140, 80);
+
+                        tCtx.imageSmoothingEnabled = true;
+                        tCtx.imageSmoothingQuality = 'high';
+                        // Draw multiple times to artificially composite and visually embolden thin, sparse chalk particles during extreme downscaling
+                        tCtx.drawImage(img, 0, 0, 140, 80);
+                        tCtx.drawImage(img, 0, 0, 140, 80);
+                        tCtx.drawImage(img, 0, 0, 140, 80);
+                        tCtx.drawImage(img, 0, 0, 140, 80);
+
+                        const composed = tCnv.toDataURL('image/jpeg', 0.9);
+                        board.thumbDataUrl = composed;
+                        dom.style.backgroundImage = `url(${composed})`;
+                    };
+                    img.src = board.dataUrl;
+                }
+                dom.onclick = () => switchBoard(index);
+
+                if (true) { // boards.length check removed to allow downloading single slides
+                    let globalMenu = document.getElementById('slide-global-menu');
+                    if (!globalMenu) {
+                        globalMenu = document.createElement('div');
+                        globalMenu.id = 'slide-global-menu';
+                        globalMenu.className = 'slide-menu-dropdown';
+                        document.body.appendChild(globalMenu);
+                    }
+
+                    const menuContainer = document.createElement('div');
+                    menuContainer.className = 'slide-menu-container';
+
+                    const dotBtn = document.createElement('button');
+                    dotBtn.className = 'slide-menu-btn';
+                    dotBtn.innerHTML = '&#8942;';
+                    dotBtn.title = "Slide Options";
+
+                    menuContainer.appendChild(dotBtn);
+                    dom.appendChild(menuContainer);
+
+                    dotBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        // Reset global menu contents
+                        globalMenu.innerHTML = '';
+                        const rect = dotBtn.getBoundingClientRect();
+
+                        // Download Option
+                        const downloadOpt = document.createElement('button');
+                        downloadOpt.className = 'slide-menu-action';
+                        downloadOpt.innerHTML = '<svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Download';
+                        downloadOpt.onclick = async (ev) => {
+                            ev.stopPropagation();
+                            globalMenu.classList.remove('show');
+                            if (board.dataUrl && typeof getCompositeBoardDataURL === 'function') {
+                                const dataURL = await getCompositeBoardDataURL(board.dataUrl);
+                                const link = document.createElement('a');
+                                link.download = `Slide_${index + 1}.png`;
+                                link.href = dataURL;
+                                link.click();
+                            }
+                        };
+
+                                                // Delete Option
+                        const delOpt = document.createElement('button');
+                        if (boards.length > 1) {
+                            delOpt.className = 'slide-menu-delete';
+                            delOpt.innerHTML = '<svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg> Delete';
+                            delOpt.onclick = (ev) => {
+                                ev.stopPropagation();
+                                globalMenu.classList.remove('show');
+                                deleteBoard(index);
+                            };
+                        }
+
+                        if (boards.length > 1) globalMenu.appendChild(delOpt);
+                        globalMenu.appendChild(downloadOpt);
+
+                        globalMenu.style.left = rect.left + 'px';
+                        globalMenu.style.top = rect.bottom + 'px'; // Pre-position
+
+                                                const wasShowing = globalMenu.classList.contains('show');
+                        document.querySelectorAll('.slide-menu-btn').forEach(b => b.classList.remove('menu-open'));
+                        
+                        if (wasShowing) {
+                            globalMenu.classList.remove('show');
+                            return; // toggle off if double clicked
+                        }
+                        globalMenu.classList.add('show');
+                        dotBtn.classList.add('menu-open');
+
+                        // Fix position dynamically upwards if needed
+                        requestAnimationFrame(() => {
+                            let topPos = rect.top - globalMenu.offsetHeight - 8;
+                            // if it goes off top of screen, push it down below button
+                            if (topPos < 10) topPos = rect.bottom + 8;
+
+                            // Check right bounds
+                            let leftPos = rect.left;
+                            if (leftPos + globalMenu.offsetWidth > window.innerWidth - 10) {
+                                leftPos = window.innerWidth - globalMenu.offsetWidth - 10;
+                            }
+
+                            globalMenu.style.top = topPos + 'px';
+                            globalMenu.style.left = leftPos + 'px';
+                        });
+                    };
+                }
+                container.appendChild(dom);
+            });
+        }
+
+        function switchBoard(index) {
+            if (index < 0 || index >= boards.length) return;
+            currentBoardIndex = index;
+            renderThumbnails();
+            boardCtx.clearRect(0, 0, boardCanvas.width, boardCanvas.height);
+            const b = boards[currentBoardIndex];
+            if (b.dataUrl) {
+                const img = new Image();
+                img.onload = () => boardCtx.drawImage(img, 0, 0);
+                img.src = b.dataUrl;
+            }
+        }
+
+        function addBoard() {
+            const newBoard = { id: Date.now(), dataUrl: '', history: [], redo: [] };
+            boards.push(newBoard);
+            switchBoard(boards.length - 1);
+            saveBoardsState();
+        }
+
+        function deleteBoard(index) {
+            boards.splice(index, 1);
+            if (currentBoardIndex >= index) currentBoardIndex = Math.max(0, currentBoardIndex - 1);
+            switchBoard(currentBoardIndex);
+            saveBoardsState();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('btn-add-slide');
+            const slideNav = document.getElementById('slide-navigator');
+            if (slideNav) {
+                slideNav.addEventListener('wheel', (e) => {
+                    if (e.deltaY !== 0) {
+                        e.preventDefault();
+                        slideNav.scrollLeft += e.deltaY;
+                    }
+                }, { passive: false });
+            }
+
+            if (btn) btn.onclick = addBoard;
+            window.addEventListener('pointerdown', (e) => {
+                const gm = document.getElementById('slide-global-menu');
+                if (gm && !e.target.closest('#slide-global-menu') && !e.target.closest('.slide-menu-btn')) {
+                                        gm.classList.remove('show');
+                    document.querySelectorAll('.slide-menu-btn').forEach(b => b.classList.remove('menu-open'));
+                }
+            });
+        });
+
+        function saveHistoryData() {
+            const dataUrl = boardCanvas.toDataURL();
+            const b = getActiveBoard();
+            if (!b) return;
+            b.dataUrl = dataUrl;
+            if (b.history.length === 0 || b.history[b.history.length - 1] !== dataUrl) {
+                b.history.push(dataUrl);
+            }
+            if (b.history.length > 25) b.history.shift();
+            b.redo = [];
+            renderThumbnails();
+            saveBoardsState();
         }
 
         function restoreFromHistory(dataUrl) {
@@ -1824,34 +2289,58 @@
         }
 
         function undo() {
-            if (historyStack.length > 1) {
-                redoStack.push(historyStack.pop());
-                restoreFromHistory(historyStack[historyStack.length - 1]);
-                localStorage.setItem('learningboard_save', historyStack[historyStack.length - 1]);
-            } else if (historyStack.length === 1) {
-                redoStack.push(historyStack.pop());
+            const b = getActiveBoard();
+            if (!b) return;
+            if (b.history.length > 1) {
+                b.redo.push(b.history.pop());
+                const prev = b.history[b.history.length - 1];
+                restoreFromHistory(prev);
+                b.dataUrl = prev;
+                saveBoardsState();
+            } else if (b.history.length === 1) {
+                b.redo.push(b.history.pop());
                 boardCtx.clearRect(0, 0, boardCanvas.width, boardCanvas.height);
-                localStorage.removeItem('learningboard_save');
+                b.dataUrl = '';
+                saveBoardsState();
             }
+            renderThumbnails();
         }
 
         function redo() {
-            if (redoStack.length > 0) {
-                const dataUrl = redoStack.pop();
-                historyStack.push(dataUrl);
+            const b = getActiveBoard();
+            if (!b) return;
+            if (b.redo.length > 0) {
+                const dataUrl = b.redo.pop();
+                b.history.push(dataUrl);
                 restoreFromHistory(dataUrl);
-                localStorage.setItem('learningboard_save', dataUrl);
+                b.dataUrl = dataUrl;
+                saveBoardsState();
             }
+            renderThumbnails();
         }
 
         function loadInitialSave() {
-            const saved = localStorage.getItem('learningboard_save');
-            if (saved) {
-                historyStack.push(saved);
-                restoreFromHistory(saved);
-            } else {
-                saveHistoryData(); // initialized empty state
+            const savedStr = localStorage.getItem('learningboard_boards_state' + window.location.pathname);
+            const legacySave = localStorage.getItem('learningboard_save'); // legacy
+
+            if (savedStr) {
+                try {
+                    const loaded = JSON.parse(savedStr);
+                    boards = loaded.map(b => ({
+                        id: b.id || Date.now(), dataUrl: b.dataUrl || '',
+                        history: b.dataUrl ? [b.dataUrl] : [], redo: []
+                    }));
+                } catch (e) { }
+            } else if (legacySave) {
+                boards = [{ id: Date.now(), dataUrl: legacySave, history: [legacySave], redo: [] }];
             }
+
+            if (!boards || boards.length === 0) boards = [{ id: Date.now(), dataUrl: '', history: [], redo: [] }];
+
+                        let savedIndex = parseInt(localStorage.getItem('learningboard_current_board_index' + window.location.pathname));
+            if (isNaN(savedIndex) || savedIndex < 0 || savedIndex >= boards.length) savedIndex = 0;
+            currentBoardIndex = savedIndex;
+            switchBoard(savedIndex);
         }
 
         document.addEventListener('DOMContentLoaded', loadInitialSave);
@@ -1936,7 +2425,8 @@
             };
         }
 
-        let chalkBaseSize = window.innerWidth <= 900 ? 0.5 : 2.5;
+        let savedChalkSize = localStorage.getItem('lb-chalk-size');
+        let chalkBaseSize = savedChalkSize ? parseFloat(savedChalkSize) : Math.max(0.1, (window.innerWidth / 1500) * 1.5);
         const chalkSizeSlider = document.getElementById('chalk-size');
         if (chalkSizeSlider) {
             chalkSizeSlider.value = chalkBaseSize;
@@ -1945,6 +2435,7 @@
             if (circle) circle.setAttribute('r', r);
             chalkSizeSlider.addEventListener('input', (e) => {
                 chalkBaseSize = parseFloat(e.target.value);
+                localStorage.setItem('lb-chalk-size', chalkBaseSize);
                 const newR = 2 + (chalkBaseSize / 15) * 8;
                 if (circle) circle.setAttribute('r', newR);
             });
@@ -2025,34 +2516,89 @@
             overlay.classList.remove('active');
         };
 
-        document.getElementById('btn-export').onclick = () => {
-            // Combine bg and board to export a correct representation
+
+        // Composite Board Helper
+        function getCompositeBoardDataURL(sourceDataURL) {
             const tempCnv = document.createElement('canvas');
             tempCnv.width = width; tempCnv.height = height;
             const tctx = tempCnv.getContext('2d');
+            const centerColor = (window.currentTheme === 'black') ? '#1a1a1a' : '#203a2f';
+            const edgeColor = (window.currentTheme === 'black') ? '#050505' : '#0d1b15';
 
-            // Draw dark slate bg with radial gradient matching CSS
-            const centerColor = currentTheme === 'black' ? '#1a1a1a' : '#203a2f';
-            const edgeColor = currentTheme === 'black' ? '#050505' : '#0d1b15';
-            const radGrad = tctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, Math.max(width, height));
-            radGrad.addColorStop(0, centerColor);
-            radGrad.addColorStop(1, edgeColor);
-            tctx.fillStyle = radGrad;
+            const isWhiteboard = window.location.pathname.includes('whiteboard');
+            if (isWhiteboard) {
+                const wCenter = '#f8fafc'; const wEdge = '#e2e8f0';
+                const radGrad = tctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, Math.max(width, height));
+                radGrad.addColorStop(0, wCenter); radGrad.addColorStop(1, wEdge);
+                tctx.fillStyle = radGrad;
+            } else {
+                const radGrad = tctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, Math.max(width, height));
+                radGrad.addColorStop(0, centerColor); radGrad.addColorStop(1, edgeColor);
+                tctx.fillStyle = radGrad;
+            }
+
             tctx.fillRect(0, 0, width, height);
-
             tctx.fillStyle = 'rgba(0,0,0,0.05)';
             tctx.fillRect(0, 0, width, height);
+            try { tctx.drawImage(bgCanvas, 0, 0); } catch (e) { }
 
-            // Draw procedural noise
-            tctx.drawImage(bgCanvas, 0, 0);
-            // Draw chalk
-            tctx.drawImage(boardCanvas, 0, 0);
+            return new Promise((resolve) => {
+                if (!sourceDataURL) { resolve(tempCnv.toDataURL('image/png')); return; }
+                const img = new Image();
+                img.onload = () => { tctx.drawImage(img, 0, 0); resolve(tempCnv.toDataURL('image/png')); };
+                img.src = sourceDataURL;
+            });
+        }
 
-            const link = document.createElement('a');
-            link.download = 'blackboard_export.png';
-            link.href = tempCnv.toDataURL('image/png');
-            link.click();
-        };
+                const btnExportPng = document.getElementById('btn-export');
+        if (btnExportPng) {
+            btnExportPng.onclick = () => {
+                const overlay = document.getElementById('export-overlay');
+                if (overlay) overlay.classList.add('active');
+            };
+        }
+        
+        const btnCancelExport = document.getElementById('export-cancel');
+        if (btnCancelExport) {
+            btnCancelExport.onclick = () => {
+                document.getElementById('export-overlay').classList.remove('active');
+            };
+        }
+
+        const btnExportPdf = document.getElementById('btn-export-pdf');
+        if (btnExportPdf) {
+            btnExportPdf.onclick = async () => {
+                document.getElementById('export-overlay').classList.remove('active');
+                if (!window.jspdf) { alert("jsPDF loaded err"); return; }
+                const { jsPDF } = window.jspdf;
+                const opt = { orientation: width > height ? 'l' : 'p', unit: 'px', format: [width, height] };
+                const doc = new jsPDF(opt);
+                for (let i = 0; i < boards.length; i++) {
+                    if (i > 0) doc.addPage([width, height], width > height ? 'l' : 'p');
+                    const dataURL = await getCompositeBoardDataURL(boards[i].dataUrl);
+                    doc.addImage(dataURL, 'PNG', 0, 0, width, height);
+                }
+                doc.save('LearningBoards.pdf');
+            };
+        }
+
+        const btnExportZip = document.getElementById('btn-export-zip');
+        if (btnExportZip) {
+            btnExportZip.onclick = async () => {
+                document.getElementById('export-overlay').classList.remove('active');
+                if (!window.JSZip) { alert("JSZip loaded err"); return; }
+                const zip = new JSZip();
+                for (let i = 0; i < boards.length; i++) {
+                    const dataURL = await getCompositeBoardDataURL(boards[i].dataUrl);
+                    const b64Data = dataURL.replace(/^data:image\/png;base64,/, "");
+                    zip.file(`Board_${i + 1}.png`, b64Data, { base64: true });
+                }
+                zip.generateAsync({ type: "blob" }).then(function (content) {
+                    const link = document.createElement('a'); link.href = URL.createObjectURL(content); link.download = "LearningBoards.zip"; link.click();
+                });
+            };
+        }
+
 
         document.getElementById('btn-fullscreen').onclick = () => {
             if (!document.fullscreenElement) {
@@ -2123,44 +2669,7 @@
         });
 
     </script>
-    <!-- Privacy Consent Banner -->
-    <div id="privacy-banner"
-        style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 500px; background: rgba(18, 29, 21, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; color: #e2e8f0; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'Outfit', sans-serif;">
-        <h4 style="margin: 0 0 10px 0; color: #34d399; font-size: 1.1rem;">Privacy Consent</h4>
-        <p style="margin: 0 0 15px 0; font-size: 0.9rem; line-height: 1.4;">We do not collect or store any of your
-            personal data on our servers. Local Storage is used strictly to autosave your drawings. By continuing to use
-            LearningBoard, you accept our <a href="/privacy/"
-                style="color: #3b82f6; text-decoration: underline;">Privacy
-                Policy</a> & <a href="/terms/" style="color: #3b82f6; text-decoration: underline;">Terms</a>.</p>
-        <div style="display: flex; gap: 10px; justify-content: flex-end;">
-            <button id="btn-decline"
-                style="background: transparent; color: #94a3b8; border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 6px; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; font-weight: 600; transition: background 0.3s;">Decline</button>
-            <button id="btn-accept"
-                style="background: #34d399; color: #0b1120; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; transition: transform 0.2s;">Accept</button>
-        </div>
-    </div>
 
-    <script>
-        // Privacy Consent Logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const consent = localStorage.getItem('lb-privacy-consent');
-            const banner = document.getElementById('privacy-banner');
-            if (consent !== 'accepted') {
-                banner.style.display = 'block';
-            }
-
-            document.getElementById('btn-accept').onclick = () => {
-                localStorage.setItem('lb-privacy-consent', 'accepted');
-                banner.style.transition = 'opacity 0.3s ease';
-                banner.style.opacity = '0';
-                setTimeout(() => banner.style.display = 'none', 300);
-            };
-
-            document.getElementById('btn-decline').onclick = () => {
-                banner.style.display = 'none';
-            };
-        });
-    </script>
     <button id="back-to-top" title="Back to top">
         <svg viewBox="0 0 24 24">
             <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
@@ -2181,6 +2690,12 @@
             });
         }
     </script>
+
+    <!-- Slide Navigator -->
+    <div id="slide-navigator" class="idle-hidden">
+        <div id="slides-container" style="display: flex; gap: 10px;"></div>
+        <button class="slide-add-btn" id="btn-add-slide" title="Add New Board">+</button>
+    </div>
     <script src="/cookie-consent.js" defer></script>
 </body>
 
