@@ -71,6 +71,17 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
+        * {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
         body,
         html {
             margin: 0;
@@ -689,7 +700,8 @@
             }
         }
 
-        #dialog-overlay, #export-overlay {
+        #dialog-overlay,
+        #export-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -722,12 +734,14 @@
             -webkit-backdrop-filter: blur(20px);
         }
 
-        #dialog-overlay.active, #export-overlay.active {
+        #dialog-overlay.active,
+        #export-overlay.active {
             display: flex;
             opacity: 1;
         }
 
-        #dialog-overlay.active .dialog, #export-overlay.active .dialog {
+        #dialog-overlay.active .dialog,
+        #export-overlay.active .dialog {
             transform: translateY(0) scale(1);
         }
 
@@ -912,7 +926,7 @@
             background: rgba(0, 0, 0, 0.4);
         }
 
-                #slide-navigator.drawing-hidden {
+        #slide-navigator.drawing-hidden {
             opacity: 0;
             pointer-events: none !important;
             transform: translate(-50%, 20px);
@@ -954,8 +968,9 @@
             right: 2px;
             z-index: 5;
         }
+
         .slide-menu-btn {
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             color: #fff;
             border-radius: 4px;
             width: 22px;
@@ -969,35 +984,41 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             transition: background 0.2s;
         }
-        
+
         .slide-menu-btn:hover {
             background: rgba(255, 255, 255, 0.2);
         }
+
         .slide-menu-btn.menu-open {
             background: #3b82f6;
             color: #ffffff;
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.8);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
         }
+
         .slide-menu-dropdown {
             display: none;
             position: fixed;
             background: #1e293b;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             overflow: hidden;
             z-index: 9000000;
             min-width: 140px;
         }
+
         body:not(.theme-black) .slide-menu-dropdown {
             background: #f8fafc;
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
+
         .slide-menu-dropdown.show {
             display: block;
         }
-        .slide-menu-action, .slide-menu-delete {
+
+        .slide-menu-action,
+        .slide-menu-delete {
             width: 100%;
             padding: 12px 16px;
             background: transparent;
@@ -1011,23 +1032,29 @@
             align-items: center;
             gap: 8px;
         }
+
         .slide-menu-action {
             color: #f1f5f9;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         body:not(.theme-black) .slide-menu-action {
             color: #334155;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
+
         .slide-menu-action:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
         }
+
         body:not(.theme-black) .slide-menu-action:hover {
-            background: rgba(0,0,0,0.04);
+            background: rgba(0, 0, 0, 0.04);
         }
+
         .slide-menu-delete {
             color: #ef4444;
         }
+
         .slide-menu-delete:hover {
             background: rgba(239, 68, 68, 0.15);
         }
@@ -1075,7 +1102,7 @@
             }
         }
 
-                        #slide-navigator.idle-hidden {
+        #slide-navigator.idle-hidden {
             opacity: 0;
             pointer-events: none;
             transform: translate(-50%, 20px);
@@ -1083,9 +1110,17 @@
     </style>
 
     <style>
-        :fullscreen { overflow: hidden !important; }
-        :-webkit-full-screen { overflow: hidden !important; }
-        :-moz-full-screen { overflow: hidden !important; }
+        :fullscreen {
+            overflow: hidden !important;
+        }
+
+        :-webkit-full-screen {
+            overflow: hidden !important;
+        }
+
+        :-moz-full-screen {
+            overflow: hidden !important;
+        }
     </style>
 </head>
 
@@ -1243,8 +1278,11 @@
         <div class="dialog">
             <h3 style="margin-bottom:12px;">Export Boards</h3>
             <div class="dialog-btns" style="flex-direction:column; gap:10px;">
-                <button id="btn-export-pdf" class="btn-confirm" style="width:100%;">Download as Multiple-Page PDF</button>
-                <button id="btn-export-zip" class="btn-confirm" style="width:100%; background:linear-gradient(135deg, #10b981 0%, #059669 100%);">Download as Image ZIP</button>
+                <button id="btn-export-pdf" class="btn-confirm" style="width:100%;">Download as Multiple-Page
+                    PDF</button>
+                <button id="btn-export-zip" class="btn-confirm"
+                    style="width:100%; background:linear-gradient(135deg, #10b981 0%, #059669 100%);">Download as Image
+                    ZIP</button>
                 <button id="export-cancel" class="btn-cancel" style="width:100%; margin-top:8px;">Cancel</button>
             </div>
         </div>
@@ -1656,7 +1694,7 @@
         function saveBoardsState() {
             clearTimeout(autoSaveTimeout);
             autoSaveTimeout = setTimeout(() => {
-                                try {
+                try {
                     const toSave = boards.map(b => ({ id: b.id, dataUrl: b.dataUrl }));
                     localStorage.setItem('learningboard_boards_state' + window.location.pathname, JSON.stringify(toSave));
                     localStorage.setItem('learningboard_current_board_index' + window.location.pathname, currentBoardIndex);
@@ -1673,7 +1711,7 @@
             boards.forEach((board, index) => {
                 const dom = document.createElement('div');
                 dom.className = 'slide-thumb' + (index === currentBoardIndex ? ' active' : '');
-                                if (board.dataUrl) {
+                if (board.dataUrl) {
                     dom.style.backgroundImage = `url(${board.thumbDataUrl || board.dataUrl})`;
                     const img = new Image();
                     img.onload = () => {
@@ -1711,21 +1749,21 @@
 
                     const menuContainer = document.createElement('div');
                     menuContainer.className = 'slide-menu-container';
-                    
+
                     const dotBtn = document.createElement('button');
                     dotBtn.className = 'slide-menu-btn';
                     dotBtn.innerHTML = '&#8942;';
                     dotBtn.title = "Slide Options";
-                    
+
                     menuContainer.appendChild(dotBtn);
                     dom.appendChild(menuContainer);
-                    
+
                     dotBtn.onclick = (e) => {
                         e.stopPropagation();
                         // Reset global menu contents
                         globalMenu.innerHTML = '';
                         const rect = dotBtn.getBoundingClientRect();
-                        
+
                         // Download Option
                         const downloadOpt = document.createElement('button');
                         downloadOpt.className = 'slide-menu-action';
@@ -1735,14 +1773,14 @@
                             globalMenu.classList.remove('show');
                             if (board.dataUrl && typeof getCompositeBoardDataURL === 'function') {
                                 const dataURL = await getCompositeBoardDataURL(board.dataUrl);
-                                const link = document.createElement('a'); 
-                                link.download = `Slide_${index + 1}.png`; 
-                                link.href = dataURL; 
+                                const link = document.createElement('a');
+                                link.download = `Slide_${index + 1}.png`;
+                                link.href = dataURL;
                                 link.click();
                             }
                         };
-                        
-                                                // Delete Option
+
+                        // Delete Option
                         const delOpt = document.createElement('button');
                         if (boards.length > 1) {
                             delOpt.className = 'slide-menu-delete';
@@ -1753,35 +1791,35 @@
                                 deleteBoard(index);
                             };
                         }
-                        
+
                         if (boards.length > 1) globalMenu.appendChild(delOpt);
                         globalMenu.appendChild(downloadOpt);
-                        
+
                         globalMenu.style.left = rect.left + 'px';
                         globalMenu.style.top = rect.bottom + 'px'; // Pre-position
-                        
-                                                const wasShowing = globalMenu.classList.contains('show');
+
+                        const wasShowing = globalMenu.classList.contains('show');
                         document.querySelectorAll('.slide-menu-btn').forEach(b => b.classList.remove('menu-open'));
-                        
+
                         if (wasShowing) {
                             globalMenu.classList.remove('show');
                             return; // toggle off if double clicked
                         }
                         globalMenu.classList.add('show');
                         dotBtn.classList.add('menu-open');
-                        
+
                         // Fix position dynamically upwards if needed
                         requestAnimationFrame(() => {
                             let topPos = rect.top - globalMenu.offsetHeight - 8;
                             // if it goes off top of screen, push it down below button
                             if (topPos < 10) topPos = rect.bottom + 8;
-                            
+
                             // Check right bounds
                             let leftPos = rect.left;
                             if (leftPos + globalMenu.offsetWidth > window.innerWidth - 10) {
                                 leftPos = window.innerWidth - globalMenu.offsetWidth - 10;
                             }
-                            
+
                             globalMenu.style.top = topPos + 'px';
                             globalMenu.style.left = leftPos + 'px';
                         });
@@ -1834,7 +1872,7 @@
             window.addEventListener('pointerdown', (e) => {
                 const gm = document.getElementById('slide-global-menu');
                 if (gm && !e.target.closest('#slide-global-menu') && !e.target.closest('.slide-menu-btn')) {
-                                        gm.classList.remove('show');
+                    gm.classList.remove('show');
                     document.querySelectorAll('.slide-menu-btn').forEach(b => b.classList.remove('menu-open'));
                 }
             });
@@ -1912,7 +1950,7 @@
 
             if (!boards || boards.length === 0) boards = [{ id: Date.now(), dataUrl: '', history: [], redo: [] }];
 
-                        let savedIndex = parseInt(localStorage.getItem('learningboard_current_board_index' + window.location.pathname));
+            let savedIndex = parseInt(localStorage.getItem('learningboard_current_board_index' + window.location.pathname));
             if (isNaN(savedIndex) || savedIndex < 0 || savedIndex >= boards.length) savedIndex = 0;
             currentBoardIndex = savedIndex;
             switchBoard(savedIndex);
@@ -2104,14 +2142,14 @@
             });
         }
 
-                const btnExportPng = document.getElementById('btn-export');
+        const btnExportPng = document.getElementById('btn-export');
         if (btnExportPng) {
             btnExportPng.onclick = () => {
                 const overlay = document.getElementById('export-overlay');
                 if (overlay) overlay.classList.add('active');
             };
         }
-        
+
         const btnCancelExport = document.getElementById('export-cancel');
         if (btnCancelExport) {
             btnCancelExport.onclick = () => {
