@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}} | LearningBoard Blog</title>
+    <meta name="description" content="{{META_DESCRIPTION}}">
+
+    <meta property="og:title" content="{{TITLE}} | LearningBoard Blog">
+    <meta property="og:description" content="{{META_DESCRIPTION}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://learningboard.online/blog/{{SLUG}}.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{TITLE}} | LearningBoard Blog">
+    <meta name="twitter:description" content="{{META_DESCRIPTION}}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Outfit', sans-serif;
+            background-color: #0b1120;
+            color: #e2e8f0;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .global-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(11, 17, 32, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .global-nav .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            text-decoration: none;
+        }
+
+        .global-nav .logo span {
+            color: #34d399;
+        }
+
+        .global-nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .global-nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .global-nav-links a:hover {
+            color: #34d399;
+        }
+
+        .global-nav-btn {
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .global-nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 50px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            background: #080d18;
+            margin-top: 80px;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: #34d399;
+        }
+    </style>
+    <link rel="stylesheet" href="/blog/blog.css">
+</head>
+
+<body>
+
+    <nav class="global-nav">
+        <a href="/" class="logo">Learning<span>Board</span></a>
+        <div class="global-nav-links">
+            <a href="/blog/">Blog Hub</a>
+            <a href="/blackboard/" class="global-nav-btn">Launch App</a>
+        </div>
+    </nav>
+
+    <div class="post-container">
+        <main class="post-layout">
+            <div class="post-main">
+                <a href="/blog/" class="back-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                    </svg>
+                    Back to articles
+                </a>
+
+                <header class="post-header">
+                    <h1 class="post-title">{{TITLE}}</h1>
+                    <div class="post-meta">
+                        <span class="date">{{DATE}}</span>
+                        <span>By {{AUTHOR}}</span>
+                    </div>
+                </header>
+
+                <article class="post-content">
+                    {{CONTENT}}
+                </article>
+            </div>
+
+            <aside class="post-sidebar">
+                <div class="sidebar-widget widget-cta">
+                    <h3>Experience LearningBoard</h3>
+                    <p>The hyper-realistic, zero-latency digital blackboard designed exclusively for educators.</p>
+                    <a href="/blackboard/" class="widget-btn">Launch Free App</a>
+                </div>
+
+                <div class="sidebar-widget widget-ad">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-placeholder">
+                        <p>Ad Space</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <footer>
+        <div style="margin-bottom: 20px;">
+            <a href="/" class="logo"
+                style="font-size: 1.5rem; font-weight: 800; color: #f8fafc; text-decoration: none;">Learning<span
+                    style="color: #34d399;">Board</span></a>
+        </div>
+        <div>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/contact/">Contact Us</a>
+        </div>
+    </footer>
+
+    <button id="back-to-top" title="Back to top">
+        <svg viewBox="0 0 24 24">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+        </svg>
+    </button>
+    <script>
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+
+</html>
