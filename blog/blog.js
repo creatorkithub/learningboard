@@ -21,7 +21,7 @@ async function loadBlogCatalog() {
             });
 
             const card = document.createElement('a');
-            card.href = `/blog/${post.id}.html`;
+            card.href = `/blog/${post.id}`;
             card.className = 'blog-card';
 
             card.innerHTML = `

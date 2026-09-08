@@ -3,6 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            window.location.replace(window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash);
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Psychology of Whiteboarding: Why Blank Canvases Spark Creativity in Learning | LearningBoard Blog</title>
     <meta name="description" content="A deep dive into how an open, blank slate on a digital canvas fundamentally changes the way we think, brainstorm, and solve complex problems during tutoring sessions.">
@@ -10,7 +15,8 @@
     <meta property="og:title" content="The Psychology of Whiteboarding: Why Blank Canvases Spark Creativity in Learning | LearningBoard Blog">
     <meta property="og:description" content="A deep dive into how an open, blank slate on a digital canvas fundamentally changes the way we think, brainstorm, and solve complex problems during tutoring sessions.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://learningboard.online/blog/psychology-of-whiteboarding.html">
+    <meta property="og:url" content="https://learningboard.online/blog/psychology-of-whiteboarding">
+    <link rel="canonical" href="https://learningboard.online/blog/psychology-of-whiteboarding">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="The Psychology of Whiteboarding: Why Blank Canvases Spark Creativity in Learning | LearningBoard Blog">
     <meta name="twitter:description" content="A deep dive into how an open, blank slate on a digital canvas fundamentally changes the way we think, brainstorm, and solve complex problems during tutoring sessions.">

@@ -3,6 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            window.location.replace(window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash);
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How LearningBoard Makes Remote Teaching Easier: The Cure for Online Classroom Friction | LearningBoard Blog</title>
     <meta name="description" content="Let’s be honest about the state of remote tutoring and online education: it often feels like a technical battle. Here is a deep dive into exactly how LearningBoard strips away the digital friction.">
@@ -10,7 +15,8 @@
     <meta property="og:title" content="How LearningBoard Makes Remote Teaching Easier: The Cure for Online Classroom Friction | LearningBoard Blog">
     <meta property="og:description" content="Let’s be honest about the state of remote tutoring and online education: it often feels like a technical battle. Here is a deep dive into exactly how LearningBoard strips away the digital friction.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://learningboard.online/blog/remote-teaching-easier.html">
+    <meta property="og:url" content="https://learningboard.online/blog/remote-teaching-easier">
+    <link rel="canonical" href="https://learningboard.online/blog/remote-teaching-easier">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="How LearningBoard Makes Remote Teaching Easier: The Cure for Online Classroom Friction | LearningBoard Blog">
     <meta name="twitter:description" content="Let’s be honest about the state of remote tutoring and online education: it often feels like a technical battle. Here is a deep dive into exactly how LearningBoard strips away the digital friction.">

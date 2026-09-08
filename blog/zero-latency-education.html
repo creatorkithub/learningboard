@@ -3,6 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            window.location.replace(window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash);
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zero-Latency Education: How Real-Time Tools are Bridging the Remote Learning Gap | LearningBoard Blog</title>
     <meta name="description" content="Lag and technical delays do more than just waste time-they break the crucial flow of a teaching moment. Here is why zero-latency real-time tools are essential to effective remote instruction.">
@@ -10,7 +15,8 @@
     <meta property="og:title" content="Zero-Latency Education: How Real-Time Tools are Bridging the Remote Learning Gap | LearningBoard Blog">
     <meta property="og:description" content="Lag and technical delays do more than just waste time-they break the crucial flow of a teaching moment. Here is why zero-latency real-time tools are essential to effective remote instruction.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://learningboard.online/blog/zero-latency-education.html">
+    <meta property="og:url" content="https://learningboard.online/blog/zero-latency-education">
+    <link rel="canonical" href="https://learningboard.online/blog/zero-latency-education">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Zero-Latency Education: How Real-Time Tools are Bridging the Remote Learning Gap | LearningBoard Blog">
     <meta name="twitter:description" content="Lag and technical delays do more than just waste time-they break the crucial flow of a teaching moment. Here is why zero-latency real-time tools are essential to effective remote instruction.">

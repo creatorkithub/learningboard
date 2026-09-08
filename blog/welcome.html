@@ -3,6 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            window.location.replace(window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash);
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to the LearningBoard Blog: Bringing the Soul of the Classroom to the Digital Screen | LearningBoard Blog</title>
     <meta name="description" content="If you have spent any time teaching online over the last few years, you already know the frustration. The warmth, spontaneity, and tactile joy of standing in front of a real, physical chalkboard gets completely lost in translation.">
@@ -10,7 +15,8 @@
     <meta property="og:title" content="Welcome to the LearningBoard Blog: Bringing the Soul of the Classroom to the Digital Screen | LearningBoard Blog">
     <meta property="og:description" content="If you have spent any time teaching online over the last few years, you already know the frustration. The warmth, spontaneity, and tactile joy of standing in front of a real, physical chalkboard gets completely lost in translation.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://learningboard.online/blog/welcome.html">
+    <meta property="og:url" content="https://learningboard.online/blog/welcome">
+    <link rel="canonical" href="https://learningboard.online/blog/welcome">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Welcome to the LearningBoard Blog: Bringing the Soul of the Classroom to the Digital Screen | LearningBoard Blog">
     <meta name="twitter:description" content="If you have spent any time teaching online over the last few years, you already know the frustration. The warmth, spontaneity, and tactile joy of standing in front of a real, physical chalkboard gets completely lost in translation.">

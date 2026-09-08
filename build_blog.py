@@ -71,10 +71,10 @@ def main():
             f.write(page)
             
         # Update Sitemap if not present
-        url_loc = f"<loc>https://learningboard.online/blog/{post_id}.html</loc>"
+        url_loc = f"<loc>https://learningboard.online/blog/{post_id}</loc>"
         if url_loc not in sitemap:
             new_urls.append(f"""  <url>
-    <loc>https://learningboard.online/blog/{post_id}.html</loc>
+    <loc>https://learningboard.online/blog/{post_id}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>""")

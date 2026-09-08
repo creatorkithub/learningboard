@@ -3,6 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            window.location.replace(window.location.pathname.replace(/\.html$/, '') + window.location.search + window.location.hash);
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{TITLE}} | LearningBoard Blog</title>
     <meta name="description" content="{{META_DESCRIPTION}}">
@@ -10,7 +15,8 @@
     <meta property="og:title" content="{{TITLE}} | LearningBoard Blog">
     <meta property="og:description" content="{{META_DESCRIPTION}}">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://learningboard.online/blog/{{SLUG}}.html">
+    <meta property="og:url" content="https://learningboard.online/blog/{{SLUG}}">
+    <link rel="canonical" href="https://learningboard.online/blog/{{SLUG}}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{TITLE}} | LearningBoard Blog">
     <meta name="twitter:description" content="{{META_DESCRIPTION}}">
