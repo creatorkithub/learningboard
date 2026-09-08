@@ -115,3 +115,41 @@ document.addEventListener('DOMContentLoaded', () => {
         loadBlogPost();
     }
 });
+
+// Reactions logic
+document.addEventListener('DOMContentLoaded', () => {
+    const reactionBtns = document.querySelectorAll('.reaction-btn');
+    if (reactionBtns.length > 0) {
+        // Use pathname as a simple unique post identifier
+        const postId = window.location.pathname.split('/').pop().replace('.html', '');
+
+        reactionBtns.forEach(btn => {
+            const reactionType = btn.getAttribute('data-reaction');
+            const countSpan = btn.querySelector('.reaction-count');
+
+            // Mock counts: deterministic random based on id length and reaction type
+            let count = ((postId.length * 7 + reactionType.length * 3) % 40) + 5;
+
+            const storageKey = `reacted_${postId}_${reactionType}`;
+            if (localStorage.getItem(storageKey)) {
+                btn.classList.add('reacted');
+                count += 1; // User reaction is inherently +1 to the public count
+            }
+
+            countSpan.textContent = count;
+
+            btn.addEventListener('click', () => {
+                let currentCount = parseInt(countSpan.textContent);
+                if (btn.classList.contains('reacted')) {
+                    btn.classList.remove('reacted');
+                    localStorage.removeItem(storageKey);
+                    countSpan.textContent = currentCount - 1;
+                } else {
+                    btn.classList.add('reacted');
+                    localStorage.setItem(storageKey, 'true');
+                    countSpan.textContent = currentCount + 1;
+                }
+            });
+        });
+    }
+});

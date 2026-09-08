@@ -4,27 +4,76 @@
         "title": "Welcome to the LearningBoard Blog: Bringing the Soul of the Classroom to the Digital Screen",
         "date": "2026-09-05",
         "excerpt": "If you have spent any time teaching online over the last few years, you already know the frustration. The warmth, spontaneity, and tactile joy of standing in front of a real, physical chalkboard gets completely lost in translation.",
-        "author": "LearningBoard Team"
+        "author": "LearningBoard Team",
+        "tags": [
+            "teaching",
+            "remote-learning",
+            "tools",
+            "digital-canvas"
+        ]
     },
     {
         "id": "remote-teaching-easier",
         "title": "How LearningBoard Makes Remote Teaching Easier: The Cure for Online Classroom Friction",
         "date": "2026-09-05",
         "excerpt": "Let’s be honest about the state of remote tutoring and online education: it often feels like a technical battle. Here is a deep dive into exactly how LearningBoard strips away the digital friction.",
-        "author": "LearningBoard Team"
+        "author": "LearningBoard Team",
+        "tags": [
+            "remote-teaching",
+            "accessibility",
+            "workflow"
+        ]
     },
     {
         "id": "mastering-digital-canvas",
         "title": "Mastering the Digital Canvas: Why Simple Visual Tools Are the Future of Online Education",
         "date": "2026-09-07",
-        "excerpt": "The fundamental act of teaching—the direct, unencumbered transfer of knowledge—often gets lost in the noise of the platform. Discover why simple tools are the future of online education.",
-        "author": "LearningBoard Team"
+        "excerpt": "The fundamental act of teaching-the direct, unencumbered transfer of knowledge-often gets lost in the noise of the platform. Discover why simple tools are the future of online education.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "future-of-education",
+            "minimalism",
+            "visual-tools"
+        ]
     },
     {
         "id": "minimalist-digital-workspace",
         "title": "Focus, Flow, and Freedom: How a Minimalist Digital Workspace Transforms Online Tutoring",
         "date": "2026-09-07",
         "excerpt": "When you are working one-on-one with a student, every digital distraction is a liability. Explore why a minimalist digital workspace is not just aesthetically pleasing, but pedagogically necessary.",
-        "author": "LearningBoard Team"
+        "author": "LearningBoard Team",
+        "tags": [
+            "tutoring",
+            "focus",
+            "minimalism",
+            "online-workspace"
+        ]
+    },
+    {
+        "id": "psychology-of-whiteboarding",
+        "title": "The Psychology of Whiteboarding: Why Blank Canvases Spark Creativity in Learning",
+        "date": "2026-09-08",
+        "excerpt": "A deep dive into how an open, blank slate on a digital canvas fundamentally changes the way we think, brainstorm, and solve complex problems during tutoring sessions.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "psychology",
+            "creativity",
+            "brainstorming",
+            "digital-whiteboard"
+        ]
+    },
+    {
+        "id": "zero-latency-education",
+        "title": "Zero-Latency Education: How Real-Time Tools are Bridging the Remote Learning Gap",
+        "date": "2026-09-08",
+        "excerpt": "Lag and technical delays do more than just waste time-they break the crucial flow of a teaching moment. Here is why zero-latency real-time tools are essential to effective remote instruction.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "technology",
+            "zero-latency",
+            "remote-learning",
+            "edtech",
+            "real-time"
+        ]
     }
 ]

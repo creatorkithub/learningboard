@@ -1,6 +1,6 @@
 # How LearningBoard Makes Remote Teaching Easier: The Cure for Online Classroom Friction
 
-Let’s be honest about the state of remote tutoring and online education: it often feels like a technical battle. You log into a video call, ready to explain a beautiful, complex concept—perhaps a tricky calculus equation, an organic chemistry structure, or a detailed sentence diagram. But the moment you share your screen, the human connection drops. You find yourself fighting against clunky drop-down menus, battling lag, or trying to write legibly with a trackpad while your student stares blankly at a frozen screen.
+Let’s be honest about the state of remote tutoring and online education: it often feels like a technical battle. You log into a video call, ready to explain a beautiful, complex concept-perhaps a tricky calculus equation, an organic chemistry structure, or a detailed sentence diagram. But the moment you share your screen, the human connection drops. You find yourself fighting against clunky drop-down menus, battling lag, or trying to write legibly with a trackpad while your student stares blankly at a frozen screen.
 
 Suddenly, you aren't an educator anymore. You’re an accidental tech support agent trying to navigate bloated enterprise software.
 
@@ -20,7 +20,7 @@ When you write on our virtual chalkboard, your computer or tablet isn’t consta
 
 ## 2. True Hardware Realism That Respects Your Handwriting
 
-Most digital whiteboard tools treat your stylus like a blunt instrument. Whether you press lightly or push down hard, you get the exact same flat, static, pixelated line. It strips away the nuance of your natural handwriting and makes drawing complex symbols—like mathematical integrals, musical notation, or physics vectors—feel impossibly awkward.
+Most digital whiteboard tools treat your stylus like a blunt instrument. Whether you press lightly or push down hard, you get the exact same flat, static, pixelated line. It strips away the nuance of your natural handwriting and makes drawing complex symbols-like mathematical integrals, musical notation, or physics vectors-feel impossibly awkward.
 
 We spent months perfecting our engine to support native stylus pressure sensitivity.
 

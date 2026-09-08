@@ -60,6 +60,11 @@ def main():
         page = page.replace('{{SLUG}}', post_id)
         page = page.replace('{{AUTHOR}}', post.get('author', 'LearningBoard Team'))
         page = page.replace('{{DATE}}', format_date(post['date']))
+        
+        tags = post.get('tags', [])
+        tags_html = "".join([f'<span class="tag">#{tag}</span>' for tag in tags])
+        page = page.replace('{{TAGS_HTML}}', tags_html)
+        
         page = page.replace('{{CONTENT}}', html_content)
         
         with open(out_file, 'w', encoding='utf-8') as f:

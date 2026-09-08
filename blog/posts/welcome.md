@@ -2,7 +2,7 @@
 
 If you have spent any time teaching online over the last few years, you already know the frustration. You open up a video call, share your screen, and get ready to explain a complex math formula, a physics diagram, or a language lesson. But the moment you try to draw or write, everything falls apart. The digital whiteboards built into major corporate software are clunky. They lag, they require five clicks just to change a pen color, and writing with a mouse or stylus feels like trying to paint with a brick.
 
-Worse yet, they feel completely corporate. They look like spreadsheet software disguised as a canvas. The warmth, spontaneity, and tactile joy of standing in front of a real, physical chalkboard—chalk dust on your fingers, the familiar scratch of slate, the immediate visual connection with a student—gets completely lost in translation.
+Worse yet, they feel completely corporate. They look like spreadsheet software disguised as a canvas. The warmth, spontaneity, and tactile joy of standing in front of a real, physical chalkboard-chalk dust on your fingers, the familiar scratch of slate, the immediate visual connection with a student-gets completely lost in translation.
 
 We built LearningBoard because we were tired of watching technology get in the way of great teaching. We didn’t want to build another bloated corporate tool with a million confusing menus. We wanted to bring the authentic, unfiltered soul of the classroom back to the digital space.
 

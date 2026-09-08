@@ -8,7 +8,7 @@ At LearningBoard, we believe this approach fundamentally misinterprets the needs
 
 ## The Cost of Digital Clutter
 
-Before we can appreciate the value of minimalism, we must understand the cost of clutter. In cognitive psychology, "split-attention effect" occurs when a learner's attention is divided between multiple sources of information that they must integrate to understand a concept. In the context of a digital learning environment, this doesn't just apply to the educational material itself—it applies to the interface.
+Before we can appreciate the value of minimalism, we must understand the cost of clutter. In cognitive psychology, "split-attention effect" occurs when a learner's attention is divided between multiple sources of information that they must integrate to understand a concept. In the context of a digital learning environment, this doesn't just apply to the educational material itself-it applies to the interface.
 
 Imagine you are teaching a child how to balance a chemical equation. You share your screen, opening a leading digital whiteboard application. Around the edges of the blank canvas, there are brightly colored icons for chat boxes, emojis, sticky notes, laser pointers, and various template options. Even if the student isn't actively clicking on these icons, their peripheral vision is processing them. Their brain is subconsciously allocating resources to filter out these irrelevant stimuli. 
 
@@ -18,7 +18,7 @@ For the tutor, the cognitive load is equally taxing. Tutors are a combination of
 
 Minimalism is often misunderstood as simply "having less." In rigorous design philosophy, true minimalism is the intentional elimination of the non-essential so that the essential can speak louder. In the context of online education, the essential elements are the tutor, the student, and the concept being taught. 
 
-When we built LearningBoard, we started by removing everything that didn't serve these three elements. We eliminated user accounts, login screens, complex toolbars, background grids, and file management systems. What remained was a pure, unadulterated canvas—a dark, expansive blackboard or a bright, clean whiteboard.
+When we built LearningBoard, we started by removing everything that didn't serve these three elements. We eliminated user accounts, login screens, complex toolbars, background grids, and file management systems. What remained was a pure, unadulterated canvas-a dark, expansive blackboard or a bright, clean whiteboard.
 
 By eliminating the non-essential, we found that something remarkable happens during a tutoring session:
 
@@ -26,7 +26,7 @@ By eliminating the non-essential, we found that something remarkable happens dur
 In a minimalist workspace, the highest point of visual contrast is always the ink you are actively placing on the board. There are no flashing buttons or vibrant side panels competing for the student's attention. The student's eye is naturally, effortlessly drawn precisely to the focal point of the lesson. The stroke of your pen dictates the visual hierarchy of the entire screen. This level of focus is completely unachievable in bloated edtech suites. 
 
 ### 2. Achieving the "Flow State"
-Psychologist Mihaly Csikszentmihalyi popularized the concept of "flow"—a state of total immersion and peak performance in an activity. For a tutor, achieving flow means you are no longer thinking about the software; you are entirely present with the student. You are listening to their questions, adapting your explanations on the fly, and drawing intuitive diagrams without conscious effort. A minimal interface removes the barriers to flow. Because LearningBoard’s toolset is completely hidden until required, and color-switching is instantaneous, your brain stops filtering the interface and starts focusing entirely on the pedagogy.
+Psychologist Mihaly Csikszentmihalyi popularized the concept of "flow"-a state of total immersion and peak performance in an activity. For a tutor, achieving flow means you are no longer thinking about the software; you are entirely present with the student. You are listening to their questions, adapting your explanations on the fly, and drawing intuitive diagrams without conscious effort. A minimal interface removes the barriers to flow. Because LearningBoard’s toolset is completely hidden until required, and color-switching is instantaneous, your brain stops filtering the interface and starts focusing entirely on the pedagogy.
 
 ### 3. Fostering a Calmer Learning Environment
 Many students requiring tutoring already experience anxiety regarding the subject matter. When they log into a session and are confronted by an overwhelming dashboard resembling the control panel of a spacecraft, this anxiety spikes. A clean, dark blackboard provides immediate sensory relief. The stark simplicity of the setup signals to the student's brain that there is only one thing they need to focus on. The environment feels calm, predictable, and supportive. 

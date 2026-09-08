@@ -19,8 +19,10 @@ The applications are fully responsive, PWA-enabled, and optimized for touch, mak
 
 ## Learning Resources & Blog
 
-LearningBoard regularly publishes tutorials, teaching strategies, and digital workspace tips on its blog:
+LearningBoard regularly publishes tutorials, teaching strategies, and digital workspace tips on its blog. Key resources include:
 - [LearningBoard Hub (Blog)](https://learningboard.online/blog/): The main hub for all articles, tutorials, and resources.
+- [The Psychology of Whiteboarding](https://learningboard.online/blog/psychology-of-whiteboarding.html)
+- [Zero-Latency Education](https://learningboard.online/blog/zero-latency-education.html)
 
 ## Legal & Support
 
