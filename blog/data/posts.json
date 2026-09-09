@@ -75,5 +75,31 @@
             "edtech",
             "real-time"
         ]
+    },
+    {
+        "id": "accessible-education-for-all",
+        "title": "Accessible Education for All: Breaking Down Barriers with Visual Tools",
+        "date": "2026-09-09",
+        "excerpt": "When discussing online learning, the conversation tends to focus entirely on latency and bandwidth. Yet, there is a much bigger roadblock facing thousands of students every day: basic accessibility.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "accessibility",
+            "inclusion",
+            "visual-tools",
+            "digital-canvas"
+        ]
+    },
+    {
+        "id": "gamification-of-learning",
+        "title": "The Gamification of Learning: Building Interactive Exercises on Digital Canvases",
+        "date": "2026-09-09",
+        "excerpt": "Keeping a student's attention, especially in an online setting, often feels like trying to hold water in your hands. This is where the concept of gamification within a digital whiteboard environment actually proves its worth.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "gamification",
+            "engagement",
+            "interactive-learning",
+            "edtech"
+        ]
     }
 ]
