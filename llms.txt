@@ -21,6 +21,10 @@ The applications are fully responsive, PWA-enabled, and optimized for touch, mak
 
 LearningBoard regularly publishes tutorials, teaching strategies, and digital workspace tips on its blog. Key resources include:
 - [LearningBoard Hub (Blog)](https://learningboard.online/blog/): The main hub for all articles, tutorials, and resources.
+- [The Science of Color in Digital Learning](https://learningboard.online/blog/color-science-digital-learning.html)
+- [Integrating LearningBoard into Your Homeschooling Curriculum](https://learningboard.online/blog/homeschooling-with-learningboard.html)
+- [Why Offline Tools Matter for Privacy and Security in EdTech](https://learningboard.online/blog/offline-edtech-privacy.html)
+- [The Ultimate Guide to Digital Chalk: Reviving the Tactile Feel of the Classroom](https://learningboard.online/blog/digital-chalk-tactile-feel.html)
 - [The Psychology of Whiteboarding](https://learningboard.online/blog/psychology-of-whiteboarding.html)
 - [Zero-Latency Education](https://learningboard.online/blog/zero-latency-education.html)
 - [Accessible Education for All](https://learningboard.online/blog/accessible-education-for-all.html)

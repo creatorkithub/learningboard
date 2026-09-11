@@ -1,5 +1,9 @@
 // blog.js - Handles loading the manifest and rendering posts
 
+let allPosts = [];
+let currentPage = 1;
+const postsPerPage = 10;
+
 async function loadBlogCatalog() {
     const grid = document.getElementById('blog-grid');
     if (!grid) return;
@@ -11,31 +15,85 @@ async function loadBlogCatalog() {
 
         // Sort by date descending
         posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        allPosts = posts;
 
-        grid.innerHTML = ''; // basic clear
-
-        posts.forEach(post => {
-            const dateObj = new Date(post.date);
-            const formattedDate = dateObj.toLocaleDateString('en-US', {
-                year: 'numeric', month: 'long', day: 'numeric'
-            });
-
-            const card = document.createElement('a');
-            card.href = `/blog/${post.id}`;
-            card.className = 'blog-card';
-
-            card.innerHTML = `
-                <div class="blog-card-date">${formattedDate}</div>
-                <h2 class="blog-card-title">${post.title}</h2>
-                <p class="blog-card-excerpt">${post.excerpt}</p>
-            `;
-            grid.appendChild(card);
-        });
+        renderBlogPage(currentPage);
 
     } catch (err) {
         console.error(err);
         grid.innerHTML = '<div class="loading-spinner">Failed to load posts. Please try again later.</div>';
     }
+}
+
+function renderBlogPage(page) {
+    const grid = document.getElementById('blog-grid');
+    grid.innerHTML = ''; // clear grid
+
+    const startIndex = (page - 1) * postsPerPage;
+    const endIndex = startIndex + postsPerPage;
+    const postsToShow = allPosts.slice(startIndex, endIndex);
+
+    postsToShow.forEach(post => {
+        const dateObj = new Date(post.date);
+        const formattedDate = dateObj.toLocaleDateString('en-US', {
+            year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        const card = document.createElement('a');
+        card.href = `/blog/${post.id}`;
+        card.className = 'blog-card';
+
+        card.innerHTML = `
+            <div class="blog-card-date">${formattedDate}</div>
+            <h2 class="blog-card-title">${post.title}</h2>
+            <p class="blog-card-excerpt">${post.excerpt}</p>
+        `;
+        grid.appendChild(card);
+    });
+
+    renderPaginationControls();
+}
+
+function renderPaginationControls() {
+    const container = document.getElementById('pagination-controls');
+    if (!container) return;
+
+    const totalPages = Math.ceil(allPosts.length / postsPerPage);
+    container.innerHTML = '';
+
+    if (totalPages <= 1) return;
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'pagination-btn';
+    prevBtn.textContent = 'Previous';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderBlogPage(currentPage);
+            window.scrollTo({ top: document.querySelector('.blog-header').offsetTop, behavior: 'smooth' });
+        }
+    };
+
+    const info = document.createElement('span');
+    info.className = 'pagination-info';
+    info.textContent = `Page ${currentPage} of ${totalPages}`;
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'pagination-btn';
+    nextBtn.textContent = 'Next';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderBlogPage(currentPage);
+            window.scrollTo({ top: document.querySelector('.blog-header').offsetTop, behavior: 'smooth' });
+        }
+    };
+
+    container.appendChild(prevBtn);
+    container.appendChild(info);
+    container.appendChild(nextBtn);
 }
 
 async function loadBlogPost() {

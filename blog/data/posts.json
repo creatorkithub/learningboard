@@ -1,5 +1,55 @@
 [
     {
+        "id": "color-science-digital-learning",
+        "title": "The Science of Color in Digital Learning: Using Whiteboard Markers Effectively",
+        "date": "2026-09-11",
+        "excerpt": "The strategic use of color is one of the most powerful tools in an educator's arsenal. Learn how color coding can drastically improve student retention and pattern recognition.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "color-theory",
+            "digital-whiteboard",
+            "teaching-strategies"
+        ]
+    },
+    {
+        "id": "homeschooling-with-learningboard",
+        "title": "Integrating LearningBoard into Your Homeschooling Curriculum",
+        "date": "2026-09-11",
+        "excerpt": "Discover how a minimalist, local-first platform like LearningBoard fundamentally changes the dynamic of homeschooling by eliminating digital distractions.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "homeschooling",
+            "minimalism",
+            "pedagogy"
+        ]
+    },
+    {
+        "id": "offline-edtech-privacy",
+        "title": "Why Offline Tools Matter for Privacy and Security in EdTech",
+        "date": "2026-09-10",
+        "excerpt": "The quiet resurgence of local-first, offline-capable tools is a crucial defensive strategy for safeguarding student and educator privacy against data harvesting.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "privacy",
+            "security",
+            "edtech",
+            "offline"
+        ]
+    },
+    {
+        "id": "digital-chalk-tactile-feel",
+        "title": "The Ultimate Guide to Digital Chalk: Reviving the Tactile Feel of the Classroom",
+        "date": "2026-09-10",
+        "excerpt": "When educators transitioned to digital platforms, the tactile feel of the classroom was lost. See how procedural chalk rendering revives this inside a digital arena.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "tactile-feel",
+            "chalkboard",
+            "teaching",
+            "future-of-education"
+        ]
+    },
+    {
         "id": "welcome",
         "title": "Welcome to the LearningBoard Blog: Bringing the Soul of the Classroom to the Digital Screen",
         "date": "2026-09-05",
