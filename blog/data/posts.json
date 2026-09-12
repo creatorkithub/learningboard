@@ -1,5 +1,31 @@
 [
     {
+        "id": "evolving-role-of-digital-blackboards",
+        "title": "The Evolving Role of Digital Blackboards in Modern Education",
+        "date": "2026-09-12",
+        "excerpt": "The transition from physical to digital teaching surfaces has not always been seamless. Explore how pressure sensitivity and progressive web apps are reclaiming the tactile feel of traditional blackboards.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "digital-blackboard",
+            "education",
+            "edtech",
+            "tactile-feel"
+        ]
+    },
+    {
+        "id": "pwa-edtech-offline-capabilities",
+        "title": "Unlocking Continuous Learning: Why Progressive Web Apps are the Future of EdTech",
+        "date": "2026-09-12",
+        "excerpt": "Unreliable internet shouldn't disrupt a lesson. Discover how local-first Progressive Web Apps (PWAs) deliver zero-latency experiences, true offline capabilities, and robust privacy for modern educators.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "pwa",
+            "edtech",
+            "privacy",
+            "offline"
+        ]
+    },
+    {
         "id": "color-science-digital-learning",
         "title": "The Science of Color in Digital Learning: Using Whiteboard Markers Effectively",
         "date": "2026-09-11",
