@@ -1,5 +1,31 @@
 [
     {
+        "id": "spatial-organization-digital-minimalism",
+        "title": "Spatial Organization and Digital Minimalism in Online Learning",
+        "date": "2026-09-14",
+        "excerpt": "Discover why a clean, predictable, and expansive digital canvas is crucial for effective online learning by leveraging digital minimalism to reduce cognitive clutter.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "digital-minimalism",
+            "spatial-organization",
+            "online-learning",
+            "focus"
+        ]
+    },
+    {
+        "id": "cognitive-load-in-virtual-classrooms",
+        "title": "Reducing Cognitive Load in Virtual Classrooms",
+        "date": "2026-09-14",
+        "excerpt": "Explore how modern virtual workspaces exacerbate cognitive overload and why a return to simplified, visual-first platforms is becoming crucial for education.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "cognitive-load",
+            "virtual-classroom",
+            "pedagogy",
+            "edtech"
+        ]
+    },
+    {
         "id": "evolving-role-of-digital-blackboards",
         "title": "The Evolving Role of Digital Blackboards in Modern Education",
         "date": "2026-09-12",

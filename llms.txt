@@ -21,6 +21,8 @@ The applications are fully responsive, PWA-enabled, and optimized for touch, mak
 
 LearningBoard regularly publishes tutorials, teaching strategies, and digital workspace tips on its blog. Key resources include:
 - [LearningBoard Hub (Blog)](https://learningboard.online/blog/): The main hub for all articles, tutorials, and resources.
+- [Spatial Organization and Digital Minimalism in Online Learning](https://learningboard.online/blog/spatial-organization-digital-minimalism.html)
+- [Reducing Cognitive Load in Virtual Classrooms](https://learningboard.online/blog/cognitive-load-in-virtual-classrooms.html)
 - [The Evolving Role of Digital Blackboards in Modern Education](https://learningboard.online/blog/evolving-role-of-digital-blackboards.html)
 - [Unlocking Continuous Learning: Why Progressive Web Apps are the Future of EdTech](https://learningboard.online/blog/pwa-edtech-offline-capabilities.html)
 - [The Science of Color in Digital Learning](https://learningboard.online/blog/color-science-digital-learning.html)
