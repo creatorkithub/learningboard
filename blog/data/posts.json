@@ -1,5 +1,31 @@
 [
     {
+        "id": "collaborative-learning-digital-age",
+        "title": "The Power of Collaborative Whiteboarding: Enhancing Peer-to-Peer Learning in the Digital Age",
+        "date": "2026-09-15",
+        "excerpt": "Discover why the magic of peer-to-peer learning relies heavily on shared visual spaces, and how real-time collaborative digital whiteboarding is reviving that magic in modern online education.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "collaboration",
+            "peer-to-peer",
+            "whiteboarding",
+            "learning-strategies"
+        ]
+    },
+    {
+        "id": "fostering-creativity-with-constraints",
+        "title": "Fostering Creativity with Constraints: Why Simple Educational Tools Outperform Complex Software",
+        "date": "2026-09-15",
+        "excerpt": "In our rush to digitize the classroom, we've overlooked human psychology: severe complexity paralyzes the mind, while deliberate design constraints ignite profound student creativity.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "creativity",
+            "minimalism",
+            "edtech-design",
+            "psychology"
+        ]
+    },
+    {
         "id": "spatial-organization-digital-minimalism",
         "title": "Spatial Organization and Digital Minimalism in Online Learning",
         "date": "2026-09-14",

@@ -128,6 +128,9 @@
 </head>
 
 <body>
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
 
     <nav class="global-nav">
         <a href="/" class="logo">Learning<span>Board</span></a>
@@ -255,6 +258,13 @@
         </svg>
     </button>
     <script>
+        window.addEventListener('scroll', () => {
+            if (document.getElementById("myBar")) {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                document.getElementById("myBar").style.width = ((winScroll / height) * 100) + "%";
+            }
+        });
         const backToTopBtn = document.getElementById('back-to-top');
         if (backToTopBtn) {
             window.addEventListener('scroll', () => {
