@@ -34,7 +34,7 @@ Tools designed around this philosophy, such as the [LearningBoard Whiteboard](/w
 
 Privacy is intrinsically linked to equity. For students residing in rural areas, underfunded school districts, or households without reliable broadband internet access, the requirement for an always-on connection is an insurmountable barrier. Constant cloud sync demands significant bandwidth. When standard EdTech platforms experience a latency spike, the application often freezes, drops connection, or loses data. 
 
-Offline tools bridge this digital divide by completely divorcing functionality from network stability. An educator can load up an application while on a school network, commute home without cell service safely working on the local device, and seamlessly continue their work regardless of their home broadband situation. By focusing on [Accessible Education for All](/blog/accessible-education-for-all.html), developers can ensure that high-quality, responsive platforms are not exclusive luxuries reserved for those with fiber-optic connections.
+Offline tools bridge this digital divide by completely divorcing functionality from network stability. An educator can load up an application while on a school network, commute home without cell service safely working on the local device, and seamlessly continue their work regardless of their home broadband situation. By focusing on [Accessible Education for All](/blog/accessible-education-for-all), developers can ensure that high-quality, responsive platforms are not exclusive luxuries reserved for those with fiber-optic connections.
 
 ## The Case for Transitory Data
 

@@ -36,6 +36,9 @@ LearningBoard regularly publishes tutorials, teaching strategies, and digital wo
 - [Accessible Education for All](https://learningboard.online/blog/accessible-education-for-all.html)
 - [The Gamification of Learning](https://learningboard.online/blog/gamification-of-learning.html)
 
+- [Beyond the Screen: How Hardware Styluses are Revolutionizing Precision in Digital Teaching](https://learningboard.online/blog/hardware-stylus-precision)
+- [The Rise of Micro-Lectures: Using Digital Canvases for Snackable Educational Content](https://learningboard.online/blog/micro-lectures-digital-canvases)
+
 ## Legal & Support
 
 - [Privacy Policy](https://learningboard.online/privacy/): Our commitment to 100% offline functionality. We collect no user content or telemetry.

@@ -4,7 +4,7 @@ We live in an era characterized by software bloat. Open almost any modern applic
 
 When a student opens a digital tool and is faced with fifty different brush types, thirty layer blending modes, and a million-color hex picker, the cognitive load shifts immediately entirely. The brain stops thinking about the actual subject matter-the math equation, the historical timeline, the biology diagram-and starts thinking about the software itself. "Which tool do I use? Should this be a vector shape or a raster stroke? What happens if I click this gear icon?" 
 
-This is the exact opposite of what effective learning requires. Effective pedagogy demands that the tool vanishes into the background, becoming a seamless extension of the student's thought process. This is precisely why [digital minimalism](/blog/spatial-organization-digital-minimalism.html) in educational tools is not just a design aesthetic, but a pedagogical necessity. 
+This is the exact opposite of what effective learning requires. Effective pedagogy demands that the tool vanishes into the background, becoming a seamless extension of the student's thought process. This is precisely why [digital minimalism](/blog/spatial-organization-digital-minimalism) in educational tools is not just a design aesthetic, but a pedagogical necessity. 
 
 ## The Paradox of Choice in the Classroom
 

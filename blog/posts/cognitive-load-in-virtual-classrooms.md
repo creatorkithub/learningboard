@@ -12,7 +12,7 @@ Cognitive Load Theory, initially developed by John Sweller in the late 1980s, fu
 2. **Germane Load:** The deep processing required to actually encode this new information into long-term memory schemas. This is the "good" effort we want students to exert.
 3. **Extraneous Load:** The effort required to understand the delivery system, the interface, or the poorly formatted instructions. This is the "bad" effort that wastes brainpower.
 
-In a physical classroom, a good teacher minimizes extraneous load intuitively. They speak clearly, point directly to the chalkboard, and remove physical distractions. The medium of knowledge transfer - the voice and the [tactile chalkboard](/blog/digital-chalk-tactile-feel.html) - becomes almost invisible.
+In a physical classroom, a good teacher minimizes extraneous load intuitively. They speak clearly, point directly to the chalkboard, and remove physical distractions. The medium of knowledge transfer - the voice and the [tactile chalkboard](/blog/digital-chalk-tactile-feel) - becomes almost invisible.
 
 In contrast, classical virtual classrooms often maximize extraneous load. Between managing unmuted microphones, hunting for screen-share buttons, reading side-chats, and trying to decipher a tiny mouse cursor squiggling over a PDF, the student's working memory is exhausted before they even begin to grapple with the actual lesson material.
 
@@ -22,7 +22,7 @@ Why are so many educational technology platforms so exhausting? It often comes d
 
 When a digital platform presents a user with twenty different icons bordering their screen, their visual cortex has to actively process and ignore those icons continuously to focus on the central presentation. This low-level, continuous processing acts as a drain on cognitive resources. It is much like trying to read a complex novel while someone is talking loudly next to you.
 
-Furthermore, context switching is brutal on working memory. If a student is trying to follow a complex geometrical proof drawn on screen, and a chat notification pops up, their attention is forcibly ripped away. When they return to the geometric proof, they must spend crucial seconds re-orienting themselves to where the teacher is in the explanation. Over a fifty-minute class, these micro-interruptions compound into massive [cognitive fatigue](/blog/minimalist-digital-workspace.html).
+Furthermore, context switching is brutal on working memory. If a student is trying to follow a complex geometrical proof drawn on screen, and a chat notification pops up, their attention is forcibly ripped away. When they return to the geometric proof, they must spend crucial seconds re-orienting themselves to where the teacher is in the explanation. Over a fifty-minute class, these micro-interruptions compound into massive [cognitive fatigue](/blog/minimalist-digital-workspace).
 
 ## The Antidote: Visual-First, High-Fidelity Minimalism
 
@@ -32,7 +32,7 @@ This is the exact philosophy driving platforms that strip away the graphical use
 
 ### Embracing the Blank Slate
 
-There is immense power in a [blank digital canvas](/blog/psychology-of-whiteboarding.html). When a student logs in and is greeted not by a dashboard of controls, but by an expanse of "chalkboard" or "whiteboard," their brain involuntarily relaxes. The expectations are clear and unambiguous. The interface does not demand attention; it merely waits for input.
+There is immense power in a [blank digital canvas](/blog/psychology-of-whiteboarding). When a student logs in and is greeted not by a dashboard of controls, but by an expanse of "chalkboard" or "whiteboard," their brain involuntarily relaxes. The expectations are clear and unambiguous. The interface does not demand attention; it merely waits for input.
 
 By relying on broad, sweeping gestures and high-contrast lines, rather than tiny interface elements, an instructor can guide a student's attention flawlessly. Just as in a real classroom, the drawing becomes the sole focal point.
 
@@ -40,13 +40,13 @@ By relying on broad, sweeping gestures and high-contrast lines, rather than tiny
 
 Latency is one of the most frustrating, often overlooked contributors to cognitive load. If an instructor writes an equation, but it takes half a second for the ink to appear on the student's screen, the brain has to constantly reconcile the audio it's hearing with the delayed visual it is seeing. This mismatch is inherently stressful to process.
 
-True [zero-latency education](/blog/zero-latency-education.html) tools eliminate this micro-stressor. When the ink flows instantly - particularly when paired with pressure-sensitive hardware like a stylus - the brain accepts the digital drawing as a direct, physical extension of the teacher. This allows both the educator and the student to enter a "flow state," where the technology becomes completely transparent, and the interaction becomes purely about the transfer of ideas.
+True [zero-latency education](/blog/zero-latency-education) tools eliminate this micro-stressor. When the ink flows instantly - particularly when paired with pressure-sensitive hardware like a stylus - the brain accepts the digital drawing as a direct, physical extension of the teacher. This allows both the educator and the student to enter a "flow state," where the technology becomes completely transparent, and the interaction becomes purely about the transfer of ideas.
 
 ### Offline and Local-First Architecture
 
 Another significant, yet unappreciated, anxiety in online learning is the constant threat of disconnection. A lagging connection, a dropped server, or an app crash disrupts learning instantly. A student constantly worrying if their homework saved, or if they missed a step because the video skipped, is carrying a massive extraneous cognitive load.
 
-This is why adopting [Progressive Web Apps (PWAs)](/blog/pwa-edtech-offline-capabilities.html) built on local-first architectures provides such a profound psychological relief. If a tool runs entirely locally in the browser, even if the internet drops, the tool keeps working. The drawing doesn't vanish. The board doesn't reset. This silent assurance removes a foundational layer of anxiety from the digital learning experience.
+This is why adopting [Progressive Web Apps (PWAs)](/blog/pwa-edtech-offline-capabilities) built on local-first architectures provides such a profound psychological relief. If a tool runs entirely locally in the browser, even if the internet drops, the tool keeps working. The drawing doesn't vanish. The board doesn't reset. This silent assurance removes a foundational layer of anxiety from the digital learning experience.
 
 ## Strategies for Educators
 

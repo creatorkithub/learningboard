@@ -28,7 +28,7 @@ One of the most profound advantages of a large, minimalist canvas is how it leve
 
 This spatial predictability is often broken in digital tools that rely on constant zooming, panning, or paginated boards. When the canvas is a small window, you have to constantly erase or move to a new page, destroying the spatial relationships between different concepts.
 
-A sprawling, minimalist digital board allows ideas to breathe. Concepts can be mapped out chronologically or logically across the space. When you need to refer back to an earlier concept, you just glance over to that side of the board. This is where a zero-latency, expansive [digital canvas](/blog/zero-latency-education.html) proves its worth, mimicking the persistence of a real-world board.
+A sprawling, minimalist digital board allows ideas to breathe. Concepts can be mapped out chronologically or logically across the space. When you need to refer back to an earlier concept, you just glance over to that side of the board. This is where a zero-latency, expansive [digital canvas](/blog/zero-latency-education) proves its worth, mimicking the persistence of a real-world board.
 
 ### The Power of Blank Space
 
@@ -56,7 +56,7 @@ If your tool has floating menus, learn the keyboard shortcuts to hide them. Only
 
 ### Step 4: Utilize Color with Restraint
 
-While it might be tempting to use every color available, digital minimalism extends to your palette. The strategic, restrained [use of color](/blog/color-science-digital-learning.html) is significantly more powerful than a chaotic rainbow. Stick to two or three high-contrast colors, using them consistently to denote specific types of information (e.g., white for main text, yellow for emphasis, red for corrections). 
+While it might be tempting to use every color available, digital minimalism extends to your palette. The strategic, restrained [use of color](/blog/color-science-digital-learning) is significantly more powerful than a chaotic rainbow. Stick to two or three high-contrast colors, using them consistently to denote specific types of information (e.g., white for main text, yellow for emphasis, red for corrections). 
 
 ## The Tangible Benefits for Students
 
@@ -64,7 +64,7 @@ The shift towards digital minimalism is not just theoretical; it yields highly p
 
 When a student does not have to filter out a chaotic interface, their anxiety levels often drop. They can focus entirely on the subject matter, leading to deeper engagement and better retention. Moreover, the predictability of a well-organized minimalist canvas helps ground them in the lesson. They quickly learn where to look for the information they need, building confidence and independence. 
 
-By removing barriers, you are actively participating in creating more [accessible education](/blog/accessible-education-for-all.html). It levels the playing field, ensuring that the technology meant to facilitate learning doesn't inadvertently become an obstacle.
+By removing barriers, you are actively participating in creating more [accessible education](/blog/accessible-education-for-all). It levels the playing field, ensuring that the technology meant to facilitate learning doesn't inadvertently become an obstacle.
 
 ## Conclusion
 

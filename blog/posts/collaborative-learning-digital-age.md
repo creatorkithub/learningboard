@@ -16,7 +16,7 @@ A digital whiteboard is not just a tool for drawing; it is a shared cognitive wo
 
 Consider the difference in cognitive engagement. In a passive lecture, a student listens to an explanation of the water cycle. In a collaborative whiteboarding session, the teacher draws a squiggly line for the ocean and asks, "Okay, who can draw what happens next when the sun heats this water?" Suddenly, a student grabs the digital marker, draws wavy arrows pointing up, and labels it "Evaporation." Another student jumps in and draws a cloud. A third draws rain. 
 
-This is no longer a lecture; it is an event. As we have discussed previously regarding [zero-latency education](/blog/zero-latency-education.html), this rapid, real-time feedback loop is essential. If a student draws a line and it takes two seconds to appear on their classmates' screens, the illusion of the shared physical space is shattered. The whiteboard must respond instantly, catching the flow of thought as quickly as the ink leaves a real marker. This requirement for true real-time performance is what separates a functioning digital learning space from a frustrating one. 
+This is no longer a lecture; it is an event. As we have discussed previously regarding [zero-latency education](/blog/zero-latency-education), this rapid, real-time feedback loop is essential. If a student draws a line and it takes two seconds to appear on their classmates' screens, the illusion of the shared physical space is shattered. The whiteboard must respond instantly, catching the flow of thought as quickly as the ink leaves a real marker. This requirement for true real-time performance is what separates a functioning digital learning space from a frustrating one. 
 
 ## The Dynamics of Peer-to-Peer Whiteboarding
 
@@ -32,7 +32,7 @@ You can't peer into a student’s mind to see if they understand cellular mitosi
 
 ### 3. The Power of "Showing" Over "Telling"
 
-Certain concepts defy verbal explanation. Try explaining the mechanics of a gear train or the layout of an electrical circuit using only words. It is agonizing. A whiteboard allows students to bypass the bottleneck of language. This relates directly to the idea of [accessible education](/blog/accessible-education-for-all.html); visual tools provide alternative pathways to understanding for students who might struggle with dense text or rapid auditory processing. A shared visual language is universal. 
+Certain concepts defy verbal explanation. Try explaining the mechanics of a gear train or the layout of an electrical circuit using only words. It is agonizing. A whiteboard allows students to bypass the bottleneck of language. This relates directly to the idea of [accessible education](/blog/accessible-education-for-all); visual tools provide alternative pathways to understanding for students who might struggle with dense text or rapid auditory processing. A shared visual language is universal. 
 
 ## Practical Strategies for Educators
 
@@ -50,4 +50,4 @@ One thing educators often struggle with when adopting digital whiteboards is the
 
 This messiness is not a bug; it is a feature. The sterile perfection of a typed document or a polished slide deck belongs to the realm of finalized information. The whiteboard belongs to the realm of thought in progress. It is supposed to look like a construction zone because learning is, by definition, an act of construction.
 
-As technology continues to close the gap between physical and digital experiences, bringing back the [tactile feel of digital chalk](/blog/digital-chalk-tactile-feel.html) and minimizing latency, we have a unique opportunity to build better learning environments. We can move past the era of passive screen-staring and re-embrace the collaborative, noisy, deeply human process of figuring things out together. The canvas is waiting. We just need to give the students the markers and get out of their way.
+As technology continues to close the gap between physical and digital experiences, bringing back the [tactile feel of digital chalk](/blog/digital-chalk-tactile-feel) and minimizing latency, we have a unique opportunity to build better learning environments. We can move past the era of passive screen-staring and re-embrace the collaborative, noisy, deeply human process of figuring things out together. The canvas is waiting. We just need to give the students the markers and get out of their way.

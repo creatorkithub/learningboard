@@ -10,7 +10,7 @@ One of the most significant challenges in modern homeschooling is managing scree
 
 LearningBoard was fundamentally designed around pedagogical minimalism. When you launch the [Blackboard interface](/blackboard/) or the Whiteboard, you are presented with exactly what you need-a blank canvas. The toolbars automatically fade away, relying on simple hover interactions to reappear only when necessary. This creates a hyper-focused environment. 
 
-For homeschooling parents, this means the software isn’t fighting you for the student’s attention. By adopting a [Minimalist Digital Workspace](/blog/minimalist-digital-workspace.html), you train the student to treat the digital canvas exactly as they would a piece of scratch paper: a tool for thought, not an entertainment device.
+For homeschooling parents, this means the software isn’t fighting you for the student’s attention. By adopting a [Minimalist Digital Workspace](/blog/minimalist-digital-workspace), you train the student to treat the digital canvas exactly as they would a piece of scratch paper: a tool for thought, not an entertainment device.
 
 ## Creating A Flexible "Morning Menu" Routine
 
@@ -22,7 +22,7 @@ A digital canvas is the perfect interactive Morning Menu. Parents can prepare a 
 
 Math is notoriously difficult to teach abstractly. A young student often struggles to map the abstract numeral "4" to four physical objects without visual reinforcement. Tangible manipulatives like blocks and beads are excellent, but they eventually hit a limitation as concepts evolve into fractions, geometry, and early algebra.
 
-The [LearningBoard Whiteboard](/whiteboard/) allows parents to bridge the gap between tangible and abstract. Its fluid rendering allows educators to draw precise geometric shapes quickly, color-code fractions, and visually partition numbers. For example, teaching long division becomes significantly easier when you can assign a specific color to the divisor, the dividend, and the quotient. As discussed in [The Science of Color in Digital Learning](/blog/color-science-digital-learning.html), using consistent color-coding drastically reduces the cognitive load required to track moving parts in a complex equation.
+The [LearningBoard Whiteboard](/whiteboard/) allows parents to bridge the gap between tangible and abstract. Its fluid rendering allows educators to draw precise geometric shapes quickly, color-code fractions, and visually partition numbers. For example, teaching long division becomes significantly easier when you can assign a specific color to the divisor, the dividend, and the quotient. As discussed in [The Science of Color in Digital Learning](/blog/color-science-digital-learning), using consistent color-coding drastically reduces the cognitive load required to track moving parts in a complex equation.
 
 Furthermore, unlike a physical whiteboard which eventually runs out of space and forces you to erase mid-thought, a scalable digital workspace allows you to simply pan across the canvas, keeping previous steps visible for context.
 
@@ -36,7 +36,7 @@ Because it responds to stylus pressure and velocity, students can practice contr
 
 Homeschooling often leans heavily into project-based learning (PBL) where a student might spend a week researching a single, overarching topic-such as the Roman Empire or the water cycle. PBL requires extensive brainstorming, mind-mapping, and outlining.
 
-A digital whiteboard serves as the ultimate infinite brainstorming space. Students can create vast, interconnected nodes of information. More importantly, because LearningBoard does not require accounts or cloud storage, saving progress is as simple as exporting the current local session. Parents can keep an organized local folder of these sessions on their own hard drive, ensuring complete data privacy as outlined in our [privacy and security guide](/blog/offline-edtech-privacy.html). 
+A digital whiteboard serves as the ultimate infinite brainstorming space. Students can create vast, interconnected nodes of information. More importantly, because LearningBoard does not require accounts or cloud storage, saving progress is as simple as exporting the current local session. Parents can keep an organized local folder of these sessions on their own hard drive, ensuring complete data privacy as outlined in our [privacy and security guide](/blog/offline-edtech-privacy). 
 
 ## Cost-Effective and Accessible
 

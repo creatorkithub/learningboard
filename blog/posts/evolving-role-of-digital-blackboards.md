@@ -28,7 +28,7 @@ One of the most significant breakthroughs in this evolution has been the applica
 
 ### The Psychology of Sound and Space
 
-Beyond the physical feel, the auditory feedback of teaching cannot be overlooked. The [psychology of whiteboarding](/blog/psychology-of-whiteboarding.html) and blackboarding goes beyond just the visual. 
+Beyond the physical feel, the auditory feedback of teaching cannot be overlooked. The [psychology of whiteboarding](/blog/psychology-of-whiteboarding) and blackboarding goes beyond just the visual. 
 
 > The distinct sound of chalk hitting a board acts as a subtle auditory cue to students. It signals that information is being transcribed, prompting them to focus their attention and often, to begin taking notes themselves. 
 
@@ -41,13 +41,13 @@ Furthermore, the digital environment offers advantages that are physically impos
 
 This spatial flexibility supports non-linear learning models where students need to see how disparate ideas interconnect.
 
-This expansive capability is particularly powerful in subjects like mathematics, physics, and computer science, where problem-solving is often a multi-step, iterative process. With a digital blackboard, a teacher can leave the initial problem statement at the top of the workspace, sketch out various potential approaches in distinct areas, and then follow a singular path downward, all while keeping the original context visible. The ability to instantly change colors, move drawn objects, and utilize structural templates further reduces the friction of the teaching process. It is the [gamification of learning](/blog/gamification-of-learning.html) applied to the very tools of instruction.
+This expansive capability is particularly powerful in subjects like mathematics, physics, and computer science, where problem-solving is often a multi-step, iterative process. With a digital blackboard, a teacher can leave the initial problem statement at the top of the workspace, sketch out various potential approaches in distinct areas, and then follow a singular path downward, all while keeping the original context visible. The ability to instantly change colors, move drawn objects, and utilize structural templates further reduces the friction of the teaching process. It is the [gamification of learning](/blog/gamification-of-learning) applied to the very tools of instruction.
 
 ### The Power of Zero-Latency Client-Side Apps
 
 Another critical evolution is the accessibility and immediacy of these modern digital blackboards. In the past, utilizing digital learning boards required heavy, clunky software installations, mandatory user accounts, and constant internet connectivity to sync to distant cloud servers. This created significant barriers. If the internet connection wavered, the lesson ground to a halt. If a student needed a quick link to review notes, they had to navigate cumbersome portal logins.
 
-Today's landscape, driven by progressive, client-side technologies, prioritizes an **instantaneous experience**. Platforms operate strictly within the bounds of the user's web browser. There are no downloads, no installations, and no required accounts. The tools are immediately available upon loading the URL. More importantly, because all processing is handled locally on the user's machine, the interaction is completely lag-free. This [zero-latency education](/blog/zero-latency-education.html) model ensures that when a teacher makes a stroke, it appears instantly on their screen and is broadcast smoothly across whatever video conferencing software they are using. The friction of the technology virtually disappears, allowing the educator to focus entirely on their student.
+Today's landscape, driven by progressive, client-side technologies, prioritizes an **instantaneous experience**. Platforms operate strictly within the bounds of the user's web browser. There are no downloads, no installations, and no required accounts. The tools are immediately available upon loading the URL. More importantly, because all processing is handled locally on the user's machine, the interaction is completely lag-free. This [zero-latency education](/blog/zero-latency-education) model ensures that when a teacher makes a stroke, it appears instantly on their screen and is broadcast smoothly across whatever video conferencing software they are using. The friction of the technology virtually disappears, allowing the educator to focus entirely on their student.
 
 Looking toward the future, the role of digital blackboards will only continue to expand. We are moving toward a paradigm where the digital teaching surface acts as the central hub of an interactive, collaborative ecosystem. As we refine these tools, the emphasis must remain on the human element. The goal should never be to build technology for technology's sake, but rather to construct tools that empower educators to communicate more clearly, more expressively, and more authentically.
 
