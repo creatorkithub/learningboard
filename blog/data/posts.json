@@ -1,5 +1,31 @@
 [
     {
+        "id": "hybrid-learning-shift",
+        "title": "The Hybrid Shift: Balancing Synchronous and Asynchronous Learning",
+        "date": "2026-09-20",
+        "excerpt": "To successfully navigate modern education, educators must find the perfect balance between live, interactive instruction and flexible, self-paced materials. Discover how digital canvases bridge this vital gap.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "hybrid-learning",
+            "asynchronous",
+            "digital-canvas",
+            "education"
+        ]
+    },
+    {
+        "id": "interactive-diagrams-living-canvas",
+        "title": "Rethinking Interactive Diagrams: From Static Slides to Living Canvases",
+        "date": "2026-09-20",
+        "excerpt": "Static slides fail to capture the nuances of complex ideas. Learn why constructing diagrams step-by-step on a digital canvas dramatically improves student comprehension and engagement.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "pedagogy",
+            "diagrams",
+            "visual-learning",
+            "edtech"
+        ]
+    },
+    {
         "id": "hardware-stylus-precision",
         "title": "Beyond the Screen: How Hardware Styluses are Revolutionizing Precision in Digital Teaching",
         "date": "2026-09-17",

@@ -38,6 +38,8 @@ LearningBoard regularly publishes tutorials, teaching strategies, and digital wo
 
 - [Beyond the Screen: How Hardware Styluses are Revolutionizing Precision in Digital Teaching](https://learningboard.online/blog/hardware-stylus-precision)
 - [The Rise of Micro-Lectures: Using Digital Canvases for Snackable Educational Content](https://learningboard.online/blog/micro-lectures-digital-canvases)
+- [The Hybrid Shift: Balancing Synchronous and Asynchronous Learning](https://learningboard.online/blog/hybrid-learning-shift)
+- [Rethinking Interactive Diagrams: From Static Slides to Living Canvases](https://learningboard.online/blog/interactive-diagrams-living-canvas)
 
 ## Legal & Support
 
