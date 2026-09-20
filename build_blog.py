@@ -32,6 +32,8 @@ def main():
         sitemap = f.read()
 
     new_urls = []
+    feed_items = []
+    llms_full_content = ["# LearningBoard - Full LLM Index\n\nThis file contains the complete textual content of LearningBoard's primary pages and blog posts.\n\n"]
 
     for post in posts:
         post_id = post['id']
@@ -79,11 +81,42 @@ def main():
     <priority>0.8</priority>
   </url>""")
 
+        # Add to feed items
+        feed_items.append(f"""    <item>
+      <title>{post['title']}</title>
+      <link>https://learningboard.online/blog/{post_id}</link>
+      <description>{post.get('excerpt', '')}</description>
+      <pubDate>{post['date']}</pubDate>
+      <guid>https://learningboard.online/blog/{post_id}</guid>
+    </item>""")
+
+        # Add to llms-full
+        llms_full_content.append(f"## {post['title']}\n\n{md_content}\n\n---\n\n")
+
     if new_urls:
         print(f"Adding {len(new_urls)} new URLs to sitemap.xml...")
         sitemap = sitemap.replace('</urlset>', '\n'.join(new_urls) + '\n</urlset>')
         with open(SITEMAP_FILE, 'w', encoding='utf-8') as f:
             f.write(sitemap)
+
+    # Generate feed.xml
+    print("Generating feed.xml...")
+    rss_feed = f'''<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>LearningBoard Blog</title>
+    <link>https://learningboard.online/blog/</link>
+    <description>Articles and tutorials for digital teaching and whiteboarding.</description>
+{chr(10).join(feed_items)}
+  </channel>
+</rss>'''
+    with open(os.path.join(BASE_DIR, 'feed.xml'), 'w', encoding='utf-8') as f:
+        f.write(rss_feed)
+        
+    # Generate llms-full.txt
+    print("Generating llms-full.txt...")
+    with open(os.path.join(BASE_DIR, 'llms-full.txt'), 'w', encoding='utf-8') as f:
+        f.write("".join(llms_full_content))
             
     print("Static build complete!")
 

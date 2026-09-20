@@ -1,0 +1,4 @@
+Contact: security@learningboard.online
+Contact: https://learningboard.online/contact/
+Preferred-Languages: en
+Canonical: https://learningboard.online/.well-known/security.txt
