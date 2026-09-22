@@ -1,5 +1,31 @@
 [
     {
+        "id": "accessible-digital-whiteboarding-for-neurodiverse-learners",
+        "title": "Accessible Digital Whiteboarding for Neurodiverse Learners",
+        "date": "2026-09-22",
+        "excerpt": "How minimalist digital whiteboards benefit neurodiverse learners (ADHD, ASD) by radically reducing cognitive load and lowering sensory barriers.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "accessibility",
+            "neurodiversity",
+            "minimalism",
+            "digital-whiteboard"
+        ]
+    },
+    {
+        "id": "data-sovereignty-in-educational-tools",
+        "title": "Data Sovereignty in Educational Tools: Why Local-First EdTech Matters",
+        "date": "2026-09-22",
+        "excerpt": "Discover why local-first educational software provides superior privacy, reduces institutional cyber-risk, and returns digital autonomy directly back to the student.",
+        "author": "LearningBoard Team",
+        "tags": [
+            "edtech",
+            "data-privacy",
+            "local-first",
+            "security"
+        ]
+    },
+    {
         "id": "hybrid-learning-shift",
         "title": "The Hybrid Shift: Balancing Synchronous and Asynchronous Learning",
         "date": "2026-09-20",
