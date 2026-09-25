@@ -127,6 +127,27 @@ def main():
         with open(SITEMAP_FILE, 'w', encoding='utf-8') as f:
             f.write(sitemap)
 
+    # Add About Us static content to feed and llms-full
+    feed_items.append(f"""    <item>
+      <title>About LearningBoard</title>
+      <link>https://learningboard.online/about/</link>
+      <description>Learn more about LearningBoard and our mission to provide the best free virtual blackboard tools.</description>
+      <pubDate>2026-09-25</pubDate>
+      <guid>https://learningboard.online/about/</guid>
+    </item>""")
+
+    about_content = """# About Us
+
+**Empowering Educators and Students Globally**
+Learning Board represents a new paradigm in digital education tools—one built entirely around the principles of performance, privacy, and simplicity. Born out of the frustration with bloated, subscription-based educational software, our mission is to provide an accessible, high-quality digital drawing suite that runs flawlessly within any modern web browser.
+
+## Our Mission
+Our goal is to ensure that educators, tutors, and students have access to top-tier digital tools regardless of their hardware or budget. We believe that technology should remove barriers to learning, not create them. By leveraging the power of client-side web technologies, we have created an offline-first tool that respects your data sovereignty.
+---
+
+"""
+    llms_full_content.append(f"## About Us\n\n{about_content}\n\n---\n\n")
+
     # Generate feed.xml
     print("Generating feed.xml...")
     rss_feed = f'''<?xml version="1.0" encoding="UTF-8" ?>

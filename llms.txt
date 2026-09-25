@@ -52,3 +52,4 @@ LearningBoard regularly publishes tutorials, teaching strategies, and digital wo
 - [Privacy Policy](https://learningboard.online/privacy/): Our commitment to 100% offline functionality. We collect no user content or telemetry.
 - [Terms of Service](https://learningboard.online/terms/)
 - [Contact](https://learningboard.online/contact/)
+- [About Us](https://learningboard.online/about/)

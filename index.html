@@ -170,10 +170,86 @@
             }
         }
 
-        main {
-            padding: 80px 20px;
-            max-width: 900px;
+        .page-wrapper {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 80px 20px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .main-content {
+            flex: 1 1 0;
+            min-width: 0;
+            padding: 0;
+        }
+
+        .page-sidebar {
+            flex: 0 0 320px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-widget {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-widget h3 {
+            margin-top: 0;
+            color: #6ee7b7;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-widget p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .sidebar-widget .widget-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            width: calc(100% - 40px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sidebar-widget .widget-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4);
+        }
+
+        @media (max-width: 1000px) {
+            .page-wrapper {
+                flex-direction: column;
+                padding: 40px 20px;
+            }
+
+            .page-sidebar {
+                width: 100%;
+                flex: auto;
+                position: relative;
+                top: 0;
+            }
+        }
+
+        main {
+            /* Handled by .page-wrapper now */
         }
 
         h1,
@@ -429,121 +505,157 @@
             <a href="/blog/">Blog</a>
             <a href="/privacy/">Privacy</a>
             <a href="/terms/">Terms</a>
+            <a href="/about/">About</a>
             <a href="/contact/">Contact</a>
-            <a href="/blackboard/" class="global-nav-btn">Launch App</a>
         </div>
     </nav>
 
-    <main>
-        <div class="hero-banner">
-            <h1>Free Virtual Blackboard &amp; Interactive Greenboard</h1>
-            <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto; color: #cbd5e1;">LearningBoard
-                provides a hyper-realistic, lag-free online blackboard experience right in your browser. Whether you're
-                teaching a math class, recording a video tutorial, or conducting remote tutoring, our virtual chalkboard
-                feels just like the real thing.</p>
-            <a href="/blackboard/" class="cta-btn-large">Open Blackboard Now</a>
-        </div>
-
-        <section style="margin-top: 50px;">
-            <h2 style="text-align: center;">Built for Teachers &amp; Tutors</h2>
-            <p
-                style="text-align: center; max-width: 750px; margin: 0 auto 40px auto; color: #cbd5e1; font-size: 1.05rem;">
-                Designed specifically for educators and presenters who need a clean, interactive teaching surface.
-                Switch seamlessly between an authentic greenboard and a deep blackboard aesthetic with a single click.
-            </p>
-
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>✍️ Pressure Sensitive Chalk</h3>
-                    <p>Hardware stylus support maps natural hand pressure dynamically to chalk thickness and opacity on
-                        the virtual chalkboard.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>🎨 Greenboard &amp; Blackboard</h3>
-                    <p>Switch seamlessly between an authentic greenboard and a deep blackboard aesthetic to match your
-                        visual teaching preferences.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>🔊 Realistic Chalk Sound</h3>
-                    <p>A built-in Web Audio engine produces realistic chalk scratching sounds that dynamically adjust to
-                        your drawing speed.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>🔒 100% Client-Side Apps</h3>
-                    <p>Works completely offline with no server required, no accounts, and no tracking. Everything runs
-                        safely inside your browser.</p>
-                </div>
+    <div class="page-wrapper">
+        <main class="main-content">
+            <div class="hero-banner">
+                <h1>Free Virtual Blackboard &amp; Interactive Greenboard</h1>
+                <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto; color: #cbd5e1;">LearningBoard
+                    provides a hyper-realistic, lag-free online blackboard experience right in your browser. Whether
+                    you're
+                    teaching a math class, recording a video tutorial, or conducting remote tutoring, our virtual
+                    chalkboard
+                    feels just like the real thing.</p>
+                <a href="/blackboard/" class="cta-btn-large">Open Blackboard Now</a>
             </div>
-        </section>
 
-        <section style="margin-top: 80px;">
-            <h2 style="text-align: center;">How to Maximize Your Teaching with LearningBoard</h2>
-            <div style="max-width: 800px; margin: 0 auto; color: #cbd5e1; font-size: 1.05rem; line-height: 1.8;">
-                <p>Digital learning has rapidly evolved, and educators need reliable, responsive tools that effectively
-                    bridge the gap between traditional classroom instruction and online remote tutoring. LearningBoard
-                    is designed to deliver a highly optimized digital blackboard web app that runs directly in your
-                    browser.</p>
-                <h3 style="color: #6ee7b7; margin-top: 30px;">Setting Up Your Virtual Classroom</h3>
-                <p>When you first launch LearningBoard, you are presented with a clean, distraction-free environment.
-                    Simply share your screen via Zoom, Google Meet, Microsoft Teams, or any preferred video conferencing
-                    solution. Because LearningBoard works locally in your web browser, latency is practically
-                    non-existent-your students will see your drawing strokes appear instantaneously.</p>
-                <h3 style="color: #6ee7b7; margin-top: 30px;">Harnessing Pressure-Sensitive Drawing</h3>
-                <p>For educators using a drawing tablet (such as Wacom, Huion, or an Apple Pencil on iPad), our
-                    application automatically detects stylus pressure. Pressing harder on the screen results in bolder,
-                    thicker chalk lines, mimicking the authentic feel of physical chalk on slate. This nuanced control
-                    is crucial for subjects that require complex diagrams, such as mathematics, physics, and organic
-                    chemistry.</p>
-                <h3 style="color: #6ee7b7; margin-top: 30px;">Privacy and Offline Reliability</h3>
-                <p>We believe in absolute data privacy. Uniquely crafted as a Progressive Web Application (PWA),
-                    LearningBoard caches its essential core files into your device upon initial visit. This robust
-                    architecture means you can continue your teaching session even if your internet connection drops.
-                    All your canvas notes, diagrams, and scribbles are stored entirely within your browser's local
-                    memory, meaning no third party ever gains access to your creative work.</p>
+            <section style="margin-top: 50px;">
+                <h2 style="text-align: center;">Built for Teachers &amp; Tutors</h2>
+                <p
+                    style="text-align: center; max-width: 750px; margin: 0 auto 40px auto; color: #cbd5e1; font-size: 1.05rem;">
+                    Designed specifically for educators and presenters who need a clean, interactive teaching surface.
+                    Switch seamlessly between an authentic greenboard and a deep blackboard aesthetic with a single
+                    click.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>✍️ Pressure Sensitive Chalk</h3>
+                        <p>Hardware stylus support maps natural hand pressure dynamically to chalk thickness and opacity
+                            on
+                            the virtual chalkboard.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎨 Greenboard &amp; Blackboard</h3>
+                        <p>Switch seamlessly between an authentic greenboard and a deep blackboard aesthetic to match
+                            your
+                            visual teaching preferences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔊 Realistic Chalk Sound</h3>
+                        <p>A built-in Web Audio engine produces realistic chalk scratching sounds that dynamically
+                            adjust to
+                            your drawing speed.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔒 100% Client-Side Apps</h3>
+                        <p>Works completely offline with no server required, no accounts, and no tracking. Everything
+                            runs
+                            safely inside your browser.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-top: 80px;">
+                <h2 style="text-align: center;">How to Maximize Your Teaching with LearningBoard</h2>
+                <div style="max-width: 800px; margin: 0 auto; color: #cbd5e1; font-size: 1.05rem; line-height: 1.8;">
+                    <p>Digital learning has rapidly evolved, and educators need reliable, responsive tools that
+                        effectively
+                        bridge the gap between traditional classroom instruction and online remote tutoring.
+                        LearningBoard
+                        is designed to deliver a highly optimized digital blackboard web app that runs directly in your
+                        browser.</p>
+                    <h3 style="color: #6ee7b7; margin-top: 30px;">Setting Up Your Virtual Classroom</h3>
+                    <p>When you first launch LearningBoard, you are presented with a clean, distraction-free
+                        environment.
+                        Simply share your screen via Zoom, Google Meet, Microsoft Teams, or any preferred video
+                        conferencing
+                        solution. Because LearningBoard works locally in your web browser, latency is practically
+                        non-existent-your students will see your drawing strokes appear instantaneously.</p>
+                    <h3 style="color: #6ee7b7; margin-top: 30px;">Harnessing Pressure-Sensitive Drawing</h3>
+                    <p>For educators using a drawing tablet (such as Wacom, Huion, or an Apple Pencil on iPad), our
+                        application automatically detects stylus pressure. Pressing harder on the screen results in
+                        bolder,
+                        thicker chalk lines, mimicking the authentic feel of physical chalk on slate. This nuanced
+                        control
+                        is crucial for subjects that require complex diagrams, such as mathematics, physics, and organic
+                        chemistry.</p>
+                    <h3 style="color: #6ee7b7; margin-top: 30px;">Privacy and Offline Reliability</h3>
+                    <p>We believe in absolute data privacy. Uniquely crafted as a Progressive Web Application (PWA),
+                        LearningBoard caches its essential core files into your device upon initial visit. This robust
+                        architecture means you can continue your teaching session even if your internet connection
+                        drops.
+                        All your canvas notes, diagrams, and scribbles are stored entirely within your browser's local
+                        memory, meaning no third party ever gains access to your creative work.</p>
+                </div>
+            </section>
+
+            <div class="faq-section">
+                <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+                <details class="faq-item">
+                    <summary>
+                        <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Is LearningBoard really 100% free?
+                        </h3>
+                        <span class="faq-icon">+</span>
+                    </summary>
+                    <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes! LearningBoard is completely free to use. There
+                        are
+                        no hidden fees, no premium subscription tiers, and no irritating account registrations required.
+                    </p>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Does it work on iPads and drawing
+                            tablets?</h3>
+                        <span class="faq-icon">+</span>
+                    </summary>
+                    <p style="margin: 15px 0 0 0; line-height: 1.6;">Absolutely. LearningBoard is deeply optimized for
+                        touch
+                        devices and hardware styluses like the Apple Pencil or Wacom tablets, dynamically reading your
+                        stylus pressure.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Can I use this for online tutoring
+                            via
+                            Zoom or Google Meet?</h3>
+                        <span class="faq-icon">+</span>
+                    </summary>
+                    <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes, our digital blackboard is highly recommended
+                        for
+                        virtual tutoring! Simply share your browser window in your video conferencing application.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Can I use LearningBoard offline?</h3>
+                        <span class="faq-icon">+</span>
+                    </summary>
+                    <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes, absolutely! LearningBoard is built as a
+                        Progressive Web App (PWA). Once you visit the site, it caches the necessary files in your
+                        browser.
+                        You can seamlessly disconnect from the internet and continue using the blackboard or whiteboard
+                        without any interruptions. You can even install it on your device for quick access!</p>
+                </details>
             </div>
-        </section>
-
-        <div class="faq-section">
-            <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
-            <details class="faq-item">
-                <summary>
-                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Is LearningBoard really 100% free?</h3>
-                    <span class="faq-icon">+</span>
-                </summary>
-                <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes! LearningBoard is completely free to use. There are
-                    no hidden fees, no premium subscription tiers, and no irritating account registrations required.</p>
-            </details>
-            <details class="faq-item">
-                <summary>
-                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Does it work on iPads and drawing
-                        tablets?</h3>
-                    <span class="faq-icon">+</span>
-                </summary>
-                <p style="margin: 15px 0 0 0; line-height: 1.6;">Absolutely. LearningBoard is deeply optimized for touch
-                    devices and hardware styluses like the Apple Pencil or Wacom tablets, dynamically reading your
-                    stylus pressure.</p>
-            </details>
-            <details class="faq-item">
-                <summary>
-                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Can I use this for online tutoring via
-                        Zoom or Google Meet?</h3>
-                    <span class="faq-icon">+</span>
-                </summary>
-                <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes, our digital blackboard is highly recommended for
-                    virtual tutoring! Simply share your browser window in your video conferencing application.</p>
-            </details>
-            <details class="faq-item">
-                <summary>
-                    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">Can I use LearningBoard offline?</h3>
-                    <span class="faq-icon">+</span>
-                </summary>
-                <p style="margin: 15px 0 0 0; line-height: 1.6;">Yes, absolutely! LearningBoard is built as a
-                    Progressive Web App (PWA). Once you visit the site, it caches the necessary files in your browser.
-                    You can seamlessly disconnect from the internet and continue using the blackboard or whiteboard
-                    without any interruptions. You can even install it on your device for quick access!</p>
-            </details>
-        </div>
-    </main>
+        </main>
+        <aside class="page-sidebar">
+            <div class="sidebar-widget">
+                <h3>Try the Whiteboard</h3>
+                <p>A fast, responsive digital whiteboard alternative perfectly suited for brainstorming.</p>
+                <a href="/whiteboard/" class="widget-btn">Launch Whiteboard</a>
+            </div>
+            <div class="sidebar-widget">
+                <h3>Explore the Blog</h3>
+                <p>Access our free tutorials and insights for online teaching.</p>
+                <a href="/blog/" class="widget-btn"
+                    style="background: transparent; border: 1px solid #34d399; color: #34d399;">Read Articles</a>
+            </div>
+        </aside>
+    </div>
 
     <footer>
         <div style="margin-bottom: 20px;">
@@ -555,6 +667,7 @@
             <a href="/privacy/">Privacy Policy</a>
             <a href="/terms/">Terms of Service</a>
             <a href="/contact/">Contact Us</a>
+            <a href="/about/">About Us</a>
         </div>
         <div style="margin-top: 20px;">
             &copy; 2026 Learning Board. All rights reserved. Built for educators.

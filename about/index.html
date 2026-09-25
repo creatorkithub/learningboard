@@ -23,7 +23,7 @@
             top.location = self.location;
         }
     </script>
-    <link rel="canonical" href="https://learningboard.online/contact/" />
+    <link rel="canonical" href="https://learningboard.online/about/" />
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
@@ -37,16 +37,19 @@
     <meta name="naver-site-verification" content="" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - LearningBoard | learningboard.online</title>
-    <meta name="description" content="Contact support for LearningBoard">
-    <meta property="og:title" content="Contact Us - LearningBoard | learningboard.online">
-    <meta property="og:description" content="Contact support for LearningBoard">
+    <title>About Us - LearningBoard | learningboard.online</title>
+    <meta name="description"
+        content="Learn more about LearningBoard and our mission to provide the best free virtual blackboard tools.">
+    <meta property="og:title" content="About Us - LearningBoard | learningboard.online">
+    <meta property="og:description"
+        content="Learn more about LearningBoard and our mission to provide the best free virtual blackboard tools.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://learningboard.online/contact/">
+    <meta property="og:url" content="https://learningboard.online/about/">
     <meta property="og:image" content="https://learningboard.online/icon.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Contact Us - LearningBoard | learningboard.online">
-    <meta name="twitter:description" content="Contact support for LearningBoard">
+    <meta name="twitter:title" content="About Us - LearningBoard | learningboard.online">
+    <meta name="twitter:description"
+        content="Learn more about LearningBoard and our mission to provide the best free virtual blackboard tools.">
     <meta name="twitter:image" content="https://learningboard.online/icon.png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -64,25 +67,91 @@
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            margin-top: 10vh;
-            padding: 40px 20px;
+            /* Now handled by page-wrapper */
         }
 
-        h1 {
-            color: #ffffff;
-            font-size: 2.5rem;
+        .page-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .main-content {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+
+        .page-sidebar {
+            flex: 0 0 320px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-widget {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-widget h3 {
+            margin-top: 0;
+            color: #6ee7b7;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-widget p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .sidebar-widget .widget-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            width: calc(100% - 40px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sidebar-widget .widget-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4);
+        }
+
+        @media (max-width: 1000px) {
+            .page-wrapper {
+                flex-direction: column;
+            }
+
+            .page-sidebar {
+                width: 100%;
+                flex: auto;
+                position: relative;
+                top: 0;
+            }
+        }
+
+        h1,
+        h2 {
+            color: #34d399;
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1.1;
-            margin-bottom: 5px;
-        }
-
-        p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.1rem;
         }
 
         a {
@@ -163,26 +232,6 @@
                 padding: 15px 20px;
             }
         }
-
-
-        .email-btn {
-            display: inline-block;
-            margin-top: 40px;
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
-            border: none;
-            border-radius: 30px;
-            color: #ffffff;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(52, 211, 153, 0.3);
-        }
-
-        .email-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(52, 211, 153, 0.4);
-        }
     </style>
     <script type="application/ld+json">
     {
@@ -218,28 +267,62 @@
             <a href="/contact/">Contact</a>
         </div>
     </nav>
-    <div class="container">
-        <h1>Contact Support</h1>
-        <p>If you need assistance, please reach out directly at:</p>
+    <div class="page-wrapper">
+        <div class="main-content">
+            <h1>About Us</h1>
+            <p><strong>Empowering Educators and Students Globally</strong></p>
+            <p>Learning Board represents a new paradigm in digital education tools-one built entirely around the
+                principles
+                of performance, privacy, and simplicity. Born out of the frustration with bloated, subscription-based
+                educational software, our mission is to provide an accessible, high-quality digital drawing suite that
+                runs
+                flawlessly within any modern web browser.</p>
 
-        <a id="em-box" class="email-btn" style="text-decoration: none;" href="#">Loading Email...</a>
+            <h2>Our Mission</h2>
+            <p>Our goal is to ensure that educators, tutors, and students have access to top-tier digital tools
+                regardless
+                of their hardware or budget. We believe that technology should remove barriers to learning, not create
+                them.
+                By leveraging the power of client-side web technologies, we have created an offline-first tool that
+                respects
+                your data sovereignty.</p>
 
-        <br><br><br><br>
+            <h2>Why We Do It</h2>
+            <ul>
+                <li><strong>Zero Latency:</strong> We developed our blackboard and whiteboard applications to run 100%
+                    locally. This means smooth ink flow and instant response times, crucial for effective teaching.</li>
+                <li><strong>Absolute Privacy:</strong> You don't need to log in to use LearningBoard. We collect zero
+                    content data-what you draw stays on your device.</li>
+                <li><strong>Simplicity by Design:</strong> We discarded complex toolbars and unnecessary features to
+                    focus
+                    on what truly matters: an authentic, intuitive writing experience that feels just like a real
+                    classroom.
+                </li>
+            </ul>
+
+            <h2>The Team</h2>
+            <p>Learning Board is developed by <a href="https://www.linkedin.com/in/balachandar-nadar" target="_blank"
+                    rel="noopener noreferrer">Balachandar Nadar</a>, a developer passionate about building
+                privacy-first,
+                utility-driven web applications that give control back to the user.</p>
+
+            <p>We are constantly refining our tools to better serve the educational community. We hope LearningBoard
+                makes your remote teaching, tutoring, or brainstorming sessions smoother and more engaging.</p>
+        </div>
+        <aside class="page-sidebar">
+            <div class="sidebar-widget">
+                <h3>Try the Whiteboard</h3>
+                <p>A fast, responsive digital whiteboard alternative perfectly suited for brainstorming.</p>
+                <a href="/whiteboard/" class="widget-btn">Launch Whiteboard</a>
+            </div>
+            <div class="sidebar-widget">
+                <h3>Explore the Blog</h3>
+                <p>Access our free tutorials and insights for online teaching.</p>
+                <a href="/blog/" class="widget-btn"
+                    style="background: transparent; border: 1px solid #34d399; color: #34d399;">Read Articles</a>
+            </div>
+        </aside>
     </div>
-
-    <script>
-        // Advanced string obfuscation to block scraper bots from harvesting the email
-        var u1 = "learning";
-        var u2 = "board.web";
-        var d1 = "gmail";
-        var d2 = "com";
-        var combined = u1 + u2 + "@" + d1 + "." + d2;
-
-        // Assemble visually for humans after the DOM loads
-        var obf = document.getElementById('em-box');
-        obf.innerText = combined;
-        obf.href = "mailto:" + combined;
-    </script>
     <script src="/cookie-consent.js" defer></script>
 </body>
 

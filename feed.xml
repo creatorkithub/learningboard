@@ -172,5 +172,12 @@
       <pubDate>2026-09-09</pubDate>
       <guid>https://learningboard.online/blog/gamification-of-learning</guid>
     </item>
+    <item>
+      <title>About LearningBoard</title>
+      <link>https://learningboard.online/about/</link>
+      <description>Learn more about LearningBoard and our mission to provide the best free virtual blackboard tools.</description>
+      <pubDate>2026-09-25</pubDate>
+      <guid>https://learningboard.online/about/</guid>
+    </item>
   </channel>
 </rss>
