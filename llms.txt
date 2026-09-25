@@ -23,6 +23,7 @@ LearningBoard regularly publishes tutorials, teaching strategies, and digital wo
 - [LearningBoard Hub (Blog)](https://learningboard.online/blog/): The main hub for all articles, tutorials, and resources.
 - [Welcome to the LearningBoard Blog: Bringing the Soul of the Classroom to the Digital Screen](https://learningboard.online/blog/welcome.html)
 - [Focus, Flow, and Freedom: How a Minimalist Digital Workspace Transforms Online Tutoring](https://learningboard.online/blog/minimalist-digital-workspace.html)
+- [Mastering the Digital Canvas: Why Simple Visual Tools Are the Future of Online Education](https://learningboard.online/blog/mastering-digital-canvas.html)
 - [Accessible Digital Whiteboarding for Neurodiverse Learners](https://learningboard.online/blog/accessible-digital-whiteboarding-for-neurodiverse-learners)
 - [Data Sovereignty in Educational Tools: Why Local-First EdTech Matters](https://learningboard.online/blog/data-sovereignty-in-educational-tools)
 - [The Power of Collaborative Whiteboarding](https://learningboard.online/blog/collaborative-learning-digital-age.html)
