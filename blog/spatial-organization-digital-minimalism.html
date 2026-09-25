@@ -127,8 +127,89 @@
         footer a:hover {
             color: #34d399;
         }
+
+        .author-bio {
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        .author-bio .author-avatar {
+            min-width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .author-bio .author-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.2rem;
+            color: #f8fafc;
+        }
+
+        .author-bio .author-info p {
+            margin: 0 0 12px 0;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .author-bio .author-info a {
+            color: #34d399;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .author-bio .author-info a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .author-bio {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
     <link rel="stylesheet" href="/blog/blog.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spatial Organization and Digital Minimalism in Online Learning",
+  "description": "Discover why a clean, predictable, and expansive digital canvas is crucial for effective online learning by leveraging digital minimalism to reduce cognitive clutter.",
+  "author": {
+    "@type": "Person",
+    "name": "Balachandar Nadar",
+    "url": "https://www.linkedin.com/in/balachandar-nadar"
+  },
+  "datePublished": "2026-09-14",
+  "publisher": {
+    "@type": "Organization",
+    "name": "LearningBoard",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://learningboard.online/icon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://learningboard.online/blog/spatial-organization-digital-minimalism"
+  }
+}
+</script>
 </head>
 
 <body>
@@ -200,6 +281,18 @@
 <p>The rush to digitize education often resulted in software bloat - tools trying to do everything at once. We built incredible virtual conference rooms but forgot to put a good chalkboard in them. Digital minimalism is a necessary correction. It is a return to first principles. </p>
 <p>By prioritizing a clean, predictable, and expansive spatial organization, we can reclaim the focused, deep work that is the hallmark of true learning. It is an acknowledgment that sometimes, the best feature a piece of software can offer is the ability to get out of the way. When the interface disappears, the learning can finally begin.</p>
                 </article>
+
+                <div class="author-bio">
+                    <div class="author-avatar">BN</div>
+                    <div class="author-info">
+                        <h3>Balachandar Nadar</h3>
+                        <p>Balachandar Nadar is the developer behind LearningBoard.online. They specialize in building
+                            privacy-first, zero-login utility apps designed to escape cloud fatigue and return control
+                            of data back to the user's local machine.</p>
+                        <a href="https://www.linkedin.com/in/balachandar-nadar" target="_blank"
+                            rel="noopener noreferrer">Connect on LinkedIn</a>
+                    </div>
+                </div>
 
                 <footer class="article-footer">
                     <div class="footer-tags">

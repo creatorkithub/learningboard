@@ -127,8 +127,89 @@
         footer a:hover {
             color: #34d399;
         }
+
+        .author-bio {
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        .author-bio .author-avatar {
+            min-width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .author-bio .author-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.2rem;
+            color: #f8fafc;
+        }
+
+        .author-bio .author-info p {
+            margin: 0 0 12px 0;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .author-bio .author-info a {
+            color: #34d399;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .author-bio .author-info a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .author-bio {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
     <link rel="stylesheet" href="/blog/blog.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Unlocking Continuous Learning: Why Progressive Web Apps are the Future of EdTech",
+  "description": "Unreliable internet shouldn't disrupt a lesson. Discover how local-first Progressive Web Apps (PWAs) deliver zero-latency experiences, true offline capabilities, and robust privacy for modern educators.",
+  "author": {
+    "@type": "Person",
+    "name": "Balachandar Nadar",
+    "url": "https://www.linkedin.com/in/balachandar-nadar"
+  },
+  "datePublished": "2026-09-12",
+  "publisher": {
+    "@type": "Organization",
+    "name": "LearningBoard",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://learningboard.online/icon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://learningboard.online/blog/pwa-edtech-offline-capabilities"
+  }
+}
+</script>
 </head>
 
 <body>
@@ -193,6 +274,18 @@
 <p>Looking ahead, the shift toward PWAs in EdTech is not merely a trend, but a necessary correction to the bloated, overly complex ecosystem we have tolerated for the past decade. It represents a return to the fundamental purpose of educational tools: serving the educator and the student, rather than serving the platform. </p>
 <p>By stripping away the dependencies on continuous high-speed internet, eliminating the artificial friction of account logins and heavy software downloads, and fiercely protecting user privacy, Progressive Web Apps provide a reliable, resilient foundation for modern instruction. They unlock the potential for truly continuous learning, proving that sometimes, the most sophisticated technological advancement is simply a return to prioritizing simplicity, speed, and reliability. As educators continue to navigate the blending of physical and digital classrooms, these local-first tools will undoubtedly become the standard, proving that the future of EdTech is not in the cloud, but right there in your browser.</p>
                 </article>
+
+                <div class="author-bio">
+                    <div class="author-avatar">BN</div>
+                    <div class="author-info">
+                        <h3>Balachandar Nadar</h3>
+                        <p>Balachandar Nadar is the developer behind LearningBoard.online. They specialize in building
+                            privacy-first, zero-login utility apps designed to escape cloud fatigue and return control
+                            of data back to the user's local machine.</p>
+                        <a href="https://www.linkedin.com/in/balachandar-nadar" target="_blank"
+                            rel="noopener noreferrer">Connect on LinkedIn</a>
+                    </div>
+                </div>
 
                 <footer class="article-footer">
                     <div class="footer-tags">

@@ -127,8 +127,89 @@
         footer a:hover {
             color: #34d399;
         }
+
+        .author-bio {
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        .author-bio .author-avatar {
+            min-width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .author-bio .author-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.2rem;
+            color: #f8fafc;
+        }
+
+        .author-bio .author-info p {
+            margin: 0 0 12px 0;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .author-bio .author-info a {
+            color: #34d399;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .author-bio .author-info a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .author-bio {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
     <link rel="stylesheet" href="/blog/blog.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Accessible Digital Whiteboarding for Neurodiverse Learners",
+  "description": "How minimalist digital whiteboards benefit neurodiverse learners (ADHD, ASD) by radically reducing cognitive load and lowering sensory barriers.",
+  "author": {
+    "@type": "Person",
+    "name": "Balachandar Nadar",
+    "url": "https://www.linkedin.com/in/balachandar-nadar"
+  },
+  "datePublished": "2026-09-22",
+  "publisher": {
+    "@type": "Organization",
+    "name": "LearningBoard",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://learningboard.online/icon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://learningboard.online/blog/accessible-digital-whiteboarding-for-neurodiverse-learners"
+  }
+}
+</script>
 </head>
 
 <body>
@@ -193,6 +274,18 @@
 <p>The real breakthrough in accessibility will not come from a more intelligent algorithm. It will come from returning the locus of control to the user. A blank, responsive, minimalist digital whiteboard does not try to teach. It just patiently waits, perfectly accommodating whatever structural, non-linear, or idiosyncratic method the student needs to express their intellect. </p>
 <p>By designing for the neurodiverse, we inadvertently build better tools for everyone. When we prioritize focus over features, and predictability over flashiness, we create digital classrooms that are calmer, kinder, and infinitely more conducive to the deep, sustained thought required for genuine education.</p>
                 </article>
+
+                <div class="author-bio">
+                    <div class="author-avatar">BN</div>
+                    <div class="author-info">
+                        <h3>Balachandar Nadar</h3>
+                        <p>Balachandar Nadar is the developer behind LearningBoard.online. They specialize in building
+                            privacy-first, zero-login utility apps designed to escape cloud fatigue and return control
+                            of data back to the user's local machine.</p>
+                        <a href="https://www.linkedin.com/in/balachandar-nadar" target="_blank"
+                            rel="noopener noreferrer">Connect on LinkedIn</a>
+                    </div>
+                </div>
 
                 <footer class="article-footer">
                     <div class="footer-tags">

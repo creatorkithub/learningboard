@@ -127,8 +127,89 @@
         footer a:hover {
             color: #34d399;
         }
+
+        .author-bio {
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        .author-bio .author-avatar {
+            min-width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .author-bio .author-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.2rem;
+            color: #f8fafc;
+        }
+
+        .author-bio .author-info p {
+            margin: 0 0 12px 0;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .author-bio .author-info a {
+            color: #34d399;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .author-bio .author-info a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .author-bio {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
     <link rel="stylesheet" href="/blog/blog.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Data Sovereignty in Educational Tools: Why Local-First EdTech Matters",
+  "description": "Discover why local-first educational software provides superior privacy, reduces institutional cyber-risk, and returns digital autonomy directly back to the student.",
+  "author": {
+    "@type": "Person",
+    "name": "Balachandar Nadar",
+    "url": "https://www.linkedin.com/in/balachandar-nadar"
+  },
+  "datePublished": "2026-09-22",
+  "publisher": {
+    "@type": "Organization",
+    "name": "LearningBoard",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://learningboard.online/icon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://learningboard.online/blog/data-sovereignty-in-educational-tools"
+  }
+}
+</script>
 </head>
 
 <body>
@@ -196,6 +277,18 @@
 <p>The future of educational software must pivot away from the extractive models of surveillance capitalism. Our digital classrooms should serve educators and students exclusively, entirely insulated from third-party analytics firms and cloud hosting conglomerates. The power must return to the edges-to the laptop in the dormitory, the tablet on the kitchen table, and the smart-board physically present in the classroom.</p>
 <p>By embracing tools that run locally, we reclaim ownership over our digital pedagogy. This transition ensures continuous access despite infrastructural limitations, provides an environment psychologically safe for experimentation, and drastically secures user data against pervasive modern threats. As we evaluate the tools we introduce to developing minds, let us prioritize those that respect their autonomy. Let us usher in an era where educational technology finally serves the learner, locally and securely.</p>
                 </article>
+
+                <div class="author-bio">
+                    <div class="author-avatar">BN</div>
+                    <div class="author-info">
+                        <h3>Balachandar Nadar</h3>
+                        <p>Balachandar Nadar is the developer behind LearningBoard.online. They specialize in building
+                            privacy-first, zero-login utility apps designed to escape cloud fatigue and return control
+                            of data back to the user's local machine.</p>
+                        <a href="https://www.linkedin.com/in/balachandar-nadar" target="_blank"
+                            rel="noopener noreferrer">Connect on LinkedIn</a>
+                    </div>
+                </div>
 
                 <footer class="article-footer">
                     <div class="footer-tags">

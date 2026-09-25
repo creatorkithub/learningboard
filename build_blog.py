@@ -69,6 +69,34 @@ def main():
         
         page = page.replace('{{CONTENT}}', html_content)
         
+        schema_data = {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post['title'],
+            "description": post.get('excerpt', ''),
+            "author": {
+                "@type": "Person",
+                "name": "Balachandar Nadar",
+                "url": "https://www.linkedin.com/in/balachandar-nadar"
+            },
+            "datePublished": post['date'],
+            "publisher": {
+                "@type": "Organization",
+                "name": "LearningBoard",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://learningboard.online/icon.png"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": f"https://learningboard.online/blog/{post_id}"
+            }
+        }
+        schema_json = json.dumps(schema_data, indent=2)
+        schema_html = f"<script type=\"application/ld+json\">\n{schema_json}\n</script>"
+        page = page.replace('{{JSON_SCHEMA_LD}}', schema_html)
+        
         with open(out_file, 'w', encoding='utf-8') as f:
             f.write(page)
             

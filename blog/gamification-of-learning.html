@@ -127,8 +127,89 @@
         footer a:hover {
             color: #34d399;
         }
+
+        .author-bio {
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        .author-bio .author-avatar {
+            min-width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #34d399 0%, #3b82f6 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .author-bio .author-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.2rem;
+            color: #f8fafc;
+        }
+
+        .author-bio .author-info p {
+            margin: 0 0 12px 0;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .author-bio .author-info a {
+            color: #34d399;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .author-bio .author-info a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .author-bio {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
     <link rel="stylesheet" href="/blog/blog.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "The Gamification of Learning: Building Interactive Exercises on Digital Canvases",
+  "description": "Keeping a student's attention, especially in an online setting, often feels like trying to hold water in your hands. This is where the concept of gamification within a digital whiteboard environment actually proves its worth.",
+  "author": {
+    "@type": "Person",
+    "name": "Balachandar Nadar",
+    "url": "https://www.linkedin.com/in/balachandar-nadar"
+  },
+  "datePublished": "2026-09-09",
+  "publisher": {
+    "@type": "Organization",
+    "name": "LearningBoard",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://learningboard.online/icon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://learningboard.online/blog/gamification-of-learning"
+  }
+}
+</script>
 </head>
 
 <body>
@@ -194,6 +275,18 @@
 <p>A teacher is not locked into a single type of quiz assigned by a textbook publisher. They can invent a new game on the fly. If they realize a student is struggling with fractions, they can quickly draw a pizza, slice it up, and turn it into a visual trading game right there on the spot. The curriculum becomes malleable. </p>
 <p>Ultimately, gamification should never be about turning education into cheap entertainment. It is about leveraging the way human beings naturally want to learn. We learn by playing, by testing boundaries, by making mistakes and instantly trying again. Watching a student light up because they finally pieced together a difficult concept on a shared screen is one of the most rewarding experiences a teacher can have. It reminds us that at its best, learning should feel like a victory.</p>
                 </article>
+
+                <div class="author-bio">
+                    <div class="author-avatar">BN</div>
+                    <div class="author-info">
+                        <h3>Balachandar Nadar</h3>
+                        <p>Balachandar Nadar is the developer behind LearningBoard.online. They specialize in building
+                            privacy-first, zero-login utility apps designed to escape cloud fatigue and return control
+                            of data back to the user's local machine.</p>
+                        <a href="https://www.linkedin.com/in/balachandar-nadar" target="_blank"
+                            rel="noopener noreferrer">Connect on LinkedIn</a>
+                    </div>
+                </div>
 
                 <footer class="article-footer">
                     <div class="footer-tags">
