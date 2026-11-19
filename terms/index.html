@@ -10,16 +10,8 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self' https://*.googletagmanager.com; object-src 'none';">
-    <style id="antiClickjack">
-        body {
-            display: none !important;
-        }
-    </style>
     <script type="text/javascript">
-        if (self === top) {
-            var antiClickjack = document.getElementById("antiClickjack");
-            if (antiClickjack) antiClickjack.parentNode.removeChild(antiClickjack);
-        } else {
+        if (self !== top) {
             top.location = self.location;
         }
     </script>
@@ -155,6 +147,29 @@
                 padding: 15px 20px;
             }
         }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 50px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            background: #080d18;
+            backdrop-filter: blur(10px);
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: #34d399;
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -202,7 +217,7 @@
     </nav>
     <div class="container">
         <h1>Terms of Service for Learning Board</h1>
-        <p><strong>Last Updated: July 21, 2026</strong></p>
+        <p><strong>Last Updated: November 19, 2026</strong></p>
         <p>Welcome to Learning Board (learningboard.online). Please read these Terms of Service ("Terms") carefully
             before using our digital blackboard web application. By accessing or using the website, you agree to be
             bound by these Terms.</p>
@@ -232,24 +247,53 @@
         <p>You agree not to use the application to engage in any behavior that intends to disrupt the functionality of
             the website or bypass security features applied to the hosting domain.</p>
 
-        <h2>5. Disclaimer of Warranties</h2>
+        <h2>5. Affiliate Disclosure & Third-Party Purchases (Amazon Associates)</h2>
+        <p>Learning Board participates in the <strong>Amazon Services LLC Associates Program</strong>, an affiliate advertising program designed to provide a means for websites to earn advertising fees by advertising and linking to Amazon (including amazon.com and its regional storefronts).</p>
+        <ul>
+            <li><strong>Mandatory Disclosure:</strong> As an Amazon Associate, I earn from qualifying purchases.</li>
+            <li><strong>Independent Sellers & Transactions:</strong> When you click on an affiliate link and make a purchase, your purchase transaction is conducted directly with Amazon or third-party sellers on the Amazon platform. Learning Board does not sell, ship, inventory, or fulfill physical products.</li>
+            <li><strong>Pricing and Product Availability:</strong> Product prices, availability, shipping terms, and ratings are determined by Amazon and respective merchants. Prices are accurate at the time of publication and are subject to change without notice. The pricing and details shown on Amazon at the time of your purchase will apply.</li>
+            <li><strong>Merchant Warranties and Returns:</strong> All customer service inquiries, returns, refunds, defective items, and warranty claims must be addressed directly to Amazon or the third-party merchant. Learning Board accepts no liability or responsibility for transactions conducted on external e-commerce platforms.</li>
+        </ul>
+
+        <h2>6. Disclaimer of Warranties</h2>
         <p>Learning Board is provided on an "AS IS" and "AS AVAILABLE" basis. We make no guarantees that your locally
             saved work will never be lost due to browser crashes, cache updates, device errors, or OS-level storage
             clearings. Use the built-in "Export PNG" option frequently to back up your critical drawings safely.</p>
 
-        <h2>6. Limitation of Liability</h2>
+        <h2>7. Limitation of Liability</h2>
         <p>To the maximum extent permitted by applicable global laws, Learning Board and its developers shall not be
             liable for any direct, indirect, incidental, or consequential damages resulting from your use of or
-            inability to use this free web application.</p>
+            inability to use this free web application or any third-party products linked from the site.</p>
 
-        <h2>7. Governing Law</h2>
+        <h2>8. Governing Law</h2>
         <p>These Terms shall be governed by and construed in accordance with standard international web practices. If
             there are any disputes regarding the platform, we will handle them directly via email.</p>
 
-        <h2>8. Termination</h2>
+        <h2>9. Termination</h2>
         <p>We reserve the right to modify, suspend, or terminate the free hosting availability of this web tool at any
             time without prior notice.</p>
     </div>
+
+    <footer>
+        <div style="margin-bottom: 20px;">
+            <a href="/"
+                style="font-size: 1.5rem; font-weight: 800; color: #f8fafc; text-decoration: none; letter-spacing: -0.02em; display: inline-flex; align-items: center;">Learning<span
+                    style="color: #34d399;">Board</span></a>
+        </div>
+        <div>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/contact/">Contact Us</a>
+            <a href="/about/">About Us</a>
+        </div>
+        <div style="margin-top: 15px; font-size: 0.85rem; color: #94a3b8; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            <strong>Affiliate Disclosure:</strong> LearningBoard is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon. As an Amazon Associate, I earn from qualifying purchases.
+        </div>
+        <div style="margin-top: 20px;">
+            &copy; 2026 Learning Board. All rights reserved. Built for educators.
+        </div>
+    </footer>
     <script src="/cookie-consent.js" defer></script>
 </body>
 

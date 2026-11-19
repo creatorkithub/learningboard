@@ -10,16 +10,8 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self' https://*.googletagmanager.com; object-src 'none';">
-    <style id="antiClickjack">
-        body {
-            display: none !important;
-        }
-    </style>
     <script type="text/javascript">
-        if (self === top) {
-            var antiClickjack = document.getElementById("antiClickjack");
-            if (antiClickjack) antiClickjack.parentNode.removeChild(antiClickjack);
-        } else {
+        if (self !== top) {
             top.location = self.location;
         }
     </script>
@@ -228,6 +220,29 @@
                 padding: 15px 20px;
             }
         }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 50px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            background: #080d18;
+            backdrop-filter: blur(10px);
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: #34d399;
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -329,6 +344,26 @@
             </div>
         </aside>
     </div>
+
+    <footer>
+        <div style="margin-bottom: 20px;">
+            <a href="/"
+                style="font-size: 1.5rem; font-weight: 800; color: #f8fafc; text-decoration: none; letter-spacing: -0.02em; display: inline-flex; align-items: center;">Learning<span
+                    style="color: #34d399;">Board</span></a>
+        </div>
+        <div>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/contact/">Contact Us</a>
+            <a href="/about/">About Us</a>
+        </div>
+        <div style="margin-top: 15px; font-size: 0.85rem; color: #94a3b8; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            <strong>Affiliate Disclosure:</strong> LearningBoard is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon. As an Amazon Associate, I earn from qualifying purchases.
+        </div>
+        <div style="margin-top: 20px;">
+            &copy; 2026 Learning Board. All rights reserved. Built for educators.
+        </div>
+    </footer>
     <script src="/cookie-consent.js" defer></script>
 </body>
 

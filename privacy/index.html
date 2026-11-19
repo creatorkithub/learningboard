@@ -10,16 +10,8 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self' https://*.googletagmanager.com; object-src 'none';">
-    <style id="antiClickjack">
-        body {
-            display: none !important;
-        }
-    </style>
     <script type="text/javascript">
-        if (self === top) {
-            var antiClickjack = document.getElementById("antiClickjack");
-            if (antiClickjack) antiClickjack.parentNode.removeChild(antiClickjack);
-        } else {
+        if (self !== top) {
             top.location = self.location;
         }
     </script>
@@ -155,6 +147,29 @@
                 padding: 15px 20px;
             }
         }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 50px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            background: #080d18;
+            backdrop-filter: blur(10px);
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: #34d399;
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -202,7 +217,7 @@
     </nav>
     <div class="container">
         <h1>Privacy Policy for Learning Board</h1>
-        <p><strong>Last Updated: July 21, 2026</strong></p>
+        <p><strong>Last Updated: November 19, 2026</strong></p>
         <p>Learning Board ("we," "our," or "us") operates the website located at learningboard.online. We are committed
             to protecting the privacy of all users, including children, educators, and creators worldwide.</p>
         <p>Because our application runs 100% client-side within your web browser, we do not collect, store, or share
@@ -263,14 +278,40 @@
             </li>
         </ul>
 
-        <h2>5. Changes to This Policy</h2>
+        <h2>5. Affiliate Disclosure and Amazon Associates Program</h2>
+        <p>Learning Board participates in the <strong>Amazon Services LLC Associates Program</strong>, an affiliate advertising program designed to provide a means for websites to earn advertising fees by advertising and linking to Amazon (including amazon.com and localized Amazon storefronts).</p>
+        <p>As part of this program, we may feature product recommendations, curated deals, and links to featured products. If you click on an Amazon affiliate link on our site and make a qualifying purchase, we may receive a small referral commission at no additional cost to you.</p>
+        <p><strong>Amazon Cookies and Tracking:</strong> When you click on an affiliate link directing you to Amazon, Amazon uses cookies and web beacons to track your visit and attribute qualifying purchases to our affiliate ID. These cookies are subject to Amazon's own privacy policy. For more information on how Amazon collects and processes data, please visit the <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=468496" target="_blank" rel="noopener noreferrer">Amazon Privacy Notice</a>.</p>
+        <p>You may disable or clear cookies at any time via your browser settings or opt out of targeted advertising through industry opt-out portals such as <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>.</p>
+
+        <h2>6. Changes to This Policy</h2>
         <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated
             timestamp.</p>
 
-        <h2>6. Contact Us</h2>
+        <h2>7. Contact Us</h2>
         <p>If you have any questions about this privacy framework, you can contact the developer via our official
             repository or support channels.</p>
     </div>
+
+    <footer>
+        <div style="margin-bottom: 20px;">
+            <a href="/"
+                style="font-size: 1.5rem; font-weight: 800; color: #f8fafc; text-decoration: none; letter-spacing: -0.02em; display: inline-flex; align-items: center;">Learning<span
+                    style="color: #34d399;">Board</span></a>
+        </div>
+        <div>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/contact/">Contact Us</a>
+            <a href="/about/">About Us</a>
+        </div>
+        <div style="margin-top: 15px; font-size: 0.85rem; color: #94a3b8; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            <strong>Affiliate Disclosure:</strong> LearningBoard is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon. As an Amazon Associate, I earn from qualifying purchases.
+        </div>
+        <div style="margin-top: 20px;">
+            &copy; 2026 Learning Board. All rights reserved. Built for educators.
+        </div>
+    </footer>
     <script src="/cookie-consent.js" defer></script>
 </body>
 

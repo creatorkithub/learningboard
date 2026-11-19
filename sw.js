@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lb-core-v1';
+const CACHE_NAME = 'lb-core-v2';
 
 self.addEventListener('install', event => {
     // Skip waiting to activate immediately
@@ -6,13 +6,33 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
-    // Claim clients immediately
-    event.waitUntil(self.clients.claim());
+    // Delete any stale caches and claim clients immediately
+    event.waitUntil(
+        caches.keys().then(keys => {
+            return Promise.all(
+                keys.map(key => {
+                    if (key !== CACHE_NAME) {
+                        return caches.delete(key);
+                    }
+                })
+            );
+        }).then(() => self.clients.claim())
+    );
 });
 
 self.addEventListener('fetch', event => {
     // Only intercept basic HTTP GET requests
     if (event.request.method !== 'GET') return;
+
+    // For localhost development, let network requests pass through directly
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        event.respondWith(
+            fetch(event.request).catch(err => {
+                return caches.match(event.request);
+            })
+        );
+        return;
+    }
 
     event.respondWith(
         fetch(event.request).then(response => {
@@ -30,11 +50,7 @@ self.addEventListener('fetch', event => {
             return response;
         }).catch(() => {
             // Network failed (offline), fallback to cache
-            return caches.match(event.request).then(cachedResponse => {
-                if (cachedResponse) {
-                    return cachedResponse;
-                }
-            });
+            return caches.match(event.request);
         })
     );
 });

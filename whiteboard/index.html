@@ -10,16 +10,8 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self' https://*.googletagmanager.com; object-src 'none';">
-    <style id="antiClickjack">
-        body {
-            display: none !important;
-        }
-    </style>
     <script type="text/javascript">
-        if (self === top) {
-            var antiClickjack = document.getElementById("antiClickjack");
-            if (antiClickjack) antiClickjack.parentNode.removeChild(antiClickjack);
-        } else {
+        if (self !== top) {
             top.location = self.location;
         }
     </script>
@@ -564,10 +556,353 @@
 
         #palette-container.drawing-hidden,
         #toolbar.drawing-hidden,
-        #scroll-info-hint.drawing-hidden {
+        #scroll-info-hint.drawing-hidden,
+        #gear-preview-widget.drawing-hidden {
             opacity: 0 !important;
             visibility: hidden !important;
             pointer-events: none !important;
+        }
+
+        /* --- RIGHT BOTTOM GEAR PREVIEW WIDGET --- */
+        #gear-preview-widget {
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            z-index: 1000001;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: auto;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .gear-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 15px;
+            border-radius: 24px;
+            background: rgba(18, 30, 24, 0.78);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-top: 1px solid rgba(255, 255, 255, 0.38);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 14px rgba(255, 153, 0, 0.15);
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+
+        .gear-pill:hover {
+            background: rgba(26, 44, 35, 0.88);
+            border-color: rgba(255, 153, 0, 0.55);
+            border-top-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 18px rgba(255, 153, 0, 0.3);
+        }
+
+        .gear-pill-amazon {
+            background: #ff9900;
+            color: #111827;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gear-toggle-icon {
+            font-size: 10px;
+            color: #cbd5e1;
+            transition: transform 0.25s ease;
+        }
+
+        #gear-preview-widget.open .gear-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        /* --- GLASSMORPHIC AMAZON PREVIEW CARD --- */
+        .whatsapp-url-preview-card {
+            display: none;
+            position: relative;
+            width: 380px;
+            max-width: calc(100vw - 32px);
+            background: rgba(18, 30, 24, 0.78);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-top: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 16px;
+            padding: 13px 14px;
+            margin-bottom: 12px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 20px rgba(255, 153, 0, 0.15);
+            animation: popupFadeSlide 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left;
+            box-sizing: border-box;
+            user-select: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .whatsapp-url-preview-card:hover {
+            background: rgba(23, 38, 30, 0.86);
+            border-color: rgba(255, 153, 0, 0.5);
+            border-top-color: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 0 25px rgba(255, 153, 0, 0.25);
+        }
+
+        #gear-preview-widget.open .whatsapp-url-preview-card {
+            display: block;
+        }
+
+        .preview-close-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #cbd5e1;
+            font-size: 16px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 4px 7px;
+            border-radius: 6px;
+            transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+            z-index: 2;
+        }
+
+        .preview-close-btn:hover {
+            color: #ffffff;
+            background: #ef4444;
+            border-color: #ef4444;
+        }
+
+        .preview-card-inner {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            text-decoration: none !important;
+            color: inherit !important;
+            cursor: pointer;
+            padding-right: 18px; /* space for close button */
+        }
+
+        .preview-thumbnail-box {
+            width: 82px;
+            height: 82px;
+            min-width: 82px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .preview-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .preview-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .preview-title {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #ffffff;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.35;
+            margin-bottom: 4px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+        }
+
+        .preview-snippet {
+            font-size: 11.5px;
+            color: #cbd5e1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.3;
+            margin-bottom: 7px;
+        }
+
+        .preview-domain-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            flex-wrap: wrap;
+        }
+
+        .preview-domain {
+            color: #ff9900;
+            font-weight: 700;
+        }
+
+        .preview-dot {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 8px;
+        }
+
+        .preview-prime {
+            background: #00a8e1;
+            color: #ffffff;
+            font-size: 9px;
+            font-weight: 800;
+            font-style: italic;
+            padding: 1px 5px;
+            border-radius: 3px;
+            letter-spacing: 0.3px;
+        }
+
+        .preview-affiliate-tag {
+            font-size: 8.5px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 1px 5px;
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .preview-cta-btn {
+            margin-left: auto;
+            background: linear-gradient(135deg, #ff9900 0%, #ff8000 100%);
+            color: #111827;
+            font-size: 10.5px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(255, 153, 0, 0.35);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .preview-card-inner:hover .preview-cta-btn {
+            transform: scale(1.04);
+            box-shadow: 0 3px 12px rgba(255, 153, 0, 0.5);
+        }
+        }
+
+        /* Mobile Responsiveness for Amazon Deal Preview Widget & Navigation */
+        @media (max-width: 600px) {
+            #scroll-info-hint {
+                left: 12px;
+                transform: none;
+                bottom: 12px;
+                padding: 4px 10px;
+                font-size: 10.5px;
+            }
+
+            #gear-preview-widget {
+                bottom: 12px;
+                right: 12px;
+                max-width: calc(100vw - 24px);
+            }
+
+            .whatsapp-url-preview-card {
+                width: min(340px, calc(100vw - 24px));
+                padding: 10px;
+                margin-bottom: 8px;
+                border-radius: 12px;
+            }
+
+            .preview-card-inner {
+                gap: 10px;
+            }
+
+            .preview-thumbnail-box {
+                width: 68px;
+                height: 68px;
+                min-width: 68px;
+                border-radius: 8px;
+            }
+
+            .preview-title {
+                font-size: 12.5px;
+            }
+
+            .preview-snippet {
+                font-size: 11px;
+                margin-bottom: 5px;
+            }
+
+            .preview-domain-row {
+                font-size: 10px;
+            }
+
+            .preview-cta-btn {
+                font-size: 9.5px;
+                padding: 1px 5px;
+            }
+
+            .gear-pill {
+                padding: 6px 12px;
+                font-size: 11.5px;
+                gap: 6px;
+            }
+
+            .gear-pill-amazon {
+                font-size: 9px;
+                padding: 1px 5px;
+            }
+        }
+
+        @media (max-height: 480px) and (orientation: landscape) {
+            #scroll-info-hint {
+                left: 10px;
+                transform: none;
+                bottom: 8px;
+            }
+
+            #gear-preview-widget {
+                bottom: 8px;
+                right: 10px;
+            }
+
+            .whatsapp-url-preview-card {
+                width: min(300px, calc(100vw - 20px));
+                padding: 6px 8px;
+                margin-bottom: 6px;
+            }
+
+            .preview-thumbnail-box {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+            }
+
+            .preview-title {
+                font-size: 11px;
+            }
+
+            .preview-snippet {
+                display: none;
+            }
+
+            .gear-pill {
+                padding: 4px 9px;
+                font-size: 10px;
+            }
         }
 
         /* --- BOTTOM SCROLL INFO HINT BUTTON --- */
@@ -1275,6 +1610,37 @@
                 <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
             </svg>
         </button>
+
+        <!-- RIGHT BOTTOM GEAR PREVIEW WIDGET -->
+        <div id="gear-preview-widget">
+            <div id="gear-popup-card" class="whatsapp-url-preview-card" role="region" aria-label="Amazon Link Preview">
+                <button id="gear-popup-close" class="preview-close-btn" title="Dismiss Preview (Esc)">&times;</button>
+                
+                <a id="gear-preview-card-link" href="https://link.amazon/B0ejw0MmA" target="_blank" rel="sponsored noopener noreferrer" class="preview-card-inner">
+                    <div class="preview-thumbnail-box">
+                        <img id="gear-preview-thumb" src="/images/teacher-tote-bag.jpg" alt="Featured Amazon Deal" class="preview-thumbnail" />
+                    </div>
+                    
+                    <div class="preview-content">
+                        <div id="gear-preview-title" class="preview-title">Bagstellar Puffer Tote Bag for Women, Lightweight Puffy Work Tote Handbag</div>
+                        <div id="gear-preview-snippet" class="preview-snippet">16 Pocket Teacher Nurse Quilted Shoulder Bag &bull; Large Cloud Carry On Purse</div>
+                        <div class="preview-domain-row">
+                            <span id="gear-preview-domain" class="preview-domain">amazon.com</span>
+                            <span class="preview-dot">&bull;</span>
+                            <span class="preview-prime">Prime</span>
+                            <span class="preview-affiliate-tag">Sponsored</span>
+                            <span class="preview-cta-btn">View Deal &rarr;</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="gear-pill" class="gear-pill" title="Amazon Featured Deals">
+                <span style="font-size: 14px; line-height: 1;">🛍️</span>
+                <span class="gear-pill-amazon">Amazon</span>
+                <span class="gear-toggle-icon">▲</span>
+            </div>
+        </div>
     </div> <!-- End app-container -->
 
     <div id="dialog-overlay">
@@ -1483,6 +1849,10 @@
             <a href="/privacy/">Privacy Policy</a>
             <a href="/terms/">Terms of Service</a>
             <a href="/contact/">Contact Us</a>
+            <a href="/about/">About Us</a>
+        </div>
+        <div style="margin-top: 15px; font-size: 0.85rem; color: #94a3b8; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            <strong>Affiliate Disclosure:</strong> LearningBoard is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon. As an Amazon Associate, I earn from qualifying purchases.
         </div>
         <div style="margin-top: 20px;">
             &copy; 2026 Learning Board. All rights reserved. Built for educators.
@@ -1647,7 +2017,7 @@
         resetIdleTimeout();
 
         function handlePointerDown(e) {
-            if (e.target.closest && (e.target.closest('#toolbar') || e.target.closest('#palette-trigger'))) return;
+            if (e.target.closest && (e.target.closest('#toolbar') || e.target.closest('#palette-trigger') || e.target.closest('#gear-preview-widget'))) return;
             if (e.target !== boardCanvas && e.target !== dustCanvas) return;
 
             const pc = document.getElementById('palette-container');
@@ -1659,6 +2029,8 @@
             const sh = document.getElementById('scroll-info-hint');
             if (sh) sh.classList.add('drawing-hidden');
             if (document.getElementById('slide-navigator')) document.getElementById('slide-navigator').classList.add('drawing-hidden');
+            const gw = document.getElementById('gear-preview-widget');
+            if (gw) gw.classList.add('drawing-hidden');
             clearTimeout(hideToolbarTimeout);
 
             isDrawing = true;
@@ -1712,6 +2084,8 @@
                     const sh = document.getElementById('scroll-info-hint');
                     if (sh) sh.classList.remove('drawing-hidden');
                     if (document.getElementById('slide-navigator')) document.getElementById('slide-navigator').classList.remove('drawing-hidden');
+                    const gw = document.getElementById('gear-preview-widget');
+                    if (gw) gw.classList.remove('drawing-hidden');
                     resetIdleTimeout();
                 }
             }, 800);
@@ -1880,6 +2254,10 @@
                 const img = new Image();
                 img.onload = () => boardCtx.drawImage(img, 0, 0);
                 img.src = b.dataUrl;
+            }
+            if (typeof pickRandomProduct === 'function' && typeof openPreview === 'function') {
+                pickRandomProduct();
+                openPreview();
             }
         }
 
@@ -2300,6 +2678,130 @@
             }
         });
 
+        // --- WhatsApp-Style URL Preview with Dynamic Random Product Popping ---
+        const gearPill = document.getElementById('gear-pill');
+        const gearWidget = document.getElementById('gear-preview-widget');
+        const gearClose = document.getElementById('gear-popup-close');
+        const gearCardLink = document.getElementById('gear-preview-card-link');
+        const gearTitle = document.getElementById('gear-preview-title');
+        const gearSnippet = document.getElementById('gear-preview-snippet');
+        const gearThumb = document.getElementById('gear-preview-thumb');
+        const gearPillLabel = document.getElementById('gear-pill-label');
+
+        // User's Amazon Affiliate Products pool (No Graphic Tablet)
+        const affiliateProducts = [
+            {
+                title: 'Bagstellar Puffer Tote Bag for Women, Lightweight Puffy Work Tote Handbag',
+                snippet: '16 Pocket Teacher Nurse Quilted Shoulder Bag &bull; Large Cloud Carry On Purse',
+                image: '/images/teacher-tote-bag.jpg',
+                url: 'https://link.amazon/B0ejw0MmA',
+                pillText: 'Teacher Bag'
+            },
+            {
+                title: 'Women Christmas Plaid Print Puff Sleeve Long Party Dress',
+                snippet: 'Gingham Square Neck Smocked Ruffle Maxi Dress &bull; Elegant Holiday Outfit',
+                image: '/images/gingham-smocked-dress.jpg',
+                url: 'https://link.amazon/B04bExWYr',
+                pillText: 'Holiday Dress'
+            },
+            {
+                title: 'XIAOWTEK Wireless Earbuds, 2026 Bluetooth 5.4 Headphones',
+                snippet: 'Bass Stereo Ear Buds with Noise Cancelling Mic &bull; 50H Playtime LED Display',
+                image: '/images/wireless-earbuds-blue.jpg',
+                url: 'https://link.amazon/B01uNPEj3',
+                pillText: 'Wireless Earbuds'
+            }
+        ];
+
+        let currentProdIndex = 0;
+
+        function pickRandomProduct() {
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * affiliateProducts.length);
+            } while (affiliateProducts.length > 1 && nextIndex === currentProdIndex);
+            currentProdIndex = nextIndex;
+            const prod = affiliateProducts[currentProdIndex];
+
+            if (gearThumb) {
+                gearThumb.src = prod.image;
+                gearThumb.alt = prod.title;
+            }
+            if (gearTitle) gearTitle.textContent = prod.title;
+            if (gearSnippet) gearSnippet.innerHTML = prod.snippet;
+            if (gearCardLink) gearCardLink.href = prod.url;
+            if (gearPillLabel) gearPillLabel.textContent = prod.pillText;
+        }
+
+        function openPreview() {
+            if (gearWidget) gearWidget.classList.add('open');
+        }
+
+        function closePreview() {
+            if (gearWidget) gearWidget.classList.remove('open');
+        }
+
+        // Toggle on pill click
+        if (gearPill) {
+            gearPill.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (gearWidget.classList.contains('open')) {
+                    closePreview();
+                } else {
+                    pickRandomProduct();
+                    openPreview();
+                }
+            });
+        }
+
+        // Close on 'x' button (closes for the moment; reopens on new board switch or arrival)
+        if (gearClose) {
+            gearClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closePreview();
+            });
+        }
+
+        // Close on clicking outside
+        document.addEventListener('click', (e) => {
+            if (gearWidget && !gearWidget.contains(e.target)) {
+                if (gearWidget.classList.contains('open')) {
+                    closePreview();
+                }
+            }
+        });
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && gearWidget && gearWidget.classList.contains('open')) {
+                closePreview();
+            }
+        });
+
+        // Clear any old closed flag so sponsor card is never blocked
+        try { localStorage.removeItem('lb_deal_closed'); } catch(e) {}
+
+        // Always stay open every time user arrives on the board
+        pickRandomProduct();
+        openPreview();
+
+        // Also stay open when switching browser tabs or windows
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                pickRandomProduct();
+                openPreview();
+            }
+        });
+
+        // Listen for paste events: If a user pastes any URL link, pop up this URL preview!
+        window.addEventListener('paste', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            const text = (e.clipboardData || window.clipboardData).getData('text');
+            if (text && (text.startsWith('http') || text.includes('amazon') || text.includes('link.'))) {
+                pickRandomProduct();
+                openPreview();
+            }
+        });
     </script>
 
     <button id="back-to-top" title="Back to top">
