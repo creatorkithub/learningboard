@@ -1,6 +1,8 @@
 (function () {
+    const CONSENT_KEY = 'privacyConsentStatus_v2';
+
     // Check if consent has already been given or declined
-    if (localStorage.getItem('privacyConsentStatus')) {
+    if (localStorage.getItem(CONSENT_KEY)) {
         return;
     }
 
@@ -114,7 +116,7 @@
     const banner = document.createElement('div');
     banner.id = 'cookie-consent-banner';
     banner.innerHTML = `
-        <p>We use cookies and Google AdSense to analyze web traffic, improve your experience, and serve personalized advertisements. By clicking "Accept", you consent to our use of these tracking technologies as detailed in our <a href="/privacy/">Privacy Policy</a> and agree to our <a href="/terms/">Terms of Service</a>.</p>
+        <p>We use cookies and third-party advertising partners (such as Adsterra) along with analytics tools to measure web traffic, improve your experience, and display advertisements. By clicking "Accept", you consent to our use of these technologies as detailed in our <a href="/privacy/">Privacy Policy</a> and agree to our <a href="/terms/">Terms of Service</a>.</p>
         <div class="cookie-btn-group">
             <button class="cookie-btn cookie-btn-decline" id="cookie-btn-decline">Decline</button>
             <button class="cookie-btn cookie-btn-accept" id="cookie-btn-accept">Accept</button>
@@ -129,14 +131,14 @@
 
     // Handle Decline
     document.getElementById('cookie-btn-decline').addEventListener('click', () => {
-        localStorage.setItem('privacyConsentStatus', 'declined');
+        localStorage.setItem(CONSENT_KEY, 'declined');
         banner.classList.remove('show');
         setTimeout(() => banner.remove(), 600);
     });
 
     // Handle Accept
     document.getElementById('cookie-btn-accept').addEventListener('click', () => {
-        localStorage.setItem('privacyConsentStatus', 'accepted');
+        localStorage.setItem(CONSENT_KEY, 'accepted');
         banner.classList.remove('show');
         setTimeout(() => banner.remove(), 600);
     });

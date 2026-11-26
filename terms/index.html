@@ -9,7 +9,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self' https://*.googletagmanager.com; object-src 'none';">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:; style-src 'self' 'unsafe-inline' https: http:; font-src 'self' data: https: http:; img-src 'self' data: blob: https: http:; connect-src 'self' https: http:; frame-src 'self' https: http:; object-src 'none';">
     <script type="text/javascript">
         if (self !== top) {
             top.location = self.location;
@@ -217,7 +217,7 @@
     </nav>
     <div class="container">
         <h1>Terms of Service for Learning Board</h1>
-        <p><strong>Last Updated: November 19, 2026</strong></p>
+        <p><strong>Last Updated: November 26, 2026</strong></p>
         <p>Welcome to Learning Board (learningboard.online). Please read these Terms of Service ("Terms") carefully
             before using our digital blackboard web application. By accessing or using the website, you agree to be
             bound by these Terms.</p>
@@ -247,13 +247,18 @@
         <p>You agree not to use the application to engage in any behavior that intends to disrupt the functionality of
             the website or bypass security features applied to the hosting domain.</p>
 
-        <h2>5. Affiliate Disclosure & Third-Party Purchases (Amazon Associates)</h2>
-        <p>Learning Board participates in the <strong>Amazon Services LLC Associates Program</strong>, an affiliate advertising program designed to provide a means for websites to earn advertising fees by advertising and linking to Amazon (including amazon.com and its regional storefronts).</p>
+        <h2>5. Third-Party Advertising &amp; External Links</h2>
+        <p>Learning Board is offered free of charge and is supported in part by third-party advertising networks,
+            including <strong>Adsterra</strong> (such as display banners and interactive Social Bar ads).</p>
         <ul>
-            <li><strong>Mandatory Disclosure:</strong> As an Amazon Associate, I earn from qualifying purchases.</li>
-            <li><strong>Independent Sellers & Transactions:</strong> When you click on an affiliate link and make a purchase, your purchase transaction is conducted directly with Amazon or third-party sellers on the Amazon platform. Learning Board does not sell, ship, inventory, or fulfill physical products.</li>
-            <li><strong>Pricing and Product Availability:</strong> Product prices, availability, shipping terms, and ratings are determined by Amazon and respective merchants. Prices are accurate at the time of publication and are subject to change without notice. The pricing and details shown on Amazon at the time of your purchase will apply.</li>
-            <li><strong>Merchant Warranties and Returns:</strong> All customer service inquiries, returns, refunds, defective items, and warranty claims must be addressed directly to Amazon or the third-party merchant. Learning Board accepts no liability or responsibility for transactions conducted on external e-commerce platforms.</li>
+            <li><strong>Sponsored Content &amp; External Sites:</strong> Advertisements displayed on the website are
+                provided by external advertising partners. Clicking an advertisement or external link may take you to a
+                third-party website operated independently from Learning Board.</li>
+            <li><strong>No Endorsement:</strong> Learning Board does not control, endorse, or assume responsibility for
+                the content, offers, accuracy, privacy policies, or practices of any third-party advertiser or external
+                website.</li>
+            <li><strong>User Discretion:</strong> Any interactions or transactions you engage in with third-party
+                advertisers are solely between you and the applicable third party.</li>
         </ul>
 
         <h2>6. Disclaimer of Warranties</h2>
@@ -287,14 +292,13 @@
             <a href="/contact/">Contact Us</a>
             <a href="/about/">About Us</a>
         </div>
-        <div style="margin-top: 15px; font-size: 0.85rem; color: #94a3b8; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-            <strong>Affiliate Disclosure:</strong> LearningBoard is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon. As an Amazon Associate, I earn from qualifying purchases.
-        </div>
         <div style="margin-top: 20px;">
             &copy; 2026 Learning Board. All rights reserved. Built for educators.
         </div>
     </footer>
     <script src="/cookie-consent.js" defer></script>
+    <!-- Adsterra Social Bar -->
+    <script data-cfasync="false" src="https://bauval.org/14/5a9f7d4fdb80c5b31c0509680835ed41"></script>
 </body>
 
 </html>
