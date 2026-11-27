@@ -248,26 +248,199 @@
             right: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 32px;
-            height: 80px;
-            background: rgba(15, 25, 20, 0.75);
+            width: 34px;
+            height: auto;
+            padding: 12px 0;
+            background: rgba(15, 25, 20, 0.52);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             border-right: none;
             border-radius: 12px 0 0 12px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 5px;
+            color: rgba(255, 255, 255, 0.92);
             cursor: pointer;
             z-index: 101;
-            box-shadow: -4px 0 15px rgba(0, 0, 0, 0.3);
+            box-shadow: -4px 0 18px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #palette-trigger:hover {
             background: rgba(25, 40, 32, 0.9);
-            width: 36px;
+            width: 38px;
+            color: #ffffff;
+        }
+
+        #palette-trigger svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        #palette-trigger .icon-close {
+            display: none;
+        }
+
+        #palette-container.tap-open #palette-trigger .icon-open,
+        #palette-container.locked #palette-trigger .icon-open {
+            display: none;
+        }
+
+        #palette-container.tap-open #palette-trigger .icon-close,
+        #palette-container.locked #palette-trigger .icon-close {
+            display: block;
+        }
+
+        .palette-trigger-label {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            line-height: 1;
+            user-select: none;
+        }
+
+        /* --- LEFT-SIDE COMPANION STICKYNOTE DOCK --- */
+        #stickynote-dock {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 100;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #stickynote-link {
+            display: flex;
+            align-items: stretch;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.92);
+            background: rgba(15, 25, 20, 0.52);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-left: none;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 4px 0 18px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            overflow: hidden;
+            transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        #stickynote-link:hover,
+        #stickynote-dock.open #stickynote-link {
+            background: rgba(15, 25, 20, 0.72);
+            border-color: rgba(253, 224, 71, 0.35);
+            box-shadow: 6px 0 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+        }
+
+        .stickynote-tab-handle {
+            width: 34px;
+            padding: 12px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .stickynote-icon {
+            width: 16px;
+            height: 16px;
+            fill: #fde047;
+            flex-shrink: 0;
+        }
+
+        .stickynote-tab-label {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            line-height: 1;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .stickynote-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            max-width: 0;
+            opacity: 0;
+            padding: 0;
+            overflow: hidden;
+            transition: max-width 0.32s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.3s ease;
+        }
+
+        #stickynote-dock:hover .stickynote-card,
+        #stickynote-link:focus-visible .stickynote-card,
+        #stickynote-dock.open .stickynote-card {
+            max-width: 320px;
+            opacity: 1;
+            padding: 14px 16px 14px 12px;
+            border-left: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .stickynote-badge {
+            display: inline-block;
+            align-self: flex-start;
+            font-size: 9.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 2px 7px;
+            border-radius: 999px;
+            background: rgba(253, 224, 71, 0.16);
+            color: #fde047;
+            border: 1px solid rgba(253, 224, 71, 0.3);
+            white-space: nowrap;
+        }
+
+        .stickynote-title {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #f8fafc;
+            white-space: nowrap;
+            line-height: 1.25;
+        }
+
+        .stickynote-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            align-self: flex-start;
+            margin-top: 2px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(52, 211, 153, 0.14);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            font-size: 11px;
+            font-weight: 600;
+            color: #6ee7b7;
+            white-space: nowrap;
+            line-height: 1.2;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        #stickynote-link:hover .stickynote-cta {
+            background: rgba(52, 211, 153, 0.22);
+            border-color: rgba(110, 231, 183, 0.5);
+        }
+
+        .stickynote-arrow {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        #stickynote-link:hover .stickynote-arrow {
+            transform: translateX(3px);
         }
 
         #toolbar {
@@ -495,13 +668,50 @@
 
             #palette-trigger {
                 width: 28px;
-                height: 70px;
+                height: auto;
+                padding: 10px 0;
+                gap: 4px;
                 border-radius: 10px 0 0 10px;
             }
 
             #palette-trigger svg {
-                width: 16px;
-                height: 16px;
+                width: 15px;
+                height: 15px;
+            }
+
+            .palette-trigger-label {
+                font-size: 10px;
+            }
+
+            #stickynote-link {
+                border-radius: 0 10px 10px 0;
+            }
+
+            .stickynote-tab-handle {
+                width: 28px;
+                padding: 10px 0;
+                gap: 4px;
+            }
+
+            .stickynote-icon {
+                width: 15px;
+                height: 15px;
+            }
+
+            .stickynote-tab-label {
+                font-size: 10px;
+            }
+
+            #stickynote-dock:hover .stickynote-card,
+            #stickynote-link:focus-visible .stickynote-card,
+            #stickynote-dock.open .stickynote-card {
+                max-width: 260px;
+                padding: 11px 12px 11px 10px;
+            }
+
+            .stickynote-cta {
+                font-size: 10px;
+                padding: 3px 8px;
             }
         }
 
@@ -539,13 +749,40 @@
 
             #palette-trigger {
                 width: 24px;
-                height: 55px;
+                height: auto;
+                padding: 8px 0;
+                gap: 3px;
                 border-radius: 8px 0 0 8px;
             }
 
             #palette-trigger svg {
-                width: 14px;
-                height: 14px;
+                width: 13px;
+                height: 13px;
+            }
+
+            .palette-trigger-label {
+                font-size: 9px;
+                letter-spacing: 0.04em;
+            }
+
+            #stickynote-link {
+                border-radius: 0 8px 8px 0;
+            }
+
+            .stickynote-tab-handle {
+                width: 24px;
+                padding: 8px 0;
+                gap: 3px;
+            }
+
+            .stickynote-icon {
+                width: 13px;
+                height: 13px;
+            }
+
+            .stickynote-tab-label {
+                font-size: 9px;
+                letter-spacing: 0.04em;
             }
 
             #fullscreen-container {
@@ -562,7 +799,8 @@
 
         #palette-container.drawing-hidden,
         #toolbar.drawing-hidden,
-        #scroll-info-hint.drawing-hidden {
+        #scroll-info-hint.drawing-hidden,
+        #stickynote-dock.drawing-hidden {
             opacity: 0 !important;
             visibility: hidden !important;
             pointer-events: none !important;
@@ -651,6 +889,16 @@
             }
 
             #toolbar.idle-hidden:hover {
+                opacity: 1;
+            }
+
+            #stickynote-dock.idle-hidden,
+            #palette-trigger.idle-hidden {
+                opacity: 0.5;
+            }
+
+            #stickynote-dock.idle-hidden:hover,
+            #palette-trigger.idle-hidden:hover {
                 opacity: 1;
             }
         }
@@ -1238,15 +1486,36 @@
         <canvas id="board-canvas"></canvas>
         <canvas id="dust-canvas"></canvas>
 
+        <!-- --- LEFT-SIDE COMPANION STICKYNOTE DOCK ---- -->
+        <div id="stickynote-dock">
+            <a id="stickynote-link" href="https://screenstickynote.com/" target="_blank" rel="noopener"
+                aria-label="Try our Web Stickynote (offline) — Free web tool, no download needed">
+                <span class="stickynote-tab-handle">
+                    <svg class="stickynote-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8l6-6V5c0-1.1-.9-2-2-2zm-1 11h-4c-.55 0-1 .45-1 1v4H5V5h14v9z" />
+                    </svg>
+                    <span class="stickynote-tab-label">Stickynote</span>
+                </span>
+                <span class="stickynote-card">
+                    <span class="stickynote-badge">100% Offline</span>
+                    <span class="stickynote-title">Try our Web Stickynote</span>
+                    <span class="stickynote-cta">Free web tool (No download needed) <span class="stickynote-arrow"
+                            aria-hidden="true">→</span></span>
+                </span>
+            </a>
+        </div>
+
         <!-- --- PHASE 5: RIGHT-SIDE FLOATING PALETTE ---- -->
         <div id="palette-container">
-            <div id="palette-trigger" title="Toggle Tool Palette">
+            <div id="palette-trigger" title="Tools" role="button" aria-label="Tools">
                 <svg class="icon icon-open" viewBox="0 0 24 24">
                     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
                 </svg>
-                <svg class="icon icon-close" viewBox="0 0 24 24" style="display:none;">
+                <svg class="icon icon-close" viewBox="0 0 24 24">
                     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
                 </svg>
+                <span class="palette-trigger-label">Tools</span>
             </div>
 
             <div id="toolbar">
@@ -2051,16 +2320,22 @@
 
         function resetIdleTimeout() {
             const tb = document.getElementById('toolbar');
+            const pt = document.getElementById('palette-trigger');
             const fc = document.getElementById('fullscreen-container');
+            const sn = document.getElementById('stickynote-dock');
             if (tb) {
                 tb.classList.remove('idle-hidden');
+                if (pt) pt.classList.remove('idle-hidden');
                 if (fc) fc.classList.remove('idle-hidden');
+                if (sn) sn.classList.remove('idle-hidden');
                 if (document.getElementById('slide-navigator')) document.getElementById('slide-navigator').classList.remove('idle-hidden');
                 clearTimeout(idleToolbarTimeout);
                 idleToolbarTimeout = setTimeout(() => {
                     if (!isDrawing) {
                         tb.classList.add('idle-hidden');
+                        if (pt) pt.classList.add('idle-hidden');
                         if (fc) fc.classList.add('idle-hidden');
+                        if (sn) sn.classList.add('idle-hidden');
                         if (document.getElementById('slide-navigator')) document.getElementById('slide-navigator').classList.add('idle-hidden');
                     }
                 }, 3000);
@@ -2070,8 +2345,24 @@
         window.addEventListener('mousemove', resetIdleTimeout);
         resetIdleTimeout();
 
+        const stickynoteDock = document.getElementById('stickynote-dock');
+        const stickynoteLink = document.getElementById('stickynote-link');
+        if (stickynoteDock && stickynoteLink) {
+            stickynoteLink.addEventListener('click', (e) => {
+                if (window.matchMedia('(hover: none)').matches && !stickynoteDock.classList.contains('open')) {
+                    e.preventDefault();
+                    stickynoteDock.classList.add('open');
+                }
+            });
+            document.addEventListener('pointerdown', (e) => {
+                if (!stickynoteDock.contains(e.target)) {
+                    stickynoteDock.classList.remove('open');
+                }
+            });
+        }
+
         function handlePointerDown(e) {
-            if (e.target.closest && (e.target.closest('#toolbar') || e.target.closest('#palette-trigger'))) return;
+            if (e.target.closest && (e.target.closest('#toolbar') || e.target.closest('#palette-trigger') || e.target.closest('#stickynote-dock'))) return;
             if (e.target !== boardCanvas && e.target !== dustCanvas) return;
 
             // If a second pointer comes down, ignore it and continue drawing with the first finger
@@ -2090,6 +2381,7 @@
             if (fc) fc.classList.add('drawing-hidden');
             const sh = document.getElementById('scroll-info-hint');
             if (sh) sh.classList.add('drawing-hidden');
+            if (stickynoteDock) stickynoteDock.classList.add('drawing-hidden');
             if (document.getElementById('slide-navigator')) document.getElementById('slide-navigator').classList.add('drawing-hidden');
             clearTimeout(hideToolbarTimeout);
 
@@ -2153,6 +2445,7 @@
                     if (fc) fc.classList.remove('drawing-hidden');
                     const sh = document.getElementById('scroll-info-hint');
                     if (sh) sh.classList.remove('drawing-hidden');
+                    if (stickynoteDock) stickynoteDock.classList.remove('drawing-hidden');
                     if (document.getElementById('slide-navigator')) document.getElementById('slide-navigator').classList.remove('drawing-hidden');
                     resetIdleTimeout();
                 }
